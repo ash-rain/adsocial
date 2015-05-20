@@ -35,8 +35,9 @@ class AuthController extends Controller {
 		$record->token = $user->token;
 		$record->user_data = json_encode($user);
 
-		$user = null;
+		$userModel = null;
 
+			var_dump($record);
 		// Check if this provider is new
 		if(!$record->user_id) {
 			if($this->auth->check()) {
@@ -45,20 +46,18 @@ class AuthController extends Controller {
 			}
 			else {
 				// Create new user, assign
-				$user = new User([
-					'name' => $user->name,
-					'email' => $user->email,
-					]);
-				$user->save();
-				$record->user_id = $user->id;
+				$userModel = User::firstOrCreate([ 'email' => $user->email ]);
+				$userModel->name = $user->name;
+				$userModel->save();
+				$record->user_id = $userModel->id;
 			}
 		}
 		else {
-			$user = User::find($record->user_id);
+			$userModel = User::find($record->user_id);
 		}
 		
 		if(!$this->auth->check()) {
-			$this->auth->login($user);
+			$this->auth->login($userModel);
 		}
 
 		$record->save();
