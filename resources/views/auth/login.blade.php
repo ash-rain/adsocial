@@ -54,11 +54,14 @@
 						</div>
 
 						<div class="form-group">
-							<div class="col-md-3 col-md-offset-4">
+							<div class="col-md-2 col-md-offset-4">
 								<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}" class="btn btn-primary btn-block">Facebook</a>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}" class="btn btn-primary btn-block">Twitter</a>
+							</div>
+							<div class="col-md-2">
+								<a href="{{ action('Auth\AuthController@getSocial', 'google') }}" class="btn btn-primary btn-block">Google+</a>
 							</div>
 						</div>
 					</form>

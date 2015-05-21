@@ -19,7 +19,7 @@ class SocialManager extends Manager {
 	/**
 	* Create an instance of the specified driver.
 	*
-	* @return \Laravel\Socialite\Two\AbstractProvider
+	* @return App\Services\Social\AbstractProvider
 	*/
 	protected function createFacebookDriver()
 	{
@@ -30,12 +30,23 @@ class SocialManager extends Manager {
 	/**
 	* Create an instance of the specified driver.
 	*
-	* @return \Laravel\Socialite\One\AbstractProvider
+	* @return \App\Services\Social\AbstractProvider
 	*/
 	protected function createTwitterDriver()
 	{
 		$config = $this->app['config']['services.twitter'];
 		return $this->buildProvider('App\Services\Social\TwitterProvider', $config);
+	}
+	
+	/**
+	* Create an instance of the specified driver.
+	*
+	* @return \App\Services\Social\AbstractProvider
+	*/
+	protected function createGoogleDriver()
+	{
+		$config = $this->app['config']['services.google'];
+		return $this->buildProvider('App\Services\Social\GoogleProvider', $config);
 	}
 
 	/**
@@ -43,7 +54,7 @@ class SocialManager extends Manager {
 	*
 	* @param  string  $provider
 	* @param  array  $config
-	* @return \Laravel\Socialite\Two\AbstractProvider
+	* @return \App\Services\Social\AbstractProvider
 	*/
 	public function buildProvider($provider, $config)
 	{

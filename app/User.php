@@ -24,6 +24,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+	// Model boot
+	public static function boot()
+	{
+		parent::boot();
+
+		// When creating a new user
+		User::creating(function($user) {
+			$user->points = config('adsocial.start_points');
+		});
+	}
+
 	public function oauth_data() {
 		return $this->hasMany('App\OAuthData');
 	}
