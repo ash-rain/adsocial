@@ -17,7 +17,8 @@ class HomeController extends Controller {
 	public function getFeed($provider)
 	{
 		$socman = new SocialManager(app());
-		dd($socman->with($provider)->getFeed());
+		$feed = $socman->with($provider)->getFeed();
+		return view('feed', compact('feed', 'provider'));
 	}
 
 }

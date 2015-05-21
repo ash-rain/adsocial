@@ -22,7 +22,12 @@ class AuthController extends Controller {
 	}
 
 	public function getSocial($provider = 'facebook') {
-		return Socialize::with($provider)->redirect();
+		$service = Socialize::with($provider);
+		$scopes = config("services.$provider.scopes");
+		if($scopes && count($scopes)) {
+			$service = $service->scopes($scopes);
+		}
+		return $service->redirect();
 	}
 
 	public function getCallback($provider = 'facebook')

@@ -147,6 +147,7 @@ return [
 
 		'Laravel\Socialite\SocialiteServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
+		
 	],
 
 	/*
@@ -197,6 +198,7 @@ return [
 
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 		'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
+
 	],
 
 ];

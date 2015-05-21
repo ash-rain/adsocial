@@ -5,7 +5,8 @@ return [
 	'facebook' => [
 		'client_id' => env('AUTH_FB_ID'),
 		'client_secret' => env('AUTH_FB_SECRET'),
-		'redirect' => env('BASE_URL') . 'auth/callback/facebook'
+		'redirect' => env('BASE_URL') . 'auth/callback/facebook',
+		'scopes' => ['user_posts']
 	],
 
 	'twitter' => [

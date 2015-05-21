@@ -14,4 +14,9 @@ class OAuthData extends Model {
 	{
 		return $this->hasOne('App\User');
 	}
+
+	public function getUserDataAttribute()
+	{
+		return json_decode($this->attributes['user_data']);
+	}
 }
