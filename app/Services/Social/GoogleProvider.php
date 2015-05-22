@@ -14,7 +14,6 @@ class GoogleProvider implements SocialProvider {
 		$providerData = Auth::user()->oauth_data()->whereProvider('google')->first();
 
 		$client = new Google_Client();
-		$client->setApplicationName('AdSocial');
 		$service = new Google_Service_Plus($client);
 		
 		if(Cache::has('service_token')) {

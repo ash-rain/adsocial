@@ -16,7 +16,8 @@
 				<li class="list-group-item">
 					<div class="row">
 					<div class="col-md-2">
-						<a class="btn btn-default">
+						<a class="btn btn-default" data-id="{{ $item->id }}" data-provider="{{ $provider }}">
+							<span class="glyphicon glyphicon-flash"></span>
 							{{ trans('post.boost') }}
 						</a>
 					</div>
@@ -30,3 +31,12 @@
 	</div>
 </div>
 @endsection
+
+
+@section('js')
+$(function() {
+	$('[data-id]').click(function() {
+		alert($(this).data('provider') + "\n" + $(this).data('id'))
+	})
+})
+@stop
