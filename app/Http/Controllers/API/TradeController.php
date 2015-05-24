@@ -13,15 +13,29 @@ class TradeController extends Controller {
 
 	public function postBoost(Request $request)
 	{
-		$input = $request->only('provider', 'provider_id', 'action', 'reward');
-		
-		if(count($array) != count(array_filter($array, 'strlen'))) {
-			throw new \Exception('Missing input');
+		$input = $request->only('provider', 'provider_id');
+
+		foreach (config('adsocial.trade_actions.' . $input['provider']) as $key => $value)
+		{
+			$input['user_id'] = Auth::id();
+			$input['action'] = $key;
+			$reward = (int)$request->input($key);
+
+			if($reward) {
+				$item = MarketItem::firstOrCreate($input);
+				$item->reward = $reward;
+				$item->save();
+			}
+			else {
+				$item = MarketItem::whereProvider($input['provider'])
+					->whereProviderId($input['provider_id'])
+					->whereAction($input['action'])
+					->first();
+				if($item) {
+					$item->delete();
+				}
+			}
 		}
-
-		$input['user_id'] = Auth::id();
-
-		return MarketItem::firstOrCreate($input);
 	}
 
 }

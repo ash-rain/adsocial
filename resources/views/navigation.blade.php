@@ -16,21 +16,21 @@
 				@if(Auth::check())
 				<li>
 					@if(in_array('twitter', Auth::user()->providers))
-					<a href="{{ action('HomeController@getFeed', 'twitter') }}">Twitter</a>
+					<a href="{{ action('HomeController@getFeed', 'twitter') }}">My Twitter</a>
 					@else
 					<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}">Connect Twitter</a>
 					@endif
 				</li>
 				<li>
 					@if(in_array('facebook', Auth::user()->providers))
-					<a href="{{ action('HomeController@getFeed', 'facebook') }}">Facebook</a>
+					<a href="{{ action('HomeController@getFeed', 'facebook') }}">My Facebook</a>
 					@else
 					<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}">Connect Facebook</a>
 					@endif
 				</li>
 				<li>
 					@if(in_array('google', Auth::user()->providers))
-					<a href="{{ action('HomeController@getFeed', 'google') }}">Google+</a>
+					<a href="{{ action('HomeController@getFeed', 'google') }}">My Google+</a>
 					@else
 					<a href="{{ action('Auth\AuthController@getSocial', 'google') }}">Connect Google+</a>
 					@endif
