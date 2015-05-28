@@ -10,5 +10,9 @@
 			'share' => 10,
 			'comment' => 7
 		]
+	],
+	'action_icons' => [
+		'retweet' => 'retweet',
+		'favorite' => 'star',
 	]
 ];

@@ -2,6 +2,7 @@
 
 use Auth;
 use App\Services\SocialManager;
+use Illuminate\Support\Collection;
 use App\MarketItem;
 
 class HomeController extends Controller {
@@ -13,7 +14,11 @@ class HomeController extends Controller {
 
 	public function getIndex()
 	{
-		$market = MarketItem::get()->groupBy('provider_id');
+		$market = array();
+		foreach (MarketItem::get()->groupBy('provider_id') as $key => $marketItem) {
+			$market[$key] = (new Collection($marketItem))->keyBy('action');
+		}
+
 		return view('home', compact('market'));
 	}
 

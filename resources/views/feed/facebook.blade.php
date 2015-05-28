@@ -1,3 +1,6 @@
+@extends('feed._base')
+
+@section('item')
 <div>
 	@if(isset($item->link))
 	<a href="{{ $item->link }}">
@@ -11,3 +14,4 @@
 <div class="label label-default">
 	{{ Carbon\Carbon::createFromTimeStamp(strtotime($item->created_time))->diffForHumans() }}
 </div>
+@stop

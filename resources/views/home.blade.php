@@ -5,15 +5,17 @@
 	<div class="panel-body">
 		@if(count($market))
 		<ul class="list-group">
-		@foreach ($market as $id => $actions)
+		@foreach($market as $id => $item)
 			<li class="list-group-item">
-				@foreach (conf('adsocial.trade_actions.' . $actions[0]->provider) as $action => $default)
-				<a class="btn btn-default">
-					{{ $action->action }}
-					{{ $action->reward }}
+				<span class="label label-default">{{ $item->first()->provider }}</span>
+				@foreach(config('adsocial.trade_actions.' . $item->first()->provider) as $actionKey => $defaultReward)
+				<a class="btn btn-default" title="{{ ucfirst($actionKey) }}">
+					<i class="glyphicon glyphicon-{{ config('adsocial.action_icons.' . $actionKey) }}"></i>
+					@if(isset($item[$actionKey]))
+					<span class="label label-success">+{{ $item[$actionKey]->reward }}</span>
+					@endif
 				</a>
 				@endforeach
-				<span class="label label-default">{{ $actions[0]->provider }}</span>
 				{{ $id }}
 			</li>
 		@endforeach
