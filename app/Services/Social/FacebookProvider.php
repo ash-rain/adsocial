@@ -24,4 +24,10 @@ class FacebookProvider implements SocialProvider {
 		
 		return $graphObject->asArray()['data'];
 	}
+
+
+	public function getPost($id)
+	{
+
+	}
 }

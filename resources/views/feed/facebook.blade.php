@@ -11,7 +11,7 @@
 	@endif
 </div>
 
-<div class="label label-default">
+<p>
 	{{ Carbon\Carbon::createFromTimeStamp(strtotime($item->created_time))->diffForHumans() }}
-</div>
+</p>
 @stop

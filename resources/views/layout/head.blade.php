@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-core.css') }}">
 <link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-theme.css') }}">
 <link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-forms.css') }}">
+<link rel="stylesheet" href="{{ asset('/vendor/neon/js/vertical-timeline/css/component.css') }}">
 <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 
 <link href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>

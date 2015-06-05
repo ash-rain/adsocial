@@ -1,5 +1,3 @@
 @extends('feed._base')
 
-@section('item')
-{{ $item->title }}
-@stop
+@section('item', $item->title)

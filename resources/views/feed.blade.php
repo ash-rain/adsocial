@@ -4,32 +4,64 @@
 
 @include('modals.boost')
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<img src="{{ $providerUser->avatar }}" style="max-height: 50px;" />
-			<h2 style="display: inline-block;">{{ $providerUser->name }}</h2>
+<h1>
+	<i class="{{ config("adsocial.provider_icons.$provider") }}"></i>
+	{{ ucfirst($provider) }}
+</h1>
+
+<ul class="cbp_tmtimeline">
+	<li>
+		<div class="cbp_tmicon">
+			<img src="{{ $providerUser->avatar }}" class="img-responsive img-circle" style="max-height: 80px;" />
 		</div>
-	</div>
-	<hr>
-	<div class="row">
-		<div class="col-md-10 col-md-offset-1">
-			<div class="row">
-			@foreach($feed as $item)
-			<div class="col-md-3">
-				@include("feed/$provider", compact('item', 'provider'))
-			</div>
-			@endforeach
-			</div>
+		<div class="cbp_tmlabel header">
+			<ul class="list-inline">
+				<li>
+					<h3>{{ $providerUser->name }}</h3>
+					<span>{{ $providerUser->email or trans('app.no_email') }}</span>
+				</li>
+				<li>
+					<h3>643</h3>
+					<span><a href="#">followers</a></span>
+				</li>
+				<li>
+					<h3>108</h3>
+					<span><a href="#">following</a></span>
+				</li>
+			</ul>
 		</div>
+	</li>
+	@foreach($feed as $item)
+	<li>
+	<time class="cbp_tmtime" datetime="2014-12-09T03:45">
+		<span>03:45 AM</span>
+		<span>Today</span>
+	</time>
+	<div class="cbp_tmicon bg-gray">
+		<i class="fa fa-comment"></i>
 	</div>
-</div>
+	<div class="cbp_tmlabel">
+		<h2>
+			<a class="btn btn-icon icon-left {{ isset($market[$item->id]) ? 'btn-primary' : 'btn-green' }}" data-toggle="modal" data-target="#boostModal" data-id="{{ $item->id }}" data-provider="{{ $provider }}">
+				<i class="fa fa-line-chart"></i>
+				{{ trans('post.boost') }}
+			</a>
+			<a href="#">{{ $providerUser->name }}</a>
+			<span>posted a status update</span>
+		</h2>
+		<p>@include("feed/$provider", compact('item', 'provider'))</p>
+	</div>
+	</li>
+	@endforeach
+</ul>
+
+
 @endsection
 
 
 @section('js')
 $(function() {
-	$('#boostModal .submit.btn').click(function() {
+	$('#boostModal .submit.btn').on('click', function() {
 		$.ajax({
 			method: 'POST',
 			url: '/api/v1/trade/boost',

@@ -1,1 +1,26 @@
-.logo h1 { color: #fff; }
+.logo a, .logo h1 {
+	font-size: 2.4rem;
+	color: #fff;
+}
+
+.page-body .main-content .cbp_tmtimeline > li .cbp_tmlabel {
+	margin-bottom: 10px;
+}
+
+.page-body .main-content .cbp_tmtimeline > li .cbp_tmlabel.header {
+	background: none;
+	padding-top: 0;
+	padding-left: 0;
+}
+
+.page-body .main-content .cbp_tmtimeline > li .cbp_tmlabel.header h3 {
+	margin-top: 0;
+}
+
+.page-body .main-content .cbp_tmtimeline > li .cbp_tmlabel.header:after {
+	display: none;
+}
+
+.page-body .main-content {
+	background-color: #ddd;
+}

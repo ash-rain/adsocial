@@ -66,9 +66,12 @@ class UserController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(User $user, Request $request)
 	{
-		//
+		$input = $request->only(['name', 'email']);
+		$user->fill($input);
+		$user->save();
+		return redirect()->action('UserController@edit', $user->id);
 	}
 
 	/**
