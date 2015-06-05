@@ -145,6 +145,8 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
+		'Illuminate\Html\HtmlServiceProvider',
+
 		'Laravel\Socialite\SocialiteServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
 		
@@ -195,6 +197,9 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		'Form'  => 'Illuminate\Html\FormFacade',
+		'HTML'  => 'Illuminate\Html\HtmlFacade',
 
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 		'Twitter' => 'Thujohn\Twitter\Facades\Twitter',

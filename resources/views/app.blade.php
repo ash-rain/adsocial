@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>AdSocial</title>
+<head>@include('layout.head')</head>
+<body class="page-body">
+	<div class="page-container">
+		<div class="sidebar-menu fixed">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<div class="logo">
+						<a href="{{ url('/') }}">AdSocial</a>
+					</div>
+					<div class="sidebar-collapse">
+						<a href="#" class="sidebar-collapse-icon">
+							<i class="fa fa-menu"></i>
+						</a>
+					</div>
+					<div class="sidebar-mobile-menu visible-xs">
+						<a href="#" class="with-animation">
+							<i class="fa fa-menu"></i>
+						</a>
+					</div>
 
-	<link rel="stylesheet" href="{{ asset('/vendor/neon/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-core.css') }}">
-	<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-theme.css') }}">
-	<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-forms.css') }}">
-	<link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-
-	<link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
-
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-</head>
-<body>
-	@include('navigation')
-	
-	@yield('content')
-
-	<!-- Scripts -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/vue/0.11.10/vue.min.js"></script>
-	<script type="text/javascript">@yield('js')</script>
+				</header>
+				@include('layout.sidebar')
+			</div>
+		</div>
+		<div class="main-content">
+			@yield('content')
+		</div>
+	</div>
+	@include('layout.scripts')
 </body>
 </html>

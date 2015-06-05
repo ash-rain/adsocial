@@ -46,7 +46,7 @@ class Authenticate {
 		else
 		{
 			if(!$this->auth->user()->email)
-				return redirect()->action('UserController@edit');
+				return redirect()->action('UserController@edit', $this->auth->id());
 		}
 
 		return $next($request);

@@ -21,7 +21,8 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => ['getLogout', 'getSocial', 'getCallback']]);
 	}
 
-	public function getSocial($provider = 'facebook') {
+	public function getSocial($provider = 'facebook')
+	{
 		$service = Socialize::with($provider);
 		$scopes = config("services.$provider.scopes");
 		if($scopes && count($scopes)) {

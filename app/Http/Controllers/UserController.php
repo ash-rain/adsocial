@@ -4,10 +4,12 @@ use App\Http\Requests;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class UserController extends Controller {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a listing of users.
 	 *
 	 * @return Response
 	 */
@@ -17,7 +19,7 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Show the form for creating a new user.
 	 *
 	 * @return Response
 	 */
@@ -27,7 +29,7 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
+	 * Store a newly created user in storage.
 	 *
 	 * @return Response
 	 */
@@ -37,7 +39,7 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Display the specified user.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -48,19 +50,18 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
+	 * Show the form for editing the specified user.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(User $user)
 	{
-		//
-		dd('da');
+		return view('profile', compact('user'));
 	}
 
 	/**
-	 * Update the specified resource in storage.
+	 * Update the specified user in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -71,7 +72,7 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * Remove the specified resource from storage.
+	 * Remove the specified user from storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
