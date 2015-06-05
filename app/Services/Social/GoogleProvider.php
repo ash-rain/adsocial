@@ -33,4 +33,9 @@ class GoogleProvider implements SocialProvider {
 		$activities = $service->activities->listActivities($providerData->provider_id, 'public');
 		return $activities['items'];
 	}
+
+	public function getPost($id)
+	{
+
+	}
 }

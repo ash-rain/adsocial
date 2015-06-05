@@ -3,4 +3,6 @@
 interface SocialProvider {
 	
 	public function getFeed();
+	
+	public function getPost($id);
 }

@@ -43,6 +43,11 @@ class Authenticate {
 				return redirect()->guest('auth/login');
 			}
 		}
+		else
+		{
+			if(!$this->auth->user()->email)
+				return redirect()->action('UserController@edit');
+		}
 
 		return $next($request);
 	}

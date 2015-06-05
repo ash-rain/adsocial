@@ -42,7 +42,6 @@ class AuthController extends Controller {
 
 		$userModel = null;
 
-			var_dump($record);
 		// Check if this provider is new
 		if(!$record->user_id) {
 			if($this->auth->check()) {

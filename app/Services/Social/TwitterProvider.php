@@ -15,4 +15,9 @@ class TwitterProvider implements SocialProvider {
 			'format' => 'object'
 			]);
 	}
+
+	public function getPost($id)
+	{
+
+	}
 }

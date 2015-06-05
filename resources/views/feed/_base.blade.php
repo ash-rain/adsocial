@@ -5,8 +5,8 @@
 			{{ trans('post.boost') }}
 		</a>
 	</div>
-	<div class="title">
-		<h3>{{ $provider }}</h3>
-		<p>@yield('item')</p>
+	<div class="title">	
+		<h3>@yield('item')</h3>
+		<p>{{ $provider }}</p>
 	</div>
 </div>
