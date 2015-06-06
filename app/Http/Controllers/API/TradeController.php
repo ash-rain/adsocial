@@ -4,6 +4,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Services\SocialManager;
 use App\MarketItem;
+use App\Post;
 
 class TradeController extends Controller {
 
@@ -13,11 +14,17 @@ class TradeController extends Controller {
 
 	public function postBoost(Request $request)
 	{
-		$input = $request->only('provider', 'provider_id');
+		$post = Post::find((int)$request->input('post_id'));
 
-		foreach (config('adsocial.trade_actions.' . $input['provider']) as $key => $value)
+		if(!$post) {
+			throw new \Exception('Post not found');
+		}
+
+		foreach (config("adsocial.trade_actions.$post->provider") as $key => $value)
 		{
+			$input['provider'] = $post->provider;
 			$input['user_id'] = Auth::id();
+			$input['post_id'] = $post->id;
 			$input['action'] = $key;
 			$reward = (int)$request->input($key);
 
@@ -28,7 +35,7 @@ class TradeController extends Controller {
 			}
 			else {
 				$item = MarketItem::whereProvider($input['provider'])
-					->whereProviderId($input['provider_id'])
+					->wherePostId($input['post_id'])
 					->whereAction($input['action'])
 					->first();
 				if($item) {

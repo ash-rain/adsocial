@@ -3,22 +3,38 @@
 @section('content')
 
 @if(count($market))
-<ul class="list-group">
-	@foreach($market as $id => $item)
-	<li class="list-group-item">
-		<span class="label label-default">{{ $item->first()->provider }}</span>
-		@foreach(config('adsocial.trade_actions.' . $item->first()->provider) as $actionKey => $defaultReward)
-		<a class="btn btn-default" title="{{ ucfirst($actionKey) }}">
-			<i class="glyphicon glyphicon-{{ config('adsocial.action_icons.' . $actionKey) }}"></i>
-			@if(isset($item[$actionKey]))
-			<span class="label label-success">+{{ $item[$actionKey]->reward }}</span>
-			@endif
-		</a>
-		@endforeach
-		{{ $id }}
-	</li>
+<div class="row">
+	@foreach($market as $id => $actions)
+	<div class="col-sm-3">
+		<div class="market-item tile-block tile-aqua">
+			<div class="tile-header">
+				<i class="{{ config('adsocial.provider_icons.'. $actions->first()->provider) }}"></i>
+				<a href="#">
+					{{ $actions->first()->user->name }}
+					<span>{{ $actions->first()->provider }}</span>
+				</a>
+			</div>
+			<div class="tile-content">
+				<p>{{ $actions->first()->post->text }}</p>
+				<img src="{{ $actions->first()->post->image }}">
+			</div>
+			<div class="tile-footer">
+				@foreach(config('adsocial.trade_actions.' . $actions->first()->provider) as $actionKey => $defaultReward)
+				<div class="action">
+					<button type="button" class="btn btn-green btn-block btn-icon icon-left" title="{{ ucfirst($actionKey) }}">
+						<i class="fa fa-{{ config('adsocial.action_icons.' . $actionKey) }}"></i>
+						{{ ucfirst($actionKey) }}
+						@if(isset($actions[$actionKey]))
+						<span class="badge badge-success pull-right">+{{ $actions[$actionKey]->reward }}</span>
+						@endif
+					</button>
+				</div>
+				@endforeach
+			</div>
+		</div>
+	</div>
 	@endforeach
-</ul>
+</div>
 @else
 	@lang('trade.market_empty')
 @endif

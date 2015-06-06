@@ -24,3 +24,11 @@
 .page-body .main-content {
 	background-color: #ddd;
 }
+
+.modal-dialog {
+	z-index: 9999;
+}
+
+.market-item .action {
+	margin-top: 4px;
+}

@@ -1,13 +1,15 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Post extends Model {
 
 	protected $guarded = ['id'];
 
-	public function user()
-	{
-		return $this->hasOne('App\User');
+	protected $dates = ['posted_at'];
+
+	public function market() {
+		return $this->hasOne('App\MarketItem');
 	}
 }

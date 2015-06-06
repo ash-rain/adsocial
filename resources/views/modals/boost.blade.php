@@ -6,21 +6,25 @@
 				<h4 class="modal-title" id="boostModalLabel">Boost Post</h4>
 			</div>
 			<div class="modal-body">
-				<form class="row">
-					<input type="hidden" name="provider">
-					<input type="hidden" name="provider_id">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="post panel-body"></div>
-						</div>
+				<form class="form-horizontal form-groups-bordered">
+					<input type="hidden" name="post_id">
+					<div class="well">
+						<div class="post-preview"></div>
+						<br style="clear: both;">
 					</div>
-					<div class="col-md-6">
-						@foreach(config("adsocial.trade_actions.twitter") as $action => $default)
-						<div class="form-group">
+
+					<p>@lang('trade.boost_instructions')</p>
+				
+					<div class="row">
+						@foreach(config("adsocial.trade_actions.$provider") as $action => $default)
+						<div class="col-sm-6">
 							<label>
-								<b>{{ trans("trade.$action") }}</b>
-								<input type="number" name="{{ $action }}" class="form-control" placeholder="{{ trans('trade.reward') }}" value="{{ $default }}">
-								{{ trans('trade.points') }}
+								<b>{{ trans("trade.actions.$action") }}</b>
+								<div class="input-spinner">
+									<button type="button" class="btn btn-default"><i class="fa fa-minus"></i></button>
+									<input type="text" name="{{ $action }}" class="form-control" placeholder="{{ trans('trade.reward') }}" value="{{ $default }}">
+									<button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
+								</div>
 							</label>
 						</div>
 						@endforeach

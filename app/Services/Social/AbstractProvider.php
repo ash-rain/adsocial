@@ -1,6 +1,7 @@
 <?php namespace App\Services\Social;
 
 use Auth;
+use Closure;
 use App\Contracts\SocialProvider;
 use App\Post;
 
@@ -19,14 +20,33 @@ abstract class AbstractProvider implements SocialProvider {
 		$target = array();
 
 		foreach ($this->fieldMap as $key => $value) {
-			$target[$key] = $value
-				? (is_callable($value)
-					? $value($source)
-					: $source[$value])
-				: null;
+			
+			$t = null;
+
+			if($value)
+			{
+				// closure
+				if(is_object($value) && ($value instanceof Closure)) {
+					$t = $value($source);
+				}
+				// string key
+				else if(is_string($value) && isset($source[$value])) {
+					$t = $source[$value];
+				}
+				// fallback array of string keys
+				else if(is_array($value)) {
+					foreach ($value as $v) {
+						if(isset($source[$v]) && strlen($source[$v])) {
+							$t = $source[$v];
+							break;
+						}
+					}
+				}
+			}
+			$target[$key] = $t;
 		}
 
-		if(!(int)$target['posted_at']) {
+		if(!(string)(int)$target['posted_at'] === $target['posted_at']) {
 			$target['posted_at'] = strtotime($target['posted_at']);
 		}
 		
@@ -39,10 +59,14 @@ abstract class AbstractProvider implements SocialProvider {
 		return $post;
 	}
 
-	public function feed($limit = self::LIMIT)
+	public function feed($limit = static::LIMIT)
 	{
 		$feed = $this->getFeed($limit);
 		$feed = array_map(function($f){ return $this->post($f->{$this->idField}); }, $feed);
 		return $feed;
+	}
+
+	public function providerData() {
+		return Auth::user()->oauth_data()->whereProvider($this->provider)->first();
 	}
 }

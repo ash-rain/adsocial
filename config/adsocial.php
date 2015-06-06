@@ -26,6 +26,9 @@
 	'action_icons' => [
 		'retweet' => 'retweet',
 		'favorite' => 'star',
+		'like' => 'thumbs-up',
+		'comment' => 'comment',
+		'share' => 'share',
 	],
 
 

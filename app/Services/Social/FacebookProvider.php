@@ -9,31 +9,37 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
 	protected $provider = 'facebook';
 	protected $fieldMap = [
-		'text' => '',
-		'link' => ''
+		'text' => ['story', 'type'],
+		'link' => 'link',
+		'image' => 'picture',
+		'posted_at' => 'created_time'
 	];
 
-	public function getFeed()
+	public function __construct()
 	{
-		$providerData = Auth::user()->oauth_data()->whereProvider('facebook')->first();
-		
 		FacebookSession::setDefaultApplication(
 			config('services.facebook.client_id'),
 			config('services.facebook.client_secret')
 			);
 
-		$session = new FacebookSession($providerData->token);
+		$this->session = new FacebookSession($this->providerData()->token);
+	}
 
-		$request = new FacebookRequest($session, 'GET', "/$providerData->provider_id/feed");
+	public function getFeed()
+	{
+		$url = '/'. $this->providerData()->provider_id .'/feed';
+		$request = new FacebookRequest($this->session, 'GET', $url);
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
-		
 		return $graphObject->asArray()['data'];
 	}
 
 	
 	public function getPost($id)
 	{
-
+		$request = new FacebookRequest($this->session, 'GET', "/$id?date_format=U");
+		$response = $request->execute();
+		$graphObject = $response->getGraphObject();
+		return $graphObject->asArray();
 	}
 }

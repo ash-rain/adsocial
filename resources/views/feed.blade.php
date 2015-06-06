@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('modals.boost')
+@include('modals.boost', compact('provider'))
 
 <h1>
 	<i class="{{ config("adsocial.provider_icons.$provider") }}"></i>
@@ -34,22 +34,28 @@
 	@foreach($feed as $item)
 	<li>
 	<time class="cbp_tmtime" datetime="2014-12-09T03:45">
-		<span>03:45 AM</span>
-		<span>Today</span>
+		<span>{{ $item->posted_at->format('d/m H:i') }}</span>
+		<span>{{ $item->posted_at->diffForHumans() }}</span>
 	</time>
-	<div class="cbp_tmicon bg-gray">
+	<div class="cbp_tmicon">
 		<i class="fa fa-comment"></i>
 	</div>
 	<div class="cbp_tmlabel">
-		<h2>
-			<a class="btn btn-icon icon-left {{ isset($market[$item->id]) ? 'btn-primary' : 'btn-green' }}" data-toggle="modal" data-target="#boostModal" data-id="{{ $item->id }}" data-provider="{{ $provider }}">
-				<i class="fa fa-line-chart"></i>
-				{{ trans('post.boost') }}
-			</a>
-			<a href="#">{{ $providerUser->name }}</a>
-			<span>posted a status update</span>
-		</h2>
-		<p>@include("feed/$provider", compact('item', 'provider'))</p>
+		<div class="row">
+			<div class="col-sm-9">
+				<h3>{{ $item->text }}</h3>	
+			</div>
+			@if($item->image)
+			<div class="col-sm-3" style="text-align: right;">
+				<img src="{{ $item->image }}">
+			</div>
+			@endif
+		</div>
+		<a class="btn btn-icon icon-left {{ $item->market ? 'btn-primary' : 'btn-green' }}"
+			data-toggle="modal" data-target="#boostModal" data-post-id="{{ $item->id }}">
+			<i class="fa {{ $item->market ? 'fa-pencil' : 'fa-check' }}"></i>
+			{{ trans('post.boost') }}
+		</a>
 	</div>
 	</li>
 	@endforeach
@@ -57,7 +63,6 @@
 
 
 @endsection
-
 
 @section('js')
 $(function() {
@@ -70,11 +75,10 @@ $(function() {
 		})
 	})
 
-	$('[data-id]').click(function() {
+	$('[data-post-id]').click(function() {
 		var modal = $('#boostModal')
-		modal.find('[name="provider"]').val($(this).data('provider'))
-		modal.find('[name="provider_id"]').val($(this).data('id'))
-		modal.find('.post.panel-body').html($(this).parent().next().html())
+		modal.find('[name="post_id"]').val($(this).data('post-id'))
+		modal.find('.post-preview').html($(this).prev().html())
 	})
 })
 @stop

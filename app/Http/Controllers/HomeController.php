@@ -14,7 +14,6 @@ class HomeController extends Controller {
 
 	public function getIndex()
 	{
-		dd( (new \App\Services\Social\TwitterProvider)->feed() );
 		$market = array();
 		foreach (MarketItem::get()->groupBy('provider_id') as $key => $marketItem) {
 			$market[$key] = (new Collection($marketItem))->keyBy('action');
@@ -26,14 +25,13 @@ class HomeController extends Controller {
 	public function getFeed($provider)
 	{
 		$socman = new SocialManager(app());
-		$feed = $socman->with($provider)->getFeed();
+		$feed = $socman->with($provider)->feed();
+
 		$providerUser = Auth::user()->oauth_data()
 			->whereProvider($provider)
 			->first()->user_data;
-		$market = MarketItem::whereUserId(Auth::id())->whereProvider($provider)
-			->get()->groupBy('provider_id')->toArray();
-
-		return view('feed', compact('feed', 'provider', 'providerUser', 'market'));
+		
+		return view('feed', compact('feed', 'provider', 'providerUser'));
 	}
 
 }

@@ -12,7 +12,7 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 	protected $provider = 'google';
 	protected $fieldMap = [
 		'text' => 'title',
-		'link' => ''
+		'posted_at' => ''
 	];
 
 	public function getFeed()
