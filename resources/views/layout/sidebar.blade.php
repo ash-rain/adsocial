@@ -3,7 +3,7 @@
 	<li>
 		<a href="{{ url('/') }}">
 			<i class="fa fa-th"></i>
-			Home
+			@lang('app.home')
 		</a>
 	</li>
 		
@@ -16,23 +16,7 @@
 			Twitter
 		</a>
 	</li>
-
 	@endif
-	<li>
-		@if(in_array('twitter', Auth::user()->providers))
-		<a href="{{ action('HomeController@getFeed', 'twitter') }}">
-			<i class="fa fa-user"></i>
-			<i class="fa fa-twitter"></i>
-			My Twitter
-		</a>
-		@else
-		<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}">
-			<i class="fa fa-plus"></i>
-			<i class="fa fa-twitter"></i>
-			Connect Twitter
-		</a>
-		@endif
-	</li>
 
 	@if(in_array('facebook', Auth::user()->providers))
 	<li>
@@ -43,22 +27,6 @@
 	</li>
 	@endif
 
-	<li>
-		@if(in_array('facebook', Auth::user()->providers))
-		<a href="{{ action('HomeController@getFeed', 'facebook') }}">
-			<i class="fa fa-user"></i>
-			<i class="fa fa-facebook-official"></i>
-			My Facebook
-		</a>
-		@else
-		<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}">
-			<i class="fa fa-plus"></i>
-			<i class="fa fa-facebook-official"></i>
-			Connect Facebook
-		</a>
-		@endif
-	</li>
-
 	@if(in_array('google', Auth::user()->providers))
 	<li>
 		<a href="{{ action('HomeController@getFeed', 'google') }}">
@@ -68,20 +36,55 @@
 	</li>
 	@endif
 
+	@if(!in_array('twitter', Auth::user()->providers))
 	<li>
-		@if(in_array('google', Auth::user()->providers))
-		<a href="{{ action('HomeController@getFeed', 'google') }}">
-			<i class="fa fa-user"></i>
-			<i class="fa fa-google-plus"></i>
-			My Google+
+		<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}">
+			<i class="fa fa-plus"></i>
+			<i class="fa fa-twitter"></i>
+			Connect Twitter
 		</a>
-		@else
+	</li>
+	@endif
+
+	@if(!in_array('facebook', Auth::user()->providers))
+	<li>
+		<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}">
+			<i class="fa fa-plus"></i>
+			<i class="fa fa-facebook-official"></i>
+			Connect Facebook
+		</a>
+	</li>
+	@endif
+
+	@if(!in_array('google', Auth::user()->providers))
+	<li>
 		<a href="{{ action('Auth\AuthController@getSocial', 'google') }}">
 			<i class="fa fa-plus"></i>
 			<i class="fa fa-google-plus"></i>
 			Connect Google+
 		</a>
-		@endif
+	</li>
+	@endif
+
+	<li class="has-sub">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+			<i class="fa fa-user"></i>
+			{{ Auth::user()->name }}
+		</a>
+		<ul>
+			<li>
+				<a href="{{ action('UserController@edit', Auth::id()) }}">
+					<i class="fa fa-pencil"></i>
+					@lang('app.profile')
+				</a>
+			</li>
+			<li>
+				<a href="{{ url('/auth/logout') }}">
+					<i class="fa fa-sign-out"></i>
+					@lang('app.logout')
+				</a>
+			</li>
+		</ul>
 	</li>
 	@endif
 </ul>

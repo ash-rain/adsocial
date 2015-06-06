@@ -1,5 +1,6 @@
 <?php namespace App;
 
+use App\Services\SocialManager;
 use Illuminate\Database\Eloquent\Model;
 
 class MarketItem extends Model {
@@ -16,5 +17,11 @@ class MarketItem extends Model {
 	public function post()
 	{
 		return $this->belongsTo('App\Post');
+	}
+
+	public function actionLink() {
+		return (new SocialManager(app()))
+			->with($this->post->provider)
+			->actionLink($this->attributes['action'], $this->post->provider_id);
 	}
 }

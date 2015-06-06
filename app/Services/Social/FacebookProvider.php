@@ -7,7 +7,7 @@ use Facebook\FacebookRequest;
 
 class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
-	protected $provider = 'facebook';
+	protected $provides = 'facebook';
 	protected $fieldMap = [
 		'text' => ['story', 'type'],
 		'link' => 'link',
@@ -41,5 +41,13 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
 		return $graphObject->asArray();
+	}
+
+	public function actionLike($id)
+	{
+		$request = new FacebookRequest($this->session, 'POST', "/$id/likes");
+		$response = $request->execute();
+		$graphObject = $response->getGraphObject();
+		dd($graphObject);
 	}
 }

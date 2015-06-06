@@ -32,3 +32,8 @@
 .market-item .action {
 	margin-top: 4px;
 }
+
+.page-container .sidebar-menu #main-menu li.has-sub > a:before {
+	font-family: 'FontAwesome';
+	content: "\f105";
+}

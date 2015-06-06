@@ -15,6 +15,10 @@
 			'like' => 5,
 			'share' => 10,
 			'comment' => 7
+		],
+		'google' => [
+			'plus' => 5,
+			'comment' => 10
 		]
 	],
 
@@ -29,6 +33,7 @@
 		'like' => 'thumbs-up',
 		'comment' => 'comment',
 		'share' => 'share',
+		'plus' => 'plus',
 	],
 
 

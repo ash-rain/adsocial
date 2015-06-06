@@ -1,6 +1,7 @@
 <?php namespace App\Services\Social;
 
 use Auth;
+use Exception;
 use Closure;
 use App\Contracts\SocialProvider;
 use App\Post;
@@ -46,7 +47,7 @@ abstract class AbstractProvider implements SocialProvider {
 			$target[$key] = $t;
 		}
 
-		if(!(string)(int)$target['posted_at'] === $target['posted_at']) {
+		if((string)(int)$target['posted_at'] !== $target['posted_at']) {
 			$target['posted_at'] = strtotime($target['posted_at']);
 		}
 		
@@ -68,5 +69,17 @@ abstract class AbstractProvider implements SocialProvider {
 
 	public function providerData() {
 		return Auth::user()->oauth_data()->whereProvider($this->provider)->first();
+	}
+
+	public function action($action, $id)
+	{
+		$method = 'action' . ucfirst($action);
+		if(method_exists($this, $method)) {
+			$this->$method($id);
+		}
+		else {
+			throw new Exception('Undefined method '. $method);
+			
+		}
 	}
 }

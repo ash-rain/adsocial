@@ -12,15 +12,14 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 	protected $provider = 'google';
 	protected $fieldMap = [
 		'text' => 'title',
-		'posted_at' => ''
+		'link' => 'url',
+		'posted_at' => 'published'
 	];
 
-	public function getFeed()
+	public function __construct()
 	{
-		$providerData = Auth::user()->oauth_data()->whereProvider('google')->first();
-
 		$client = new Google_Client();
-		$service = new Google_Service_Plus($client);
+		$this->service = new Google_Service_Plus($client);
 		
 		if(Cache::has('service_token')) {
 			$client->setAccessToken(Cache::get('service_token'));
@@ -35,13 +34,17 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 			$client->getAuth()->refreshTokenWithAssertion($cred);
 		}
 		Cache::forever('service_token', $client->getAccessToken());
+	}
 
-		$activities = $service->activities->listActivities($providerData->provider_id, 'public');
+	public function getFeed()
+	{
+		$activities = $this->service->activities->listActivities($this->providerData()->provider_id, 'public');
 		return $activities['items'];
 	}
 
 	public function getPost($id)
 	{
-
+		$activity = $this->service->activities->get($id);
+		return array_only((array)$activity, ['title', 'published', 'url']);
 	}
 }

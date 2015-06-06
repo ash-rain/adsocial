@@ -10,22 +10,27 @@ class HomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->social = new SocialManager(app());
 	}
 
 	public function getIndex()
 	{
 		$market = array();
-		foreach (MarketItem::get()->groupBy('provider_id') as $key => $marketItem) {
+		foreach (MarketItem::get()->groupBy('post_id') as $key => $marketItem) {
 			$market[$key] = (new Collection($marketItem))->keyBy('action');
 		}
-
 		return view('home', compact('market'));
+	}
+
+	public function getAction($provider, $id, $action)
+	{
+		$status = $this->social->with($provider)->action($action, $id);
+		return $status;
 	}
 
 	public function getFeed($provider)
 	{
-		$socman = new SocialManager(app());
-		$feed = $socman->with($provider)->feed();
+		$feed = $this->social->with($provider)->feed();
 
 		$providerUser = Auth::user()->oauth_data()
 			->whereProvider($provider)
