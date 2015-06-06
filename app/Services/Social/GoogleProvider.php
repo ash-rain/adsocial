@@ -7,7 +7,13 @@ use Google_Client;
 use Google_Service_Plus;
 use Google_Auth_AssertionCredentials;
 
-class GoogleProvider implements SocialProvider {
+class GoogleProvider extends AbstractProvider implements SocialProvider {
+
+	protected $provider = 'google';
+	protected $fieldMap = [
+		'text' => 'title',
+		'link' => ''
+	];
 
 	public function getFeed()
 	{

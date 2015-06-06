@@ -14,6 +14,7 @@ class HomeController extends Controller {
 
 	public function getIndex()
 	{
+		dd( (new \App\Services\Social\TwitterProvider)->feed() );
 		$market = array();
 		foreach (MarketItem::get()->groupBy('provider_id') as $key => $marketItem) {
 			$market[$key] = (new Collection($marketItem))->keyBy('action');

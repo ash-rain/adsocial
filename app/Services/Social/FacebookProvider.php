@@ -5,8 +5,14 @@ use App\Contracts\SocialProvider;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 
-class FacebookProvider implements SocialProvider {
+class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
+	protected $provider = 'facebook';
+	protected $fieldMap = [
+		'text' => '',
+		'link' => ''
+	];
+
 	public function getFeed()
 	{
 		$providerData = Auth::user()->oauth_data()->whereProvider('facebook')->first();
@@ -25,7 +31,7 @@ class FacebookProvider implements SocialProvider {
 		return $graphObject->asArray()['data'];
 	}
 
-
+	
 	public function getPost($id)
 	{
 

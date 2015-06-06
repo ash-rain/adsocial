@@ -18,8 +18,10 @@ class CreatePostsTable extends Migration {
 			$table->string('provider', 8)->index();
 			$table->string('provider_id')->index();
 			$table->string('text');
-			$table->string('link');
+			$table->string('image')->nullable();
+			$table->string('link')->nullable();
 			$table->bigInteger('user_id')->unsigned()->index();
+			$table->timestamp('posted_at');
 			$table->timestamps();
 		});
 	}
