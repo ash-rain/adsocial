@@ -5,7 +5,7 @@
 @include('modals.boost', compact('provider'))
 
 <h1>
-	<i class="{{ config("adsocial.provider_icons.$provider") }}"></i>
+	<i class="{{ config("adsocial.$provider.icon") }}"></i>
 	{{ ucfirst($provider) }}
 </h1>
 

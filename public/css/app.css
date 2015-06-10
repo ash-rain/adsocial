@@ -1,3 +1,26 @@
+.market-item .tile-content.image p {
+	padding: 1em;
+	background: rgba(0,0,0,.5);
+	color: #fff;
+}
+
+.market-item .tile-content.image {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 200px;
+	padding: 0;
+}
+
+.market-item .tile-footer .time {
+	line-height: 2.5;
+	padding-left: 1em;
+}
+
+.market-item .tile-footer .action .fa {
+	color: #fff;
+}
+
 .market-item .tile-footer {
 	padding: 0;
 }

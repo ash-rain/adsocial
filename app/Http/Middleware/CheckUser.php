@@ -13,10 +13,9 @@ class CheckUser {
 
 	public function handle($request, Closure $next)
 	{
-		dd($this->auth->user()->email);
-
 		if ($this->auth->check())
 		{
+			//dd($this->auth->user()->email);
 			if(!$this->auth->user()->email)
 				return redirect()->action('UserController@edit');
 		}

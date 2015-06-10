@@ -2,12 +2,13 @@
 
 @section('content')
 
+<h1>
+	@lang('app.hi')
+	{{ $user->name }}
+</h1>
+
 <div class="row">
-	<h1 class="col-sm-11 col-sm-offset-1">
-		@lang('app.hi')
-		{{ $user->name }}
-	</h1>
-	<div class="col-sm-3 col-sm-offset-2">
+	<div class="col-sm-3">
 		<div class="tile-stats tile-gray">
 			<div class="icon"><i class="fa fa-line-chart"></i></div>
 			<div class="num" data-start="0" data-end="{{ $user->points }}" data-duration="900" data-delay="0">
@@ -24,7 +25,7 @@
 		</a>
 	</div>
 
-	<div class="col-sm-4">
+	<div class="col-sm-5">
 		<div class="scrollable" data-height="190">
 			<ul class="list-group">
 				@foreach(range(1, 10) as $i)
@@ -49,7 +50,7 @@
 		</div>
 	</div>
 
-	<div class="col-sm-3">
+	<div class="col-sm-4">
 		<div class="scrollable" data-height="190">
 			<ul class="list-group">
 				@foreach(range(1, 3) as $i)
@@ -74,10 +75,11 @@
 		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-sm-4 col-sm-offset-1">
+	<div class="col-sm-5">
 		<h2>
-			<i class="fa fa-gear"></i>
+			<i class="fa fa-pencil-square-o"></i>
 			@lang('app.profile')
 		</h2>
 		{!! Form::model($user, [
@@ -110,6 +112,7 @@
 
 	<div class="col-sm-7">
 		<h2>
+			<i class="fa fa-link"></i>
 			@lang('app.linked_providers')
 		</h2>
 		<div class="row">
@@ -117,7 +120,7 @@
 			<div class="col-sm-6">
 				<a href="javascript:void(0)" onclick="if({{ strlen($provider->user_data->email) }}) jQuery('input[name=email]').val('{{ $provider->user_data->email }}')">
 					<div class="tile-stats tile-aqua">
-						<div class="icon"><i class="{{ config("adsocial.provider_icons.$provider->provider") }}"></i></div>
+						<div class="icon"><i class="{{ config("adsocial.$provider->provider.icon") }}"></i></div>
 						<div class="num">
 							<img width="40" height="40" src="{{ $provider->user_data->avatar }}">
 							{{ $provider->user_data->nickname or $provider->provider }}
@@ -129,10 +132,10 @@
 			</div>
 			@endforeach
 
-			@foreach(array_diff(config('adsocial.auth_providers'), $user->providers) as $newProvider)
+			@foreach(array_diff(array_keys(config('adsocial.actions')), $user->providers) as $newProvider)
 			<div class="col-sm-6">
 				<a href="{{ action('AuthController@getSocial', $newProvider) }}" class="tile-stats tile-cyan">
-					<div class="icon"><i class="{{ config("adsocial.provider_icons.$newProvider") }}"></i></div>
+					<div class="icon"><i class="{{ config("adsocial.$newProvider.icon") }}"></i></div>
 					<div class="num">
 						<i class="fa fa-user-plus"></i>
 						{{ $newProvider }}

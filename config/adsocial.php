@@ -2,45 +2,44 @@
 	// The starting points given to each user
 	'start_points' => 250,
 
-	// List of auth provider identifiers
-	'auth_providers' => ['facebook', 'twitter', 'google'],
-
-	// Types of post interactions and their default point rewards
-	'trade_actions' => [
+	// Providers and types of post interaction
+	'actions' => [
 		'twitter' => [
-			'retweet' => 10,
-			'favorite' => 5
+			'icon' => 'fa fa-twitter',
+			'retweet' => [
+				'default' => 10,
+				'icon' => 'retweet',
+			],
+			'favorite' => [
+				'default' => 5,
+				'icon' => 'star',
+			]
 		],
 		'facebook' => [
-			'like' => 5,
-			'share' => 10,
-			'comment' => 7
+			'icon' => 'fa fa-facebook-official',
+			'like' => [
+				'default' => 5,
+				'icon' => 'thumbs-up',
+			],
+			'share' => [
+				'default' => 10,
+				'icon' => 'share',
+			],
+			'comment' => [
+				'default' => 7,
+				'icon' => 'comment',
+			]
 		],
 		'google' => [
-			'plus' => 5,
-			'comment' => 10
+			'icon' => 'fa fa-google-plus',
+			'plus' => [
+				'default' => 5,
+				'icon' => 'plus',
+			],
+			'comment' => [
+				'default' => 10,
+				'icon' => 'comment',
+			]
 		]
-	],
-
-
-	// ***** UI *****
-	
-
-	// Icon classes for each action
-	'action_icons' => [
-		'retweet' => 'retweet',
-		'favorite' => 'star',
-		'like' => 'thumbs-up',
-		'comment' => 'comment',
-		'share' => 'share',
-		'plus' => 'plus',
-	],
-
-
-	// Icon classes for each provider
-	'provider_icons' => [
-		'twitter' => 'fa fa-twitter',
-		'facebook' => 'fa fa-facebook-official',
-		'google' => 'fa fa-google-plus'
 	]
 ];

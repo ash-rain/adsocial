@@ -1,5 +1,5 @@
 <ul id="main-menu" class="main-menu">
-	<li>
+	<li class="{{ Request::is('/') ? 'active' : '' }}">
 		<a href="{{ url('/') }}">
 			<i class="fa fa-th"></i>
 			@lang('app.home')
@@ -8,71 +8,37 @@
 
 	@if($user)
 
-	@if(in_array('twitter', $user->providers))
-	<li class="{{ Request::is('feed/twitter') ? 'active' : '' }}">
-		<a href="{{ action('HomeController@getFeed', 'twitter') }}">
-			<i class="fa fa-twitter"></i>
-			Twitter
-		</a>
-	</li>
-	@endif
+	@foreach(config('adsocial.actions') as $provider => $settings)
+		@if(in_array($provider, $user->providers))
+		<li class="{{ Request::is("feed/$provider", "feed/$provider/*") ? 'active' : '' }}">
+			<a href="{{ action('HomeController@getFeed', $provider) }}">
+				<i class="{{ $settings['icon'] }}"></i>
+				@lang("app.providers.$provider")
+			</a>
+		</li>
+		@endif
+	@endforeach
 
-	@if(in_array('facebook', $user->providers))
-	<li>
-		<a href="{{ action('HomeController@getFeed', 'facebook') }}">
-			<i class="fa fa-facebook-official"></i>
-			Facebook
-		</a>
-	</li>
-	@endif
+	@foreach(config('adsocial.actions') as $provider => $settings)
+		@if(!in_array($provider, $user->providers))
+		<li class="{{ Request::is("feed/$provider", "feed/$provider/*") ? 'active' : '' }}">
+			<a href="{{ action('AuthController@getSocial', $provider) }}">
+				<i class="fa fa-plus"></i>
+				<i class="{{ $settings['icon'] }}"></i>
+				Connect @lang("app.providers.$provider")
+			</a>
+		</li>
+		@endif
+	@endforeach
 
-	@if(in_array('google', $user->providers))
-	<li>
-		<a href="{{ action('HomeController@getFeed', 'google') }}">
-			<i class="fa fa-google-plus"></i>
-			Google+
-		</a>
-	</li>
-	@endif
-
-	@if(!in_array('twitter', $user->providers))
-	<li>
-		<a href="{{ action('AuthController@getSocial', 'twitter') }}">
-			<i class="fa fa-plus"></i>
-			<i class="fa fa-twitter"></i>
-			Connect Twitter
-		</a>
-	</li>
-	@endif
-
-	@if(!in_array('facebook', $user->providers))
-	<li>
-		<a href="{{ action('AuthController@getSocial', 'facebook') }}">
-			<i class="fa fa-plus"></i>
-			<i class="fa fa-facebook-official"></i>
-			Connect Facebook
-		</a>
-	</li>
-	@endif
-
-	@if(!in_array('google', $user->providers))
-	<li>
-		<a href="{{ action('AuthController@getSocial', 'google') }}">
-			<i class="fa fa-plus"></i>
-			<i class="fa fa-google-plus"></i>
-			Connect Google+
-		</a>
-	</li>
-	@endif
-
-	<li class="has-sub">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	<li class="has-sub opened {{ Request::is('me', 'me/*') ? 'active' : '' }}">
+		<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 			<i class="fa fa-user"></i>
 			{{ $user->name }}
 		</a>
 		<ul>
-			<li>
-				<a href="{{ action('UserController@edit', Auth::id()) }}">
+			<li class="{{ Request::is('me') ? 'active' : '' }}">
+				<a href="{{ action('UserController@edit') }}">
 					<i class="fa fa-pencil"></i>
 					@lang('app.profile')
 				</a>

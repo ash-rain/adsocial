@@ -20,7 +20,7 @@ class TradeController extends Controller {
 			throw new \Exception('Post not found');
 		}
 
-		foreach (config("adsocial.trade_actions.$post->provider") as $key => $value)
+		foreach (config("adsocial.actions.$post->provider") as $key => $value)
 		{
 			$input['provider'] = $post->provider;
 			$input['user_id'] = Auth::id();

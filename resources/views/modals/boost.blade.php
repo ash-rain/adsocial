@@ -16,13 +16,13 @@
 					<p>@lang('trade.boost_instructions')</p>
 				
 					<div class="row">
-						@foreach(config("adsocial.trade_actions.$provider") as $action => $default)
+						@foreach(config("adsocial.actions.$provider") as $action => $settings)
 						<div class="col-sm-6">
 							<label>
 								<b>{{ trans("trade.actions.$action") }}</b>
 								<div class="input-spinner">
 									<button type="button" class="btn btn-default"><i class="fa fa-minus"></i></button>
-									<input type="text" name="{{ $action }}" class="form-control" placeholder="{{ trans('trade.reward') }}" value="{{ $default }}">
+									<input type="text" name="{{ $action }}" class="form-control" placeholder="{{ trans('trade.reward') }}" value="{{ $settings['default'] }}">
 									<button type="button" class="btn btn-default"><i class="fa fa-plus"></i></button>
 								</div>
 							</label>

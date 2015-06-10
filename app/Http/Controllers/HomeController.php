@@ -11,6 +11,7 @@ class HomeController extends Controller {
 	public function __construct()
 	{
 		$this->middleware('auth');
+		$this->middleware('checkUser');
 		$this->social = new SocialManager(app());
 	}
 

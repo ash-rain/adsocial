@@ -17,9 +17,9 @@ class CreateLogTable extends Migration {
 			$table->bigIncrements('id');
 			$table->bigInteger('user_id')->unsigned()->index();
 			$table->bigInteger('market_item_id')->unsigned()->index()->nullable();
-			$table->integer('change')->nullable();
 			$table->string('reason')->nullable();
-			$table->timestamp('created_at');
+			$table->boolean('flag')->nullable();
+			$table->timestamps();
 		});
 	}
 

@@ -1,12 +1,12 @@
 ## AdSocial
 
-### Configuration
+## Configuration
 * /config/adsocial.php
 * /config/app.php
 * /.env
 * /config/database.php
 
-### Deployment
+## Deployment
 
 #### 1. Clone the repository
 ```
@@ -34,7 +34,7 @@ If you're setting up a new instance you have to `mv .env.example .env` and then 
 
 That should cover everything about deployment. Steps 2-4 are not always necessary while step 5 applies only for a fresh deployment or if some settings have been changed.
 
-### Queue
+## Queue
 AdSocial has background workers that regularly check the status of a claimed reward for user action (i.e. a facebook like). There are two queue channels with different purposes:
 
 #### Fast
@@ -44,3 +44,10 @@ This channel is processed very often (20 seconds) and makes 8 attempts before dr
 #### Slow
 The `slow` channel makes sure actions are not reverted after the user has been rewarded. The channel is processed every 8 hours and has no tolerance for false checks. If an action has been reverted (i.e. unlike, delete share/retweet, etc.) after a claim has been rewarded a penalty is applied and logged. If a linked account has received three penalties it gets locked down and nobody can use it in AdSocial anymore.
 Claims older than a month are automatically dropped from the queue.
+
+## Database Tables
+* `oauth_data` : Information about an OAuth account/session and its relation to an AdSocial user.
+* `market` : All actions that have a reward.
+* `posts` : A dual-purpose cache/interface representing generic posts on social media.
+* `jobs` : The queue storage
+* `log` : Action reward log
