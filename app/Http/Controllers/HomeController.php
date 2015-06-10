@@ -4,6 +4,7 @@ use Auth;
 use App\Services\SocialManager;
 use Illuminate\Support\Collection;
 use App\MarketItem;
+use App\Post;
 
 class HomeController extends Controller {
 
@@ -22,10 +23,21 @@ class HomeController extends Controller {
 		return view('home', compact('market'));
 	}
 
-	public function getAction($provider, $id, $action)
+	public function getAction($post = null, $action = null)
 	{
-		$status = $this->social->with($provider)->action($action, $id);
-		return $status;
+		$post = Post::find($post);
+		if(!$post) {	
+			return view('action_complete');
+		}
+		$url = !$action ? false
+			: $this->social->with($post->provider)->action($action, $post->provider_id);
+		if($url === true) {
+			return view('action_complete');
+		}
+		if(!$url || !parse_url($url)) {
+			$url = $post->link;
+		}
+		return redirect($url);
 	}
 
 	public function getFeed($provider)

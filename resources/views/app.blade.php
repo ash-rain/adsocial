@@ -21,7 +21,6 @@
 							<i class="fa fa-fw fa-bars"></i>
 						</a>
 					</div>
-
 				</header>
 				@include('layout.sidebar')
 			</div>

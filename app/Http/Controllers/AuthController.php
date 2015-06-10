@@ -1,24 +1,32 @@
-<?php namespace App\Http\Controllers\Auth;
+<?php namespace App\Http\Controllers;
 
 use Socialize;
-use App\Http\Controllers\Controller;
+use App\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Database\QueryException;
 
 use App\OAuthData;
 use App\User;
 
 class AuthController extends Controller {
 
-	use AuthenticatesAndRegistersUsers;
-
-	public function __construct(Guard $auth, Registrar $registrar)
+	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
-		$this->registrar = $registrar;
-
 		$this->middleware('guest', ['except' => ['getLogout', 'getSocial', 'getCallback']]);
+	}
+
+	public function getIndex() {
+		return view('login');
+	}
+
+	public function postIndex(Request $request) {
+	}
+
+	public function getLogout()
+	{
+		$this->auth->logout();
+		return redirect('/');
 	}
 
 	public function getSocial($provider = 'facebook')
@@ -51,18 +59,33 @@ class AuthController extends Controller {
 			}
 			else {
 				// Create new user, assign
-				$userModel = User::firstOrCreate([ 'email' => $user->email ]);
+				$userModel = User::firstOrCreate(['email' => $user->email]);
 				$userModel->name = $user->name;
 				$userModel->save();
 				$record->user_id = $userModel->id;
 			}
 		}
+		// The provided acount is already linked with a user
 		else {
+			// Find the linked user
 			$userModel = User::find($record->user_id);
+			// Check if the account's been linked to another user
+			if($this->auth->check() && $record->user_id != $this->auth->id()) {
+				// Create new record
+				$record = $record->replicate(['id', 'user_id']);
+				$record->user_id = $this->auth->id();
+			}
 		}
 		
 		if(!$this->auth->check()) {
 			$this->auth->login($userModel);
+		}
+
+		if(!$this->auth->user()->email && $user->email) {
+			try {
+				$this->auth->user()->fill(['email' => $user->email])->save();
+			}
+			catch(QueryException $e) {}
 		}
 
 		$record->save();

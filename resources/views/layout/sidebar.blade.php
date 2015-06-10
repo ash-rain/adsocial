@@ -1,16 +1,15 @@
 <ul id="main-menu" class="main-menu">
-
 	<li>
 		<a href="{{ url('/') }}">
 			<i class="fa fa-th"></i>
 			@lang('app.home')
 		</a>
 	</li>
-		
-	@if(Auth::check())
 
-	@if(in_array('twitter', Auth::user()->providers))
-	<li class="root-level">
+	@if($user)
+
+	@if(in_array('twitter', $user->providers))
+	<li class="{{ Request::is('feed/twitter') ? 'active' : '' }}">
 		<a href="{{ action('HomeController@getFeed', 'twitter') }}">
 			<i class="fa fa-twitter"></i>
 			Twitter
@@ -18,7 +17,7 @@
 	</li>
 	@endif
 
-	@if(in_array('facebook', Auth::user()->providers))
+	@if(in_array('facebook', $user->providers))
 	<li>
 		<a href="{{ action('HomeController@getFeed', 'facebook') }}">
 			<i class="fa fa-facebook-official"></i>
@@ -27,7 +26,7 @@
 	</li>
 	@endif
 
-	@if(in_array('google', Auth::user()->providers))
+	@if(in_array('google', $user->providers))
 	<li>
 		<a href="{{ action('HomeController@getFeed', 'google') }}">
 			<i class="fa fa-google-plus"></i>
@@ -36,9 +35,9 @@
 	</li>
 	@endif
 
-	@if(!in_array('twitter', Auth::user()->providers))
+	@if(!in_array('twitter', $user->providers))
 	<li>
-		<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}">
+		<a href="{{ action('AuthController@getSocial', 'twitter') }}">
 			<i class="fa fa-plus"></i>
 			<i class="fa fa-twitter"></i>
 			Connect Twitter
@@ -46,9 +45,9 @@
 	</li>
 	@endif
 
-	@if(!in_array('facebook', Auth::user()->providers))
+	@if(!in_array('facebook', $user->providers))
 	<li>
-		<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}">
+		<a href="{{ action('AuthController@getSocial', 'facebook') }}">
 			<i class="fa fa-plus"></i>
 			<i class="fa fa-facebook-official"></i>
 			Connect Facebook
@@ -56,9 +55,9 @@
 	</li>
 	@endif
 
-	@if(!in_array('google', Auth::user()->providers))
+	@if(!in_array('google', $user->providers))
 	<li>
-		<a href="{{ action('Auth\AuthController@getSocial', 'google') }}">
+		<a href="{{ action('AuthController@getSocial', 'google') }}">
 			<i class="fa fa-plus"></i>
 			<i class="fa fa-google-plus"></i>
 			Connect Google+
@@ -69,7 +68,7 @@
 	<li class="has-sub">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 			<i class="fa fa-user"></i>
-			{{ Auth::user()->name }}
+			{{ $user->name }}
 		</a>
 		<ul>
 			<li>
@@ -79,7 +78,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{{ url('/auth/logout') }}">
+				<a href="{{ action('AuthController@getLogout') }}">
 					<i class="fa fa-sign-out"></i>
 					@lang('app.logout')
 				</a>

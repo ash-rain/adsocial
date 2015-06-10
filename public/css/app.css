@@ -1,3 +1,15 @@
+.market-item .tile-footer {
+	padding: 0;
+}
+
+.market-item .tile-footer .btn {
+	border-radius: 0;
+}
+
+.login-page .login-header {
+	padding: 15vh 0 5vh 0;
+}
+
 .logo a, .logo h1 {
 	font-size: 2.4rem;
 	color: #fff;
@@ -29,11 +41,11 @@
 	z-index: 9999;
 }
 
-.market-item .action {
-	margin-top: 4px;
-}
-
 .page-container .sidebar-menu #main-menu li.has-sub > a:before {
 	font-family: 'FontAwesome';
 	content: "\f105";
+}
+
+.btn-icon i {
+	width: 3rem;
 }

@@ -3,7 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class Authenticate {
+class CheckUser {
 
 	protected $auth;
 
@@ -13,14 +13,12 @@ class Authenticate {
 
 	public function handle($request, Closure $next)
 	{
-		if ($this->auth->guest())
+		dd($this->auth->user()->email);
+
+		if ($this->auth->check())
 		{
-			if ($request->ajax()) {
-				return response('Unauthorized.', 401);
-			}
-			else {
-				return redirect()->action('AuthController@getIndex');
-			}
+			if(!$this->auth->user()->email)
+				return redirect()->action('UserController@edit');
 		}
 
 		return $next($request);

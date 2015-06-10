@@ -11,7 +11,7 @@ abstract class AbstractProvider implements SocialProvider {
 	const LIMIT = 20;
 	protected $idField = 'id';
 	protected $fieldMap = [];
-	
+
 	public function post($id)
 	{
 		$post = Post::whereProviderId($id)->first();
@@ -51,7 +51,7 @@ abstract class AbstractProvider implements SocialProvider {
 			$target['posted_at'] = strtotime($target['posted_at']);
 		}
 		
-		$target['provider'] = $this->provider;
+		$target['provider'] = $this->provides;
 		$target['provider_id'] = $id;
 		$target['user_id'] = Auth::id();
 		
@@ -68,18 +68,18 @@ abstract class AbstractProvider implements SocialProvider {
 	}
 
 	public function providerData() {
-		return Auth::user()->oauth_data()->whereProvider($this->provider)->first();
+		return Auth::user()->oauth_data()->whereProvider($this->provides)->first();
 	}
 
 	public function action($action, $id)
 	{
 		$method = 'action' . ucfirst($action);
 		if(method_exists($this, $method)) {
-			$this->$method($id);
+			return $this->$method($id);
 		}
-		else {
-			throw new Exception('Undefined method '. $method);
-			
+		else if(isset($this->actionMap) && isset($this->actionMap[$action])) {
+			return sprintf($this->actionMap[$action], $id);
 		}
+		return false;
 	}
 }

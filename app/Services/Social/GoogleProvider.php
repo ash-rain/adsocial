@@ -9,7 +9,7 @@ use Google_Auth_AssertionCredentials;
 
 class GoogleProvider extends AbstractProvider implements SocialProvider {
 
-	protected $provider = 'google';
+	protected $provides = 'google';
 	protected $fieldMap = [
 		'text' => 'title',
 		'link' => 'url',

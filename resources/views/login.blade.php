@@ -1,4 +1,4 @@
-@extends('public')
+@extends('app_public')
 
 @section('title', 'Log In')
 @section('bodyClass', 'login-page login-form-fall')
@@ -8,13 +8,32 @@
 	<div class="login-header login-caret">
 		<div class="login-content">
 			<a href="{{ url('/') }}" class="logo">
-				<h1>AdSocial</h1>
+				<h1>
+					<i class="fa fa-user"></i>
+					AdSocial
+				</h1>
 			</a>
-			<p class="description">Log in with any account</p>
+			<p class="description">
+				@lang('app.get_started_text')
+				<br><br>
+			</p>
+
 			<div class="login-progressbar-indicator">
 				<h3>0%</h3>
 				<span>logging in...</span>
 			</div>
+
+			<form action="{{ action('UserController@store') }}" method="POST">
+				<div class="form-group">
+					<input type="text" class="form-control input-lg" name="name" placeholder="@lang('app.name')" autocomplete="off" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-lg btn-success btn-icon btn-block btn-login">
+						<i class="fa fa-chevron-right"></i>
+						@lang('app.get_started')
+					</button>
+				</div>
+			</form>
 		</div>
 	</div>
 
@@ -22,11 +41,34 @@
 
 	<div class="login-form">
 		<div class="login-content">
-			<div class="form-login-error">
-				<h3>Invalid login</h3>
-				<p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
+			<div class="form-group">
+				<a href="{{ action('AuthController@getSocial', 'facebook') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left facebook-button">
+					Login with Facebook
+					<i class="fa fa-facebook-official"></i>
+				</a>
 			</div>
+			<div class="form-group">
+				<a href="{{ action('AuthController@getSocial', 'twitter') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left twitter-button">
+					Login with Twitter
+					<i class="fa fa-twitter"></i>
+				</a>
+			</div>
+			<div class="form-group">
+				<a href="{{ action('AuthController@getSocial', 'google') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left google-button">
+					Login with Google+
+					<i class="fa fa-google-plus"></i>
+				</a>
+			</div>
+			
+			<div class="form-group">
+				<em>- @lang('auth.alternative') -</em>
+			</div>
+
 			<form method="post" role="form" id="form_login" novalidate="novalidate">
+				<div class="form-login-error">
+					<h3>Invalid login</h3>
+					<p>Enter <strong>demo</strong>/<strong>demo</strong> as login and password.</p>
+				</div>
 				<div class="form-group">
 					<div class="input-group">
 						<div class="input-group-addon">
@@ -49,33 +91,7 @@
 						@lang('app.login')
 					</button>
 				</div>
-				<div class="form-group">
-					<em>- or -</em>
-				</div>
-				<div class="form-group">
-					<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left facebook-button">
-						Login with Facebook
-						<i class="fa fa-facebook"></i>
-					</a>
-				</div>
-				<div class="form-group">
-					<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left twitter-button">
-						Login with Twitter
-						<i class="fa fa-twitter"></i>
-					</a>
-				</div>
-				<div class="form-group">
-					<a href="{{ action('Auth\AuthController@getSocial', 'google') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left google-button">
-						Login with Google+
-						<i class="fa fa-google-plus"></i>
-					</a>
-				</div>
 			</form>
-			
-			
-			<div class="login-bottom-links">
-				<a href="extra-forgot-password.html" class="link">@lang('app.register')</a>
-			</div>
 		</div>
 	</div>
 
@@ -94,7 +110,7 @@
 					</div>
 				@endif
 
-				<form class="form-horizontal" role="form" method="POST" action="{{ url('/auth/login') }}">
+				<form class="form-horizontal" role="form" method="POST" action="{{ action('AuthController@getIndex') }}">
 					<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 					<div class="form-group">
@@ -131,13 +147,13 @@
 
 					<div class="form-group">
 						<div class="col-md-2 col-md-offset-4">
-							<a href="{{ action('Auth\AuthController@getSocial', 'facebook') }}" class="btn btn-primary btn-block">Facebook</a>
+							<a href="{{ action('AuthController@getSocial', 'facebook') }}" class="btn btn-primary btn-block">Facebook</a>
 						</div>
 						<div class="col-md-2">
-							<a href="{{ action('Auth\AuthController@getSocial', 'twitter') }}" class="btn btn-primary btn-block">Twitter</a>
+							<a href="{{ action('AuthController@getSocial', 'twitter') }}" class="btn btn-primary btn-block">Twitter</a>
 						</div>
 						<div class="col-md-2">
-							<a href="{{ action('Auth\AuthController@getSocial', 'google') }}" class="btn btn-primary btn-block">Google+</a>
+							<a href="{{ action('AuthController@getSocial', 'google') }}" class="btn btn-primary btn-block">Google+</a>
 						</div>
 					</div>
 				</form>

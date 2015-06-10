@@ -6,7 +6,7 @@ use App\Contracts\SocialProvider;
 
 class TwitterProvider extends AbstractProvider implements SocialProvider {
 
-	protected $provider = 'twitter';
+	protected $provides = 'twitter';
 	protected $fieldMap = array(
 		'text' => 'text',
 		'posted_at' => 'created_at'

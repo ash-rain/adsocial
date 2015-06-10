@@ -4,6 +4,7 @@ use Auth;
 use App\Contracts\SocialProvider;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
+use App\Post;
 
 class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
@@ -48,6 +49,14 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		$request = new FacebookRequest($this->session, 'POST', "/$id/likes");
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
-		dd($graphObject);
+		return $graphObject->getProperty('success');
+	}
+
+	public function actionShare($id) {
+		$post = Post::whereProviderId($id)->first();
+		$request = new FacebookRequest($this->session, 'POST', '/me/feed', ['link' => $post->link]);
+		$response = $request->execute();
+		$graphObject = $response->getGraphObject();
+		return $graphObject->getProperty('success');
 	}
 }
