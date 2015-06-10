@@ -1,11 +1,11 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "skyint/adsocial",
+	"description": "AdSocial",
+	"keywords": ["social", "boost"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
-		"laravel/framework": "5.0.*",
+		"laravel/framework": "5.1.*",
 		"laravel/socialite": "2.0.0",
 		"illuminate/html": "~5.0",
 		"thujohn/twitter": "~2.0",

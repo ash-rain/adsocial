@@ -1,12 +1,12 @@
 <?php
 
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
 
 Route::model('user', 'App\User');
 Route::model('post', 'App\Post');
 
-Route::controller('/', 'HomeController');
 Route::controller('auth', 'AuthController');
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@getIndex']);
+Route::controller('/', 'HomeController');
 
 Route::get('me', 'UserController@edit');
 Route::post('me', 'UserController@store');

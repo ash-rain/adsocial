@@ -2,11 +2,8 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase {
 
-	/**
-	 * Creates the application.
-	 *
-	 * @return \Illuminate\Foundation\Application
-	 */
+	protected $baseUrl = 'http://localhost';
+
 	public function createApplication()
 	{
 		$app = require __DIR__.'/../bootstrap/app.php';
