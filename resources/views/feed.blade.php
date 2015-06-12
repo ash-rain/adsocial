@@ -54,7 +54,7 @@
 		<a class="btn btn-icon icon-left {{ $item->market ? 'btn-primary' : 'btn-green' }}"
 			data-toggle="modal" data-target="#boostModal" data-post-id="{{ $item->id }}">
 			<i class="fa {{ $item->market ? 'fa-pencil' : 'fa-check' }}"></i>
-			{{ trans('post.boost') }}
+			{{ trans( $item->market ? 'post.boost' : 'post.boosted') }}
 		</a>
 	</div>
 	</li>

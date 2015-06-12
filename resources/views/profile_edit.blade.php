@@ -16,17 +16,15 @@
 			</div>
 			<h3>points</h3>
 		</div>
-		<a href="{{ url('/') }}" class="tile-stats tile-green">
-			<h3>
-				<i class="fa fa-plus"></i>
-				Buy Points
-			</h3>
-			<div class="icon"><i class="fa fa-cc-paypal"></i></div>
+		<a id="buy" href="{{ url('/') }}" class="tile-stats tile-red">
+			<i class="fa fa-dollar"></i>
+			Buy Points
+			{{-- <div class="icon"><i class="fa fa-cc-paypal"></i></div> --}}
 		</a>
 	</div>
 
 	<div class="col-sm-5">
-		<div class="scrollable" data-height="190">
+		<div class="scrollable" data-height="195">
 			<ul class="list-group">
 				@foreach(range(1, 10) as $i)
 				<li class="list-group-item">
@@ -47,11 +45,12 @@
 				</li>
 				@endforeach
 			</ul>
+			<a href="#">@lang('app.show_older')</a>
 		</div>
 	</div>
 
 	<div class="col-sm-4">
-		<div class="scrollable" data-height="190">
+		<div class="scrollable" data-height="195">
 			<ul class="list-group">
 				@foreach(range(1, 3) as $i)
 				<li class="list-group-item">

@@ -1,3 +1,10 @@
+#buy {
+	text-align: center;
+	font-weight: 900;
+	font-size: 1.5em;
+	color: #fff;
+}
+
 .market-item .tile-content.image p {
 	padding: 1em;
 	background: rgba(0,0,0,.5);
