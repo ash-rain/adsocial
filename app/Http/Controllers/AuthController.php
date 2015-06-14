@@ -16,11 +16,20 @@ class AuthController extends Controller {
 		$this->middleware('guest', ['except' => ['getLogout', 'getSocial', 'getCallback']]);
 	}
 
+	private function socialite()
+	{
+		Socialize::extend('linkedin', function($app) {
+			$config = $app['config']['services.linkedin'];
+			return Socialize::buildProvider('App\Services\LinkedInProvider', $config);
+		});
+	}
+	
 	public function getIndex() {
 		return view('login');
 	}
 
 	public function postIndex(Request $request) {
+		// TODO
 	}
 
 	public function getLogout()
@@ -31,6 +40,7 @@ class AuthController extends Controller {
 
 	public function getSocial($provider = 'facebook')
 	{
+		$this->socialite();
 		$service = Socialize::with($provider);
 		$scopes = config("services.$provider.scopes");
 		if($scopes && count($scopes)) {
@@ -41,6 +51,7 @@ class AuthController extends Controller {
 
 	public function getCallback($provider = 'facebook')
 	{
+		$this->socialite();
 		$user = Socialize::with($provider)->user();
 
 		// Get or create the user data record

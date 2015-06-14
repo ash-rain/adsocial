@@ -59,6 +59,12 @@
 					<i class="fa fa-google-plus"></i>
 				</a>
 			</div>
+			<div class="form-group">
+				<a href="{{ action('AuthController@getSocial', 'linkedin') }}" class="btn btn-default btn-lg btn-block btn-icon icon-left twitter-button">
+					Login with LinkedIn
+					<i class="fa fa-linkedin"></i>
+				</a>
+			</div>
 			
 			<div class="form-group">
 				<em>- @lang('auth.alternative') -</em>

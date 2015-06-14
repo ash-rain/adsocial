@@ -19,5 +19,11 @@ return [
 		'client_id' => env('AUTH_GG_ID'),
 		'client_secret' => env('AUTH_GG_SECRET'),
 		'redirect' => env('BASE_URL') . 'auth/callback/google'
+	],
+
+	'linkedin' => [
+		'client_id' => env('AUTH_LI_ID'),
+		'client_secret' => env('AUTH_LI_SECRET'),
+		'redirect' => env('BASE_URL') . 'auth/callback/linkedin'
 	]
 ];
