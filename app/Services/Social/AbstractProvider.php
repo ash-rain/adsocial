@@ -82,4 +82,14 @@ abstract class AbstractProvider implements SocialProvider {
 		}
 		return false;
 	}
+	
+	public function check($action, $id, $user)
+	{
+		$method = 'check' . ucfirst($action);
+		if(method_exists($this, $method)) {
+			$oauth_data = $user->oauth_data()->whereProvider($this->provides)->first();
+			return $this->$method($id, $oauth_data);
+		}
+		return false;
+	}
 }

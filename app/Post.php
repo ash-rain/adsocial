@@ -10,6 +10,6 @@ class Post extends Model {
 	protected $dates = ['posted_at'];
 
 	public function market() {
-		return $this->hasOne('App\MarketItem');
+		return $this->hasMany('App\MarketItem');
 	}
 }

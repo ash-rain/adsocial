@@ -67,7 +67,7 @@
 			</div>
 			
 			<div class="form-group">
-				<em>- @lang('auth.alternative') -</em>
+				<em>- @lang('app.or') -</em>
 			</div>
 
 			<form method="post" role="form" id="form_login" novalidate="novalidate">

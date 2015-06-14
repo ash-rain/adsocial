@@ -40,6 +40,10 @@
 				'default' => 10,
 				'icon' => 'comment',
 			]
+		],
+		'linkedin' => [
+			'icon' => 'fa fa-linkedin',
+			'authOnly' => true
 		]
 	]
 ];

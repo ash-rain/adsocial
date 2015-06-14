@@ -59,4 +59,17 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		$graphObject = $response->getGraphObject();
 		return $graphObject->getProperty('success');
 	}
+
+	public function checkLike($id, $oauth_data)
+	{
+		$request = new FacebookRequest($this->session, 'GET', "/$id/likes");
+		$response = $request->execute();
+		$graphObject = $response->getGraphObject();
+		foreach($graphObject->getProperty('data') as $user) {
+			if($user->id == $oauth_data->provider_id) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

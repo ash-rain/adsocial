@@ -33,7 +33,7 @@
 					@foreach(config('adsocial.actions.' . $actions->first()->provider) as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
 					<div class="action">
-						<a target="_blank" href="{{ action('HomeController@getAction', [$actions->first()->post_id, $action]) }}" class="btn btn-primary btn-block btn-icon icon-left" title="@lang("app.actions.$action")">
+						<a target="_blank" href="{{ action('SiteController@getAction', [$actions->first()->post_id, $action]) }}" class="btn btn-primary btn-block btn-icon icon-left" title="@lang("app.actions.$action")">
 							<i class="fa fa-{{ $settings['icon'] }}"></i>
 							@lang("app.actions.$action")
 							@if(isset($actions[$action]))

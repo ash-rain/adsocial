@@ -6,18 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 class Log extends Model {
 
 	protected $table = 'log';
-
 	protected $guarded = ['id'];
-
 	protected $dates = ['created_at'];
 
-	public function user()
-	{
+	public function user() {
 		return $this->belongsTo('App\User');
 	}
 
-	public function marketItem()
-	{
+	public function market() {
 		return $this->belongsTo('App\MarketItem');
 	}
 }

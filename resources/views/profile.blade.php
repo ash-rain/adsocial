@@ -23,7 +23,7 @@
 				<div class="btn-group pull-right">
 					@foreach(config("adsocial.actions.$post->provider") as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
-					<a target="_blank" href="{{ action('HomeController@getAction', [$post->id, $action]) }}" class="btn btn-default" title="@lang("app.providers.$action")">
+					<a target="_blank" href="{{ action('SiteController@getAction', [$post->id, $action]) }}" class="btn btn-default" title="@lang("app.providers.$action")">
 						<i class="fa fa-{{ $settings['icon'] }}"></i>
 					</a>
 					@endforeach

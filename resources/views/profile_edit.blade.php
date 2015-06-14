@@ -14,11 +14,11 @@
 			<div class="num" data-start="0" data-end="{{ $user->points }}" data-duration="900" data-delay="0">
 				{{ $user->points }}
 			</div>
-			<h3>points</h3>
+			<h3>@lang('app.points')</h3>
 		</div>
 		<a id="buy" href="{{ url('/') }}" class="tile-stats tile-red">
 			<i class="fa fa-dollar"></i>
-			Buy Points
+			@lang('app.buy_points')
 			{{-- <div class="icon"><i class="fa fa-cc-paypal"></i></div> --}}
 		</a>
 	</div>

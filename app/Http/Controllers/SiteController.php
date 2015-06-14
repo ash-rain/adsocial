@@ -1,12 +1,14 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
+use Queue;
 use App\Services\SocialManager;
 use Illuminate\Support\Collection;
 use App\MarketItem;
 use App\Post;
+use App\Log;
 
-class HomeController extends Controller {
+class SiteController extends Controller {
 
 	public function __construct()
 	{
@@ -27,6 +29,20 @@ class HomeController extends Controller {
 	public function getAction($post = null, $action = null)
 	{
 		$post = Post::find($post);
+		
+		if($action) {
+			// Log action and push to queue
+			$log = Log::firstOrCreate([
+				'reason' => $action,
+				'market_item_id' => $post->market()->whereAction($action)->first()->id
+			]);
+			if($log->id) {
+				return view('action_complete');
+			}
+			Auth::user()->log()->save($log);
+			Queue::push('App\Jobs\CheckActions', compact('log'));
+		}
+
 		if(!$post) {	
 			return view('action_complete');
 		}
