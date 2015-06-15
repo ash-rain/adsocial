@@ -51,3 +51,12 @@ Claims older than a month are automatically dropped from the queue.
 * `posts` : A dual-purpose cache/interface representing generic posts on social media.
 * `jobs` : The queue storage
 * `log` : Action reward log
+* 
+
+## OAuth
+Callback routes: `/auth/callback/{provider}`
+Currently supported:
+* http://adsocial.microweber.com/auth/callback/google
+* http://adsocial.microweber.com/auth/callback/facebook
+* http://adsocial.microweber.com/auth/callback/linkedin
+* http://adsocial.microweber.com/auth/callback/twitter
