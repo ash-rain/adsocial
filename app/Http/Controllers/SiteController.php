@@ -39,17 +39,14 @@ class SiteController extends Controller {
 		
 		if($action) {
 			// Log action and push to queue
-			$log = Log::firstOrCreate([
+			$log = Log::firstOrNew([
 				'reason' => $action,
 				'market_item_id' => $post->market()->whereAction($action)->first()->id
 			]);
-			
-			//if($log->id) {
-			//	return view('action_complete');
-			//}
-			Auth::user()->log()->save($log);
-			$q = Queue::later(Carbon::now()->addSeconds(15), 'App\Jobs\AwaitAction', ['log' => $log->id]);
-			dd($q);
+			if(!$log->id) {
+				Auth::user()->log()->save($log);
+				$q = Queue::later(Carbon::now()->addSeconds(15), 'App\Jobs\AwaitAction', ['log' => $log->id]);
+			}
 		}
 
 		if(!$post) {	

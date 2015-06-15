@@ -14,6 +14,7 @@ class LinkedInProvider extends AbstractProvider implements SocialProvider {
 
 	public function __construct()
 	{
+		parent::__construct();
 		$this->linkedin = new LinkedIn();
 	}
 

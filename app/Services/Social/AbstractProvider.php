@@ -73,7 +73,8 @@ abstract class AbstractProvider implements SocialProvider {
 		return $feed;
 	}
 
-	public function providerData() {
+	public function providerData()
+	{
 		if(!$this->user) return;
 		return $this->user->oauth_data()->whereProvider($this->provides)->first();
 	}

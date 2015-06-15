@@ -18,6 +18,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 
 	public function __construct()
 	{
+		parent::__construct();
 		FacebookSession::setDefaultApplication(
 			config('services.facebook.client_id'),
 			config('services.facebook.client_secret')
@@ -72,7 +73,9 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		$request = new FacebookRequest($this->session, 'GET', "/$id/likes");
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
-		$data = $graphObject->getProperty('data')->asArray();
+		$data = $graphObject->getProperty('data');
+		if(!$data) return false;
+		$data = $data->asArray();
 		foreach($data as $userLikes) {
 			if($userLikes->id == $user) {
 				return true;

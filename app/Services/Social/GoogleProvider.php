@@ -18,6 +18,7 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 
 	public function __construct()
 	{
+		parent::__construct();
 		$client = new Google_Client();
 		$this->service = new Google_Service_Plus($client);
 		
