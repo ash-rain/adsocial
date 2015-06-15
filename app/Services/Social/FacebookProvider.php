@@ -22,12 +22,15 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 			config('services.facebook.client_id'),
 			config('services.facebook.client_secret')
 			);
+	}
 
+	private function useSession() {
 		$this->session = new FacebookSession($this->providerData()->token);
 	}
 
 	public function getFeed()
 	{
+		$this->useSession();
 		$url = '/'. $this->providerData()->provider_id .'/feed';
 		$request = new FacebookRequest($this->session, 'GET', $url);
 		$response = $request->execute();
@@ -38,6 +41,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
 	public function getPost($id)
 	{
+		$this->useSession();
 		$request = new FacebookRequest($this->session, 'GET', "/$id?date_format=U");
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
@@ -46,6 +50,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 
 	public function actionLike($id)
 	{
+		$this->useSession();
 		$request = new FacebookRequest($this->session, 'POST', "/$id/likes");
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
@@ -53,6 +58,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 	}
 
 	public function actionShare($id) {
+		$this->useSession();
 		$post = Post::whereProviderId($id)->first();
 		$request = new FacebookRequest($this->session, 'POST', '/me/feed', ['link' => $post->link]);
 		$response = $request->execute();
@@ -60,13 +66,15 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		return $graphObject->getProperty('success');
 	}
 
-	public function checkLike($id, $oauth_data)
+	public function checkLike($id, $user)
 	{
+		$this->useSession();
 		$request = new FacebookRequest($this->session, 'GET', "/$id/likes");
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
-		foreach($graphObject->getProperty('data') as $user) {
-			if($user->id == $oauth_data->provider_id) {
+		$data = $graphObject->getProperty('data')->asArray();
+		foreach($data as $userLikes) {
+			if($userLikes->id == $user) {
 				return true;
 			}
 		}

@@ -18,7 +18,7 @@
 			<ul class="list-inline">
 				<li>
 					<h3>{{ $providerUser->name }}</h3>
-					<span>{{ $providerUser->email or trans('app.no_email') }}</span>
+					<span>{{ $providerUser->email or trans('app.noemail') }}</span>
 				</li>
 				<li>
 					<h3>643</h3>
@@ -33,8 +33,7 @@
 	</li>
 	@foreach($feed as $item)
 	<li>
-	<time class="cbp_tmtime" datetime="2014-12-09T03:45">
-		<span>{{-- $item->posted_at->format('d/m H:i') --}}</span>
+	<time class="cbp_tmtime" datetime="2014-12-09T03:45" title="{{ $item->posted_at->format('d/m H:i') }}">
 		<span>{{ $item->posted_at->diffForHumans() }}</span>
 	</time>
 	<div class="cbp_tmicon">
@@ -51,10 +50,10 @@
 			</div>
 			@endif
 		</div>
-		<a class="btn btn-icon icon-left {{ $item->market ? 'btn-primary' : 'btn-green' }}"
+		<a class="btn btn-icon icon-left {{ $item->market->count() ? 'btn-primary' : 'btn-green' }}"
 			data-toggle="modal" data-target="#boostModal" data-post-id="{{ $item->id }}">
-			<i class="fa {{ $item->market ? 'fa-pencil' : 'fa-check' }}"></i>
-			{{ trans( $item->market ? 'post.boost' : 'post.boosted') }}
+			<i class="fa {{ $item->market->count() ? 'fa-pencil' : 'fa-plus' }}"></i>
+			{{ trans($item->market->count() ? 'app.boosted' : 'app.boost') }}
 		</a>
 	</div>
 	</li>

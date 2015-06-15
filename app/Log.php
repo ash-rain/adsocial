@@ -14,6 +14,6 @@ class Log extends Model {
 	}
 
 	public function market() {
-		return $this->belongsTo('App\MarketItem');
+		return $this->belongsTo('App\MarketItem', 'market_item_id');
 	}
 }

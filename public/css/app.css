@@ -1,3 +1,11 @@
+.tile-block.tile-gray .tile-footer a:hover {
+	color: #fff;
+}
+
+.tile-block.tile-gray .tile-footer a:hover .label {
+	font-weight: bold;
+}
+
 #buy {
 	text-align: center;
 	font-weight: 900;

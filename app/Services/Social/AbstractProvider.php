@@ -11,6 +11,12 @@ abstract class AbstractProvider implements SocialProvider {
 	const LIMIT = 20;
 	protected $idField = 'id';
 	protected $fieldMap = [];
+	protected $user;
+	protected $provides;
+
+	public function __construct() {
+		$this->user = Auth::user();
+	}
 
 	public function post($id)
 	{
@@ -68,7 +74,8 @@ abstract class AbstractProvider implements SocialProvider {
 	}
 
 	public function providerData() {
-		return Auth::user()->oauth_data()->whereProvider($this->provides)->first();
+		if(!$this->user) return;
+		return $this->user->oauth_data()->whereProvider($this->provides)->first();
 	}
 
 	public function action($action, $id)
@@ -83,12 +90,13 @@ abstract class AbstractProvider implements SocialProvider {
 		return false;
 	}
 	
-	public function check($action, $id, $user)
+	public function check($market, $user)
 	{
-		$method = 'check' . ucfirst($action);
+		$method = 'check' . ucfirst($market->action);
 		if(method_exists($this, $method)) {
+			$this->user = $market->user;
 			$oauth_data = $user->oauth_data()->whereProvider($this->provides)->first();
-			return $this->$method($id, $oauth_data);
+			return $this->$method($market->post->provider_id, $oauth_data->provider_id);
 		}
 		return false;
 	}

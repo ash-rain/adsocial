@@ -3,6 +3,7 @@
 use Auth;
 use Queue;
 use App\Services\SocialManager;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use App\MarketItem;
 use App\Post;
@@ -20,7 +21,13 @@ class SiteController extends Controller {
 	public function getIndex()
 	{
 		$market = array();
-		foreach (MarketItem::get()->groupBy('post_id') as $key => $marketItem) {
+		$providers = Auth::user()->providers;
+		$query = MarketItem::where(function($q) use ($providers) {
+			foreach ($providers as $provider) {
+				$q->orWhere('provider', $provider);
+			}
+		});
+		foreach ($query->get()->groupBy('post_id') as $key => $marketItem) {
 			$market[$key] = (new Collection($marketItem))->keyBy('action');
 		}
 		return view('home', compact('market'));
@@ -36,11 +43,13 @@ class SiteController extends Controller {
 				'reason' => $action,
 				'market_item_id' => $post->market()->whereAction($action)->first()->id
 			]);
-			if($log->id) {
-				return view('action_complete');
-			}
+			
+			//if($log->id) {
+			//	return view('action_complete');
+			//}
 			Auth::user()->log()->save($log);
-			Queue::push('App\Jobs\CheckActions', compact('log'));
+			$q = Queue::later(Carbon::now()->addSeconds(15), 'App\Jobs\AwaitAction', ['log' => $log->id]);
+			dd($q);
 		}
 
 		if(!$post) {	
