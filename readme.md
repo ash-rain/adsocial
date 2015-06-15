@@ -56,6 +56,7 @@ Claims older than a month are automatically dropped from the queue.
 ## OAuth
 Callback routes: `/auth/callback/{provider}`
 Currently supported:
+* http://adsocial.microweber.com/auth/callback/google
 * http://adsocial.microweber.com/auth/callback/facebook
-* http://adsocial.microweber.com/auth/callback/twitter
+* http://adsocial.microweber.com/auth/callback/linkedin
 * http://adsocial.microweber.com/auth/callback/twitter
