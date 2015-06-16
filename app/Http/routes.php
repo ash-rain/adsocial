@@ -4,6 +4,7 @@ Route::model('user', 'App\User');
 Route::model('post', 'App\Post');
 
 Route::controller('auth', 'AuthController');
+Route::controller('checkout', 'CheckoutController');
 
 Route::get('me', 'UserController@edit');
 Route::post('me', 'UserController@store');

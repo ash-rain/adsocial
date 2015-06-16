@@ -1,6 +1,16 @@
 @extends('app')
 
+@section('js')
+$(function() {
+	$('#buyModal .submit').click(function() {
+		$('#buyModal form')[0].submit()
+	})
+})
+@stop
+
 @section('content')
+
+@include('modals.buy')
 
 <h1>
 	@lang('app.hi')
@@ -16,7 +26,7 @@
 			</div>
 			<h3>@lang('app.points')</h3>
 		</div>
-		<a id="buy" href="{{ url('/') }}" class="tile-stats tile-red">
+		<a href="#" id="buy" data-toggle="modal" data-target="#buyModal" class="tile-stats tile-red">
 			<i class="fa fa-dollar"></i>
 			@lang('app.buy_points')
 			{{-- <div class="icon"><i class="fa fa-cc-paypal"></i></div> --}}

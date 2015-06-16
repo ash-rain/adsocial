@@ -2,9 +2,11 @@
 
 use Auth;
 use Queue;
-use App\Services\SocialManager;
+use PayPal;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
+use App\Services\SocialManager;
 use App\MarketItem;
 use App\Post;
 use App\Log;
@@ -31,6 +33,12 @@ class SiteController extends Controller {
 			$market[$key] = (new Collection($marketItem))->keyBy('action');
 		}
 		return view('home', compact('market'));
+	}
+
+	public function postCheckout(Request $request)
+	{
+		$points = $request->input('points');
+		dd($points);
 	}
 
 	public function getAction($post = null, $action = null)

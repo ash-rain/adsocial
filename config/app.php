@@ -149,7 +149,7 @@ return [
 
 		'Laravel\Socialite\SocialiteServiceProvider',
 		'Thujohn\Twitter\TwitterServiceProvider',
-		
+		'Netshell\Paypal\PaypalServiceProvider',
 	],
 
 	/*
@@ -203,7 +203,7 @@ return [
 
 		'Socialize' => 'Laravel\Socialite\Facades\Socialite',
 		'Twitter' => 'Thujohn\Twitter\Facades\Twitter',
-
+		'PayPal'   => 'Netshell\Paypal\Facades\Paypal',
 	],
 
 ];
