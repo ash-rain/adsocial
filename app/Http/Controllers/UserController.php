@@ -18,10 +18,8 @@ class UserController extends Controller {
 		return view('profile', compact('user'));
 	}
 
-	public function edit()
-	{
-		$user = $this->auth->user();
-		return view('profile_edit', compact('user'));
+	public function edit() {
+		return view('profile_edit');
 	}
 
 	public function store(Request $request)

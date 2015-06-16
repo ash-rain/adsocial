@@ -3,6 +3,8 @@
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use App\Log;
+use Cache;
 
 class User extends Model implements AuthenticatableContract {
 
@@ -42,5 +44,15 @@ class User extends Model implements AuthenticatableContract {
 			$list[] = $od->provider;
 		}
 		return $list;
+	}
+
+	public function getPointsAttribute()
+	{
+		$points = $this->attributes['points'];
+		$id = $this->attributes['id'];
+		$points += Cache::remember("user_{$id}_points", 5, function() use($id) {
+			return Log::with('market')->where('user_id', $id)->get()->sum('market.reward');
+		});
+		return $points;
 	}
 }

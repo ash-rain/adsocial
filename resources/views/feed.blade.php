@@ -33,7 +33,7 @@
 	</li>
 	@foreach($feed as $item)
 	<li>
-	<time class="cbp_tmtime" datetime="2014-12-09T03:45" title="{{ $item->posted_at->format('d/m H:i') }}">
+	<time class="cbp_tmtime" title="{{ $item->posted_at->format('d/m H:i') }}">
 		<span>{{ $item->posted_at->diffForHumans() }}</span>
 	</time>
 	<div class="cbp_tmicon">
@@ -59,8 +59,6 @@
 	</li>
 	@endforeach
 </ul>
-
-
 @endsection
 
 @section('js')

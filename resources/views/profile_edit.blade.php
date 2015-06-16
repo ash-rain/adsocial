@@ -26,26 +26,35 @@
 	<div class="col-sm-5">
 		<div class="scrollable" data-height="195">
 			<ul class="list-group">
-				@foreach(range(1, 10) as $i)
+				@foreach($user->log as $log)
 				<li class="list-group-item">
 					<span class="badge badge-success">
-						+7
+						+{{ $log->market->reward }}
 					</span>
-					<strong>Reason</strong>
-					<div>
-						<a href="#">
-							<i class="fa fa-hand-o-up"></i>
-							Link to resource
-						</a>
-						<div class="pull-right">
-							<i class="fa fa-clock-o"></i>
-							<small>{{ Carbon\Carbon::now()->diffForHumans() }}</small>
-						</div>
+					<i class="fa fa-{{ config('adsocial.actions.'. $log->market->provider .'.'. $log->reason .'.icon') }}"></i>
+					<strong>{{ trans("app.actions_done.$log->reason") }}</strong>
+					<a href="{{ $log->market->post->link }}" target="_blank">
+						{{ $log->market->post->text }}
+					</a>
+					<div title="{{ $log->updated_at }}">
+						<i class="fa fa-clock-o"></i>
+						<small>{{ $log->updated_at->diffForHumans() }}</small>
 					</div>
 				</li>
 				@endforeach
+				<li class="list-group-item">
+					<span class="badge badge-success">
+						+{{ config('adsocial.start_points') }}
+					</span>
+					<i class="fa fa-user"></i>
+					<strong>{{ trans('app.actions_done.register') }}</strong>
+					<div title="{{ $user->created_at }}">
+						<i class="fa fa-clock-o"></i>
+						<small>{{ $user->created_at->diffForHumans() }}</small>
+					</div>
+				</li>
 			</ul>
-			<a href="#">@lang('app.show_older')</a>
+			{{-- <a href="#">@lang('app.show_older')</a> --}}
 		</div>
 	</div>
 
