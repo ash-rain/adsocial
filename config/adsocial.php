@@ -45,5 +45,24 @@
 			'icon' => 'fa fa-linkedin',
 			'authOnly' => true
 		]
+	],
+
+	// Payment plans
+	'plans' => [
+		'one' => [
+			'cost' => 10,
+			'points' => 1000,
+			'promoDays' => 1
+		],
+		'two' => [
+			'cost' => 25,
+			'points' => 4000,
+			'promoDays' => 3
+		],
+		'three' => [
+			'cost' => 50,
+			'points' => 11000,
+			'promoDays' => 7
+		]
 	]
 ];

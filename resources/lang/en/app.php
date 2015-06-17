@@ -39,6 +39,11 @@ return [
 	'noemail' => '(no e-mail)',
 	'or' => 'or',
 	'password' => 'Password',
+	'plans' => [
+		'one' => 'Plan 1',
+		'two' => 'Plan 2',
+		'three' => 'Plan 3'
+	],
 	'providers' => [
 		'twitter' => 'Twitter',
 		'linkedin' => 'LinkedIn',
