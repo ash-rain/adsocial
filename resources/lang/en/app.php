@@ -23,6 +23,7 @@ return [
 	'boost_text' => 'Set a reward for each action. An action doesn\t necessarily have to have a reward - you can set it to 0.',
 	'buy_points' => 'Buy Points',
 	'cancel' => 'Cancel',
+	'checkout' => 'Checkout',
 	'connect' => 'Connect',
 	'connect_info' => 'Add another account to your profile',
 	'email' => 'E-mail',
@@ -40,10 +41,13 @@ return [
 	'or' => 'or',
 	'password' => 'Password',
 	'plans' => [
-		'one' => 'Plan 1',
-		'two' => 'Plan 2',
-		'three' => 'Plan 3'
+		'one' => 'Starter',
+		'two' => 'Real Deal',
+		'three' => 'Serious',
+		'four' => 'Mega Plan'
 	],
+	'promo_days' => '{0} Promotion not included|{1} day of post promotion|[2,Inf] days of post promotion',
+	'promo_text' => 'While promoted your posts will appear in the begining of the market. Purchasing a bigger plan will give your posts additional advantage.',
 	'providers' => [
 		'twitter' => 'Twitter',
 		'linkedin' => 'LinkedIn',

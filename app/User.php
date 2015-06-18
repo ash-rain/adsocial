@@ -53,9 +53,9 @@ class User extends Model implements AuthenticatableContract {
 		$points += Cache::remember("user_{$id}_pointsP", 5, function() use($id) {
 			return Log::with('market')->where('user_id', $id)->get()->sum('market.reward');
 		});
-		$points -= Cache::remember("user_{$id}_pointsM", 5, function() use($id) {
+		/*$points -= Cache::remember("user_{$id}_pointsM", 5, function() use($id) {
 			return Log::with('market')->where('user_id', $id)->get()->sum('market.reward');
-		});
+		});*/
 		return $points;
 	}
 }

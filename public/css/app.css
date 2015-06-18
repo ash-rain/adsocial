@@ -1,3 +1,16 @@
+#buyModal .tile-block .tile-footer a {
+	padding: 1em 0;
+}
+
+#buyModal .tile-content > div:nth-child(2) {
+	margin: .5em 0;
+}
+
+#buyModal .tile-content {
+	font-size: 1.4em;
+	line-height: 1;
+}
+
 .tile-block.tile-gray .tile-footer a:hover {
 	color: #fff;
 }

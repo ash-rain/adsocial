@@ -50,19 +50,29 @@
 	// Payment plans
 	'plans' => [
 		'one' => [
-			'cost' => 10,
+			'cost' => 4.99,
 			'points' => 1000,
-			'promoDays' => 1
+			'promoDays' => 0
 		],
 		'two' => [
-			'cost' => 25,
+			'cost' => 12.99,
 			'points' => 4000,
-			'promoDays' => 3
+			'promoDays' => 1
 		],
 		'three' => [
-			'cost' => 50,
+			'cost' => 49.99,
 			'points' => 11000,
-			'promoDays' => 7
+			'promoDays' => 4
+		],
+		'four' => [
+			'cost' => 99.99,
+			'points' => 24000,
+			'promoDays' => 10
 		]
+	],
+
+	'checkout' => [
+		'currency' => 'USD',
+		'currency_code' => 'USD',
 	]
 ];
