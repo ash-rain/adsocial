@@ -24,12 +24,11 @@ abstract class AbstractProvider implements SocialProvider {
 		if($post) return $post;
 
 		$source = (array)$this->getPost($id);
-		$target = array();
+		$postData = array();
 
-		foreach ($this->fieldMap as $key => $value) {
-			
+		foreach ($this->fieldMap as $key => $value)
+		{
 			$t = null;
-
 			if($value)
 			{
 				// closure
@@ -40,7 +39,7 @@ abstract class AbstractProvider implements SocialProvider {
 				else if(is_string($value) && isset($source[$value])) {
 					$t = $source[$value];
 				}
-				// fallback array of string keys
+				// array of fallback string keys
 				else if(is_array($value)) {
 					foreach ($value as $v) {
 						if(isset($source[$v]) && strlen($source[$v])) {
@@ -50,18 +49,18 @@ abstract class AbstractProvider implements SocialProvider {
 					}
 				}
 			}
-			$target[$key] = $t;
+			$postData[$key] = $t;
 		}
 
-		if((string)(int)$target['posted_at'] !== $target['posted_at']) {
-			$target['posted_at'] = strtotime($target['posted_at']);
+		if($postData['posted_at'] && (string)(int)$postData['posted_at'] != $postData['posted_at']) {
+			$postData['posted_at'] = strtotime($postData['posted_at']);
 		}
 		
-		$target['provider'] = $this->provides;
-		$target['provider_id'] = $id;
-		$target['user_id'] = Auth::id();
+		$postData['provider'] = $this->provides;
+		$postData['provider_id'] = $id;
+		$postData['user_id'] = $this->user->id;
 		
-		$post = new Post($target);
+		$post = new Post($postData);
 		$post->save();
 		return $post;
 	}

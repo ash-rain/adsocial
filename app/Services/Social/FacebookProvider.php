@@ -10,7 +10,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 	
 	protected $provides = 'facebook';
 	protected $fieldMap = [
-		'text' => ['story', 'type'],
+		'text' => ['story', 'description', 'type'],
 		'link' => 'link',
 		'image' => 'picture',
 		'posted_at' => 'created_time'

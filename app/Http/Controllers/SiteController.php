@@ -35,12 +35,6 @@ class SiteController extends Controller {
 		return view('home', compact('market'));
 	}
 
-	public function postCheckout(Request $request)
-	{
-		$points = $request->input('points');
-		dd($points);
-	}
-
 	public function getAction($post = null, $action = null)
 	{
 		$post = Post::find($post);

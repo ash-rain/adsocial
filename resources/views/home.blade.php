@@ -51,7 +51,7 @@
 	</div>
 </div>
 @else
-	@lang('trade.market_empty')
+	@lang('app.market_empty')
 @endif
 
 @stop
