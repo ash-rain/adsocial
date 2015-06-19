@@ -37,6 +37,12 @@
 			{{ $user->name }}
 		</a>
 		<ul>
+			<li>
+				<a href="#" data-toggle="modal" data-target="#postModal" >
+					<i class="fa fa-plus"></i>
+					@lang('app.new_post')
+				</a>
+			</li>
 			<li class="{{ Request::is('me') ? 'active' : '' }}">
 				<a href="{{ action('UserController@edit') }}">
 					<i class="fa fa-pencil"></i>

@@ -6,7 +6,7 @@
 <div>
 	<div class="market row">
 		@foreach($market as $id => $actions)
-		<div class="col-md-3">
+		<div class="col-sm-6 col-md-4 col-lg-3">
 			<div class="market-item tile-block tile-gray">
 				<div class="tile-header">
 					<i class="{{ config('adsocial.actions.'. $actions->first()->provider . '.icon') }}"></i>

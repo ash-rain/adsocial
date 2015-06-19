@@ -1,3 +1,21 @@
+.cbp_tmtimeline > li .cbp_tmicon { left: 15% }
+.cbp_tmtimeline:before { left: 15%; }
+.cbp_tmtimeline > li .cbp_tmtime { width: 20%; }
+.cbp_tmtimeline > li .cbp_tmlabel { margin-left: 20%; }
+
+@media only screen and (max-width: 767px) {
+	.page-body .page-container .main-content {
+		padding-top: 100px;
+	}
+
+	.page-container .sidebar-menu .sidebar-menu-inner.ps-container {
+		width: 100%;
+		background: #2b303a;
+		bottom: auto;
+		height: auto;
+	}
+}
+
 #buyModal .tile-block .tile-footer a {
 	padding: 1em 0;
 }
@@ -92,6 +110,7 @@
 	z-index: 9999;
 }
 
+.page-body .select2-container .select2-choice .select2-arrow b:before,
 .page-container .sidebar-menu #main-menu li.has-sub > a:before {
 	font-family: 'FontAwesome';
 	content: "\f105";

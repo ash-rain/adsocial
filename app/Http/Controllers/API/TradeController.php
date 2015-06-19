@@ -20,14 +20,13 @@ class TradeController extends Controller {
 			throw new \Exception('Post not found');
 		}
 
-		foreach (config("adsocial.actions.$post->provider") as $key => $value)
+		foreach(config('adsocial.actions.'. $post->provider) as $key => $value)
 		{
 			$input['provider'] = $post->provider;
 			$input['user_id'] = Auth::id();
 			$input['post_id'] = $post->id;
 			$input['action'] = $key;
 			$reward = (int)$request->input($key);
-
 			if($reward) {
 				$item = MarketItem::firstOrCreate($input);
 				$item->reward = $reward;

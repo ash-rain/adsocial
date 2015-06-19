@@ -5,5 +5,7 @@
 <script src="{{ asset('vendor/neon/js/joinable.js') }}"></script>
 <script src="{{ asset('vendor/neon/js/resizeable.js') }}"></script>
 <script src="{{ asset('vendor/neon/js/neon-api.js') }}"></script>
+<script src="{{ asset('vendor/neon/js/daterangepicker/daterangepicker.js') }}"></script>
+<script src="{{ asset('vendor/neon/js/select2/select2.min.js') }}"></script>
 <script src="{{ asset('vendor/neon/js/neon-custom.js') }}"></script>
 <script type="text/javascript">@yield('js')</script>

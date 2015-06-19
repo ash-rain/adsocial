@@ -29,6 +29,7 @@
 			@yield('content')
 		</div>
 	</div>
+	@include('modals.post')
 	@include('layout.scripts')
 </body>
 </html>

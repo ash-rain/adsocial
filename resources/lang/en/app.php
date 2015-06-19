@@ -20,7 +20,7 @@ return [
 	],
 	'boost' => 'Boost Post',
 	'boosted' => 'Boosting',
-	'boost_text' => 'Set a reward for each action. An action doesn\t necessarily have to have a reward - you can set it to 0.',
+	'boost_text' => 'Set a reward for each action. Leave a field blank if you don\'t want to reward that action.',
 	'buy_points' => 'Buy Points',
 	'cancel' => 'Cancel',
 	'checkout' => 'Checkout',
@@ -38,6 +38,7 @@ return [
 	'name' => 'Full name',
 	'name_required' => 'Name is required!',
 	'noemail' => '(no e-mail)',
+	'noreward' => '(no reward)',
 	'or' => 'or',
 	'password' => 'Password',
 	'plans' => [

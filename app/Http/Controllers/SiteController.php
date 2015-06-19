@@ -20,6 +20,11 @@ class SiteController extends Controller {
 		$this->social = new SocialManager(app());
 	}
 
+	public function postPost(Request $request)
+	{
+		$input = $request->only(['provider', 'text', 'link', 'posted_at', 'categories']);
+	}
+
 	public function getIndex()
 	{
 		$market = array();

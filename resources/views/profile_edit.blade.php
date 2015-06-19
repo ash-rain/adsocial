@@ -21,9 +21,7 @@ $(function() {
 	<div class="col-sm-3">
 		<div class="tile-stats tile-gray">
 			<div class="icon"><i class="fa fa-line-chart"></i></div>
-			<div class="num" data-start="0" data-end="{{ $user->points }}" data-duration="900" data-delay="0">
-				{{ $user->points }}
-			</div>
+			<div class="num" data-start="0" data-end="{{ $user->points }}" data-duration="900" data-delay="0"></div>
 			<h3>@lang('app.points')</h3>
 		</div>
 		<a href="#" id="buy" data-toggle="modal" data-target="#buyModal" class="tile-stats tile-red">
@@ -138,10 +136,10 @@ $(function() {
 			<div class="col-sm-6">
 				<a href="javascript:void(0)" onclick="if({{ strlen($provider->user_data->email) }}) jQuery('input[name=email]').val('{{ $provider->user_data->email }}')">
 					<div class="tile-stats tile-aqua">
-						<div class="icon"><i class="{{ config("adsocial.$provider->provider.icon") }}"></i></div>
+						<div class="icon"><i class="{{ config("adsocial.actions.{$provider->provider}.icon") }}"></i></div>
 						<div class="num">
 							<img width="40" height="40" src="{{ $provider->user_data->avatar }}">
-							{{ $provider->user_data->nickname or $provider->provider }}
+							{{ trans("app.providers.$provider->provider") }}
 						</div>
 						<h3>{{ $provider->user_data->name }}</h3>
 						<p>{{ $provider->user_data->email or trans('app.noemail') }}</p>
@@ -153,10 +151,10 @@ $(function() {
 			@foreach(array_diff(array_keys(config('adsocial.actions')), $user->providers) as $newProvider)
 			<div class="col-sm-6">
 				<a href="{{ action('AuthController@getSocial', $newProvider) }}" class="tile-stats tile-cyan">
-					<div class="icon"><i class="{{ config("adsocial.$newProvider.icon") }}"></i></div>
+					<div class="icon"><i class="{{ config("adsocial.actions.$newProvider.icon") }}"></i></div>
 					<div class="num">
 						<i class="fa fa-user-plus"></i>
-						{{ $newProvider }}
+						{{ trans("app.providers.$newProvider") }}
 					</div>
 					<h3>@lang('app.connect')</h3>
 					<p>@lang('app.connect_info')</p>
