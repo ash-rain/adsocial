@@ -34,27 +34,27 @@ $(function() {
 	<div class="col-sm-5">
 		<div class="scrollable" data-height="195">
 			<ul class="list-group">
-				@foreach($user->log as $log)
+				@foreach($earned as $item)
 				<li class="list-group-item">
 					<span class="badge badge-success">
-						+{{ $log->reward ? $log->reward : $log->market->reward }}
+						+{{ $item->reward ? $item->reward : $item->market_reward }}
 					</span>
 					
-					@unless($log->reward)
-					<i class="fa fa-{{ config('br.actions.'. $log->market->provider .'.'. $log->reason .'.icon') }}"></i>
+					@unless($item->reward)
+					<i class="fa fa-{{ config('br.actions.'. $item->provider .'.'. $item->reason .'.icon') }}"></i>
 					@endunless
 					
-					<strong>{{ trans("app.actions_done.$log->reason") }}</strong>
+					<strong>{{ trans("app.actions_done.$item->reason") }}</strong>
 
-					@unless($log->reward)
-					<a href="{{ $log->market->post->link }}" target="_blank">
-						{{ $log->market->post->text }}
+					@unless($item->reward)
+					<a href="{{ $item->link }}" target="_blank">
+						{{ $item->text }}
 					</a>
 					@endunless
 					
-					<div title="{{ $log->updated_at }}">
+					<div title="{{ $item->updated_at }}">
 						<i class="fa fa-clock-o"></i>
-						<small>{{ $log->updated_at->diffForHumans() }}</small>
+						<small>{{ (new Carbon\Carbon($item->updated_at))->diffForHumans() }}</small>
 					</div>
 				</li>
 				@endforeach

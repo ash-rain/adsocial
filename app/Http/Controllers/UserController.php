@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Http\Requests;
 use App\User;
+use App\Log;
 
 class UserController extends Controller {
 
@@ -24,7 +25,10 @@ class UserController extends Controller {
 			->join('users', 'log.user_id', '=', 'users.id')
 			->select('log.updated_at', 'log.reason', 'log.user_id', 'users.name', 'market.reward', 'market.provider', 'posts.text')
 			->get();
-		return view('profile_edit', compact('reduced'));
+		$earned = $this->auth->user()->earned
+			->select('log.updated_at', 'log.reason', 'log.reward', 'market.reward as market_reward', 'market.provider', 'posts.text', 'posts.link')
+			->get();
+		return view('profile_edit', compact('earned', 'reduced'));
 	}
 
 	public function store(Request $request)

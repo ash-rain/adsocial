@@ -11,11 +11,12 @@
 				<div class="tile-header">
 					<i class="{{ config('br.actions.'. $actions->first()->provider . '.icon') }}"></i>
 					@if($actions->first()->user->id == $user->id)
-					<a href="#">
+					<a href="#" data-toggle="modal" data-target="#{{ $actions->first()->provider }}BoostModal" data-post-id="{{ $actions->first()->post->id }}">
 						<i class="fa fa-fw fa-pencil-square"></i>
 					</a>
 					@endif
 					<a href="{{ action('UserController@show', $actions->first()->user->id) }}">
+						<span class="pull-right">{{ $actions->first()->updated_at->diffForHumans() }}</span>
 						{{ $actions->first()->user->name }}
 						<span>{{ $actions->first()->provider }}</span>
 					</a>
@@ -29,7 +30,7 @@
 					<p>{{ $actions->first()->post->text }}</p>
 				</div>
 				@endif
-				@unless($actions->first()->user->id == $user->id)
+				@unless(0 && $actions->first()->user->id == $user->id)
 				<div class="tile-footer">
 					@foreach(config('br.actions.' . $actions->first()->provider) as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
@@ -55,6 +56,15 @@
 @else
 	@lang('app.market_empty')
 @endif
+
+{{-- Boost edit modals --}}
+@foreach(config('br.actions') as $provider => $actions)
+@unless(isset($actions['authOnly']))
+@include('modals.boost', compact('provider'))
+@endunless
+@endforeach
+
+@include('layout.boost-js')
 
 @stop
 

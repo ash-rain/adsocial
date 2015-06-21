@@ -20,7 +20,7 @@ class SiteController extends Controller {
 		$this->social = new SocialManager(app());
 	}
 
-	public function postPost(Request $request)
+	public function postNewPost(Request $request)
 	{
 		$input = $request->only(['provider', 'text', 'link', 'posted_at', 'categories']);
 	}
@@ -33,9 +33,7 @@ class SiteController extends Controller {
 		foreach ($query->get()->groupBy('post_id') as $key => $marketItem) {
 			$market[$key] = (new Collection($marketItem))
 				->keyBy('action')
-				->filter(function($market) {
-					return !in_array($market->action, $market->log()->lists('reason')->toArray());
-				});
+				->sortByDesc('updated_at');
 		}
 		return view('home', compact('market'));
 	}

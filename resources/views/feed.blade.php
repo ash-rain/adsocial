@@ -47,7 +47,7 @@
 				@endif
 			</div>
 			<a class="btn btn-icon icon-left {{ $item->market->count() ? 'btn-primary' : 'btn-green' }}"
-				data-toggle="modal" data-target="#{{ $provider }}BoostModal" data-post-id="{{ $item->id }}" data>
+				data-toggle="modal" data-target="#{{ $provider }}BoostModal" data-post-id="{{ $item->id }}">
 				<i class="fa {{ $item->market->count() ? 'fa-pencil' : 'fa-plus' }}"></i>
 				{{ trans($item->market->count() ? 'app.boosted' : 'app.boost') }}
 			</a>
@@ -57,24 +57,6 @@
 </ul>
 
 @include('modals.boost', compact('provider'))
+@include('layout.boost-js')
 
 @endsection
-
-@section('js')
-$(function() {
-	var modal = $('#{{ $provider }}BoostModal')
-	modal.find('.submit.btn').on('click', function() {
-		$.ajax({
-			method: 'POST',
-			url: '/api/v1/trade/boost',
-			data: modal.find('form').serialize(),
-			complete: function(){ window.location.reload() }
-		})
-	})
-
-	$('[data-post-id]').click(function() {
-		modal.find('[name="post_id"]').val($(this).data('post-id'))
-		modal.find('.post-preview').html($(this).prev().html())
-	})
-})
-@stop

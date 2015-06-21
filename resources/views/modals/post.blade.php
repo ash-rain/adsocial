@@ -6,7 +6,7 @@
 				<h4 class="modal-title" id="postModalLabel">@lang('app.post_new')</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="{{ action('SiteController@postPost') }}" method="POST">
+				<form class="form-horizontal" action="{{ action('SiteController@postNewPost') }}" method="POST">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">@lang('app.provider')</label>
 						<div class="col-sm-4">

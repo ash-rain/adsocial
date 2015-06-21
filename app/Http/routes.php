@@ -12,7 +12,10 @@ Route::patch('me', 'UserController@update');
 Route::get('user/{user}', 'UserController@show');
 
 Route::group(['prefix' => 'api/v1', 'namespace' => 'API'], function() {
-	Route::controller('trade', 'TradeController');
+	Route::controllers([
+		'trade' => 'TradeController',
+		'post' => 'PostController'
+	]);
 });
 
 Route::get('/', ['as' => 'home', 'uses' => 'SiteController@getIndex']);

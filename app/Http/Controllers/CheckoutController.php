@@ -6,7 +6,7 @@ class CheckoutController extends Controller
 
 	public function __construct()
 	{
-		$this->_apiContext = PayPal::ApiContext(config('services.paypal.client_id'), config('services.paypal.secret'));
+		/*$this->_apiContext = PayPal::ApiContext(config('services.paypal.client_id'), config('services.paypal.secret'));
 		
 		$this->_apiContext->setConfig(array(
 			'mode' => 'sandbox',
@@ -16,7 +16,7 @@ class CheckoutController extends Controller
 			'log.FileName' => storage_path('logs/paypal.log'),
 			'log.LogLevel' => 'FINE'
 		));
-
+*/
 		$this->middleware('auth', ['only' => 'getIndex']);
 	}
 	public function getDone(Request $request)

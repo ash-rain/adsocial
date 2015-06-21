@@ -1,4 +1,4 @@
-<div class="modal fade" id="{{ $provider }}BoostModal" tabindex="-1" role="dialog" aria-labelledby="{{ $provider }}BoostModalLabel" aria-hidden="true">
+<div class="boost modal fade" id="{{ $provider }}BoostModal" tabindex="-1" role="dialog" aria-labelledby="{{ $provider }}BoostModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -9,7 +9,9 @@
 				<form class="form-horizontal form-groups-bordered">
 					<input type="hidden" name="post_id">
 					<div>
-						<div class="post-preview"></div>
+						<h3>
+							<a class="post-preview"></a>
+						</h3>
 						<br style="clear: both;">
 					</div>
 					<hr>
@@ -26,7 +28,7 @@
 										<i class="fa fa-minus"></i>
 									</button>
 									
-									<input type="text" name="{{ $action }}" class="form-control" placeholder="{{ trans('app.noreward') }}" value="{{ $settings['default'] }}" data-min="1" data-mask="decimal">
+									<input type="text" name="{{ $action }}" class="form-control reward" placeholder="{{ trans('app.noreward') }}" value="{{ $settings['default'] }}" data-min="1" data-mask="decimal">
 									
 									<button type="button" class="btn btn-default">
 										<i class="fa fa-plus"></i>

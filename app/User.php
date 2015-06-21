@@ -40,7 +40,7 @@ class User extends Model implements AuthenticatableContract {
 	}
 
 	public function log() {
-		return $this->hasMany('App\Log')->orderBy('log.updated_at', 'desc');
+		return $this->hasMany('App\Log');
 	}
 	
 	public function getReducedAttribute() {
@@ -48,6 +48,15 @@ class User extends Model implements AuthenticatableContract {
 			->join('market', 'log.market_item_id', '=', 'market.id')
 			->join('posts', 'market.post_id', '=', 'posts.id')
 			->where('posts.user_id', $this->attributes['id'])
+			->orderBy('log.updated_at', 'desc');
+	}
+
+	public function getEarnedAttribute() {
+		return DB::table('log')
+			->leftJoin('market', 'log.market_item_id', '=', 'market.id')
+			->leftJoin('posts', 'market.post_id', '=', 'posts.id')
+			->where('log.flag', true)
+			->where('log.user_id', $this->attributes['id'])
 			->orderBy('log.updated_at', 'desc');
 	}
 
@@ -63,8 +72,8 @@ class User extends Model implements AuthenticatableContract {
 	public function getPointsAttribute()
 	{
 		$id = $this->attributes['id'];
-		//return Cache::remember("user_{$id}_points", 5, function() use($id)
-		//{
+		return Cache::remember("user_{$id}_points", 3, function() use($id)
+		{
 			$marketActions = Log::with('market')
 				->whereFlag(true)
 				->where('user_id', $id)
@@ -75,6 +84,6 @@ class User extends Model implements AuthenticatableContract {
 				->get()->sum('reward');
 			$reduced = $this->reduced->select('market.reward')->sum('market.reward');
 			return $marketActions + $otherActions - $reduced;
-		//});
+		});
 	}
 }
