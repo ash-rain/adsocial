@@ -7,12 +7,12 @@
 	<div class="market row">
 		@foreach($market as $id => $actions)
 		<div class="col-sm-6 col-md-4 col-lg-3">
-			<div class="market-item tile-block tile-gray">
+			<div class="market-item tile-block {{ $actions->first()->user->id == $user->id ? 'tile-aqua' : 'tile-gray' }}">
 				<div class="tile-header">
 					<i class="{{ config('br.actions.'. $actions->first()->provider . '.icon') }}"></i>
 					@if($actions->first()->user->id == $user->id)
 					<a href="#">
-						<i class="fa fa-pencil-square-o"></i>
+						<i class="fa fa-fw fa-pencil-square"></i>
 					</a>
 					@endif
 					<a href="{{ action('UserController@show', $actions->first()->user->id) }}">
@@ -29,6 +29,7 @@
 					<p>{{ $actions->first()->post->text }}</p>
 				</div>
 				@endif
+				@unless($actions->first()->user->id == $user->id)
 				<div class="tile-footer">
 					@foreach(config('br.actions.' . $actions->first()->provider) as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
@@ -45,6 +46,7 @@
 					@endif
 					@endforeach
 				</div>
+				@endunless
 			</div>
 		</div>
 		@endforeach
