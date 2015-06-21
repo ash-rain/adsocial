@@ -10,7 +10,7 @@ return [
 		'share' => 'Share',
 	],
 	'actions_done' => [
-		'register' => 'Joined AdSocial',
+		'register' => 'Joined BuzzRunnr',
 		'comment' => 'Commented',
 		'favorite' => 'Favorited',
 		'like' => 'Liked',
@@ -31,7 +31,7 @@ return [
 	'email' => 'E-mail',
 	'email_required' => 'E-mail is required!',
 	'get_started' => 'Get Started!',
-	'get_started_text' => 'Join the AdSocial network',
+	'get_started_text' => 'Join the BuzzRunnr network',
 	'hi' => 'Hi,',
 	'home' => 'Market',
 	'linked_providers' => 'Linked accounts',

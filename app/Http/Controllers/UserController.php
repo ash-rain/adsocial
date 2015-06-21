@@ -18,8 +18,13 @@ class UserController extends Controller {
 		return view('profile', compact('user'));
 	}
 
-	public function edit() {
-		return view('profile_edit');
+	public function edit()
+	{
+		$reduced = $this->auth->user()->reduced
+			->join('users', 'log.user_id', '=', 'users.id')
+			->select('log.updated_at', 'log.reason', 'log.user_id', 'users.name', 'market.reward', 'market.provider', 'posts.text')
+			->get();
+		return view('profile_edit', compact('reduced'));
 	}
 
 	public function store(Request $request)

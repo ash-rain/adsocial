@@ -37,30 +37,27 @@ $(function() {
 				@foreach($user->log as $log)
 				<li class="list-group-item">
 					<span class="badge badge-success">
-						+{{ $log->market->reward }}
+						+{{ $log->reward ? $log->reward : $log->market->reward }}
 					</span>
+					
+					@unless($log->reward)
 					<i class="fa fa-{{ config('br.actions.'. $log->market->provider .'.'. $log->reason .'.icon') }}"></i>
+					@endunless
+					
 					<strong>{{ trans("app.actions_done.$log->reason") }}</strong>
+
+					@unless($log->reward)
 					<a href="{{ $log->market->post->link }}" target="_blank">
 						{{ $log->market->post->text }}
 					</a>
+					@endunless
+					
 					<div title="{{ $log->updated_at }}">
 						<i class="fa fa-clock-o"></i>
 						<small>{{ $log->updated_at->diffForHumans() }}</small>
 					</div>
 				</li>
 				@endforeach
-				<li class="list-group-item">
-					<span class="badge badge-success">
-						+{{ config('br.start_points') }}
-					</span>
-					<i class="fa fa-user"></i>
-					<strong>{{ trans('app.actions_done.register') }}</strong>
-					<div title="{{ $user->created_at }}">
-						<i class="fa fa-clock-o"></i>
-						<small>{{ $user->created_at->diffForHumans() }}</small>
-					</div>
-				</li>
 			</ul>
 			{{-- <a href="#">@lang('app.show_older')</a> --}}
 		</div>
@@ -69,21 +66,23 @@ $(function() {
 	<div class="col-sm-4">
 		<div class="scrollable" data-height="195">
 			<ul class="list-group">
-				@foreach(range(1, 3) as $i)
+				@foreach($reduced as $item)
 				<li class="list-group-item">
 					<span class="badge badge-warning">
-						-10
+						-{{ $item->reward }}
 					</span>
-					<strong>Reason</strong>
+					
+					<i class="fa-fw {{ config("br.actions.{$item->provider}.icon") }}"></i>
+					<i class="fa-fw fa fa-{{ config("br.actions.{$item->provider}.{$item->reason}.icon") }}"></i>
+
+					<a href="{{ action('UserController@show', $item->user_id) }}">{{ $item->name }}</a>
+					@lang("app.actions_done.$item->reason")
+					
+					<a href="#">{{ $item->text }}</a>
+					
 					<div>
-						<a href="#">
-							<i class="fa fa-hand-o-up"></i>
-							Link to resource
-						</a>
-						<div class="pull-right">
-							<i class="fa fa-clock-o"></i>
-							<small>{{ Carbon\Carbon::now()->diffForHumans() }}</small>
-						</div>
+						<i class="fa fa-clock-o"></i>
+						<small>{{ (new Carbon\Carbon($item->updated_at))->diffForHumans() }}</small>
 					</div>
 				</li>
 				@endforeach

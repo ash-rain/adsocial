@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use App\Log;
 use Cache;
+use DB;
 
 class User extends Model implements AuthenticatableContract {
 
@@ -20,8 +21,13 @@ class User extends Model implements AuthenticatableContract {
 		parent::boot();
 
 		// When creating a new user
-		User::creating(function($user) {
-			$user->points = config('br.start_points');
+		User::created(function($user) {
+			(new Log([
+				'user_id' => $user->id,
+				'reason' => 'register',
+				'reward' => config('br.start_points'),
+				'flag' => true
+				]))->save();
 		});
 	}
 
@@ -36,6 +42,13 @@ class User extends Model implements AuthenticatableContract {
 	public function log() {
 		return $this->hasMany('App\Log');
 	}
+	
+	public function getReducedAttribute() {
+		return DB::table('log')
+			->join('market', 'log.market_item_id', '=', 'market.id')
+			->join('posts', 'market.post_id', '=', 'posts.id')
+			->where('posts.user_id', $this->attributes['id']);
+	}
 
 	public function getProvidersAttribute()
 	{
@@ -48,14 +61,19 @@ class User extends Model implements AuthenticatableContract {
 
 	public function getPointsAttribute()
 	{
-		$points = $this->attributes['points'];
 		$id = $this->attributes['id'];
-		$points += Cache::remember("user_{$id}_pointsP", 5, function() use($id) {
-			return Log::with('market')->where('user_id', $id)->get()->sum('market.reward');
-		});
-		/*$points -= Cache::remember("user_{$id}_pointsM", 5, function() use($id) {
-			return Log::with('market')->where('user_id', $id)->get()->sum('market.reward');
-		});*/
-		return $points;
+		//return Cache::remember("user_{$id}_points", 5, function() use($id)
+		//{
+			$marketActions = Log::with('market')
+				->whereFlag(true)
+				->where('user_id', $id)
+				->get()->sum('market.reward');
+			$otherActions = Log::where('user_id', $id)
+				->whereFlag(true)
+				->whereNull('market_item_id')
+				->get()->sum('reward');
+			$reduced = $this->reduced->select('market.reward')->sum('market.reward');
+			return $marketActions + $otherActions - $reduced;
+		//});
 	}
 }

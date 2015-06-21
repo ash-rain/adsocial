@@ -12,4 +12,8 @@ class Post extends Model {
 	public function market() {
 		return $this->hasMany('App\MarketItem');
 	}
+
+	public function log() {
+		return $this->hasManyThrough('App\Log', 'App\MarketItem');
+	}
 }
