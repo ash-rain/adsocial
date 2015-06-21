@@ -29,13 +29,13 @@ class SiteController extends Controller {
 	{
 		$market = array();
 		$providers = Auth::user()->providers;
-		$query = MarketItem::where(function($q) use ($providers) {
-			foreach ($providers as $provider) {
-				$q->orWhere('provider', $provider);
-			}
-		});
+		$query = MarketItem::whereIn('provider', $providers);
 		foreach ($query->get()->groupBy('post_id') as $key => $marketItem) {
-			$market[$key] = (new Collection($marketItem))->keyBy('action');
+			$market[$key] = (new Collection($marketItem))
+				->keyBy('action')
+				->filter(function($market) {
+					return !in_array($market->action, $market->log()->lists('reason')->toArray());
+				});
 		}
 		return view('home', compact('market'));
 	}

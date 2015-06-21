@@ -32,17 +32,17 @@
 				<div class="tile-footer">
 					@foreach(config('br.actions.' . $actions->first()->provider) as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
+					@if(isset($actions[$action]))
 					<div class="action">
 						<a target="_blank" href="{{ action('SiteController@getAction', [$actions->first()->post_id, $action]) }}" class="btn btn-primary btn-block btn-icon icon-left" title="@lang("app.actions.$action")">
 							<i class="fa fa-{{ $settings['icon'] }}"></i>
 							@lang("app.actions.$action")
-							@if(isset($actions[$action]))
 							<strong class="label label-success pull-right">
 								+{{ $actions[$action]->reward }}
 							</strong>
-							@endif
 						</a>
 					</div>
+					@endif
 					@endforeach
 				</div>
 			</div>

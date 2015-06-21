@@ -40,14 +40,15 @@ class User extends Model implements AuthenticatableContract {
 	}
 
 	public function log() {
-		return $this->hasMany('App\Log');
+		return $this->hasMany('App\Log')->orderBy('log.updated_at', 'desc');
 	}
 	
 	public function getReducedAttribute() {
 		return DB::table('log')
 			->join('market', 'log.market_item_id', '=', 'market.id')
 			->join('posts', 'market.post_id', '=', 'posts.id')
-			->where('posts.user_id', $this->attributes['id']);
+			->where('posts.user_id', $this->attributes['id'])
+			->orderBy('log.updated_at', 'desc');
 	}
 
 	public function getProvidersAttribute()
