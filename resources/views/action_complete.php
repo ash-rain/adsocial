@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>AdSocial</title>
+	<title>@lang('app.title')</title>
 	<script type="text/javascript">window.close()</script>
 </head>
 <body>

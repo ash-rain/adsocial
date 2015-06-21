@@ -12,7 +12,7 @@
 		<div class="market-item tile-block tile-gray">
 			<div class="tile-header">
 				<a href="{{ $post->link }}">
-					<i class="{{ config("adsocial.actions.$post->provider.icon") }}"></i>
+					<i class="{{ config("br.actions.$post->provider.icon") }}"></i>
 					{{ $post->text }}
 				</a>
 			</div>
@@ -21,7 +21,7 @@
 			@endif
 			<div class="tile-footer clearfix">
 				<div class="btn-group pull-right">
-					@foreach(config("adsocial.actions.$post->provider") as $action => $settings)
+					@foreach(config("br.actions.$post->provider") as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
 					<a target="_blank" href="{{ action('SiteController@getAction', [$post->id, $action]) }}" class="btn btn-default" title="@lang("app.providers.$action")">
 						<i class="fa fa-{{ $settings['icon'] }}"></i>

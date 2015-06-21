@@ -8,7 +8,7 @@
 			<div class="modal-body">
 				<form action="{{ action('CheckoutController@postIndex') }}" method="POST">
 					<div class="row">
-						@foreach(config('adsocial.plans') as $plan => $details)
+						@foreach(config('br.plans') as $plan => $details)
 						<div class="col-sm-4">
 							<div class="market-item tile-block tile-aqua" data-plan="{{ $plan }}">
 								<div class="tile-header">@lang("app.plans.$plan")</div>
@@ -25,7 +25,7 @@
 									</div>
 									<div>
 										{{ $details['cost'] }}
-										{{ config('adsocial.checkout.currency') }}
+										{{ config('br.checkout.currency') }}
 									</div>
 								</div>
 								<div class="tile-footer">

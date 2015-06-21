@@ -10,7 +10,7 @@
 			<a href="{{ url('/') }}" class="logo">
 				<h1>
 					<i class="fa fa-user"></i>
-					AdSocial
+					@lang('app.title')
 				</h1>
 			</a>
 			<p class="description">

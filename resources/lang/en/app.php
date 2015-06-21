@@ -23,6 +23,8 @@ return [
 	'boost_text' => 'Set a reward for each action. Leave a field blank if you don\'t want to reward that action.',
 	'buy_points' => 'Buy Points',
 	'cancel' => 'Cancel',
+	'categories' => 'Categories',
+	'characters' => 'characters',
 	'checkout' => 'Checkout',
 	'connect' => 'Connect',
 	'connect_info' => 'Add another account to your profile',
@@ -49,6 +51,7 @@ return [
 	],
 	'promo_days' => '{0} Promotion not included|{1} day of post promotion|[2,Inf] days of post promotion',
 	'promo_text' => 'While promoted your posts will appear in the begining of the market. Purchasing a bigger plan will give your posts additional advantage.',
+	'provider' => 'Post to',
 	'providers' => [
 		'twitter' => 'Twitter',
 		'linkedin' => 'LinkedIn',
@@ -57,5 +60,10 @@ return [
 	],
 	'profile' => 'Profile',
 	'points' => 'points',
+	'post_new' => 'New Post',
+	'post_schedule' => 'Schedule post',
+	'post_text' => 'Post text',
+	'post_link' => 'Post link',
 	'save' => 'Save',
+	'title' => 'BuzzRunnr'
 ];

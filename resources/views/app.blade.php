@@ -7,9 +7,7 @@
 			<div class="sidebar-menu-inner ps-container ps-active-y">
 				<header class="logo-env">
 					<div class="logo">
-						<a href="{{ url('/') }}">
-							AdSocial
-						</a>
+						<a href="{{ url('/') }}">@lang('app.title')</a>
 					</div>
 					<div class="sidebar-collapse">
 						<a href="#" class="sidebar-collapse-icon">

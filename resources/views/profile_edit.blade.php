@@ -39,7 +39,7 @@ $(function() {
 					<span class="badge badge-success">
 						+{{ $log->market->reward }}
 					</span>
-					<i class="fa fa-{{ config('adsocial.actions.'. $log->market->provider .'.'. $log->reason .'.icon') }}"></i>
+					<i class="fa fa-{{ config('br.actions.'. $log->market->provider .'.'. $log->reason .'.icon') }}"></i>
 					<strong>{{ trans("app.actions_done.$log->reason") }}</strong>
 					<a href="{{ $log->market->post->link }}" target="_blank">
 						{{ $log->market->post->text }}
@@ -52,7 +52,7 @@ $(function() {
 				@endforeach
 				<li class="list-group-item">
 					<span class="badge badge-success">
-						+{{ config('adsocial.start_points') }}
+						+{{ config('br.start_points') }}
 					</span>
 					<i class="fa fa-user"></i>
 					<strong>{{ trans('app.actions_done.register') }}</strong>
@@ -136,7 +136,7 @@ $(function() {
 			<div class="col-sm-6">
 				<a href="javascript:void(0)" onclick="if({{ strlen($provider->user_data->email) }}) jQuery('input[name=email]').val('{{ $provider->user_data->email }}')">
 					<div class="tile-stats tile-aqua">
-						<div class="icon"><i class="{{ config("adsocial.actions.{$provider->provider}.icon") }}"></i></div>
+						<div class="icon"><i class="{{ config("br.actions.{$provider->provider}.icon") }}"></i></div>
 						<div class="num">
 							<img width="40" height="40" src="{{ $provider->user_data->avatar }}">
 							{{ trans("app.providers.$provider->provider") }}
@@ -148,10 +148,10 @@ $(function() {
 			</div>
 			@endforeach
 
-			@foreach(array_diff(array_keys(config('adsocial.actions')), $user->providers) as $newProvider)
+			@foreach(array_diff(array_keys(config('br.actions')), $user->providers) as $newProvider)
 			<div class="col-sm-6">
 				<a href="{{ action('AuthController@getSocial', $newProvider) }}" class="tile-stats tile-cyan">
-					<div class="icon"><i class="{{ config("adsocial.actions.$newProvider.icon") }}"></i></div>
+					<div class="icon"><i class="{{ config("br.actions.$newProvider.icon") }}"></i></div>
 					<div class="num">
 						<i class="fa fa-user-plus"></i>
 						{{ trans("app.providers.$newProvider") }}

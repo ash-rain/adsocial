@@ -8,7 +8,7 @@
 
 	@if($user)
 
-	@foreach(config('adsocial.actions') as $provider => $settings)
+	@foreach(config('br.actions') as $provider => $settings)
 		@if(!isset($settings['authOnly']) && in_array($provider, $user->providers))
 		<li class="{{ Request::is("feed/$provider", "feed/$provider/*") ? 'active' : '' }}">
 			<a href="{{ action('SiteController@getFeed', $provider) }}">
@@ -19,7 +19,7 @@
 		@endif
 	@endforeach
 
-	@foreach(config('adsocial.actions') as $provider => $settings)
+	@foreach(config('br.actions') as $provider => $settings)
 		@if(!isset($settings['authOnly']) && !in_array($provider, $user->providers))
 		<li class="{{ Request::is("feed/$provider", "feed/$provider/*") ? 'active' : '' }}">
 			<a href="{{ action('AuthController@getSocial', $provider) }}">
@@ -40,7 +40,7 @@
 			<li>
 				<a href="#" data-toggle="modal" data-target="#postModal" >
 					<i class="fa fa-plus"></i>
-					@lang('app.new_post')
+					@lang('app.post_new')
 				</a>
 			</li>
 			<li class="{{ Request::is('me') ? 'active' : '' }}">

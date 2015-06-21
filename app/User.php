@@ -21,7 +21,7 @@ class User extends Model implements AuthenticatableContract {
 
 		// When creating a new user
 		User::creating(function($user) {
-			$user->points = config('adsocial.start_points');
+			$user->points = config('br.start_points');
 		});
 	}
 

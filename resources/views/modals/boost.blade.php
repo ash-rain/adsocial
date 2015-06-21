@@ -16,7 +16,7 @@
 					<p>@lang('app.boost_text')</p>
 				
 					<div class="row">
-						@foreach(config("adsocial.actions.$provider") as $action => $settings)
+						@foreach(config("br.actions.$provider") as $action => $settings)
 						@if(is_array($settings))
 						<div class="col-sm-6">
 							<label>
