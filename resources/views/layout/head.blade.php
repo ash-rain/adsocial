@@ -3,16 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AdSocial</title>
 
-<link rel="stylesheet" href="{{ asset('/vendor/neon/css/bootstrap.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-core.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-theme.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/css/neon-forms.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/js/vertical-timeline/css/component.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/js/daterangepicker/daterangepicker-bs3.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/js/select2/select2-bootstrap.css') }}">
-<link rel="stylesheet" href="{{ asset('/vendor/neon/js/select2/select2.css') }}">
-<link rel="stylesheet" href="{{ asset('/css/app.css') }}">
-
+<link rel="stylesheet" href="{{ asset('style.css') }}">
 <link href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
