@@ -51,7 +51,8 @@
 }
 
 .market-item .tile-content.image {
-	background-size: cover;
+	background-color: #303641;
+	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 200px;

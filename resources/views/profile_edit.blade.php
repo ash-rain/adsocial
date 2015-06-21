@@ -68,7 +68,7 @@ $(function() {
 			<ul class="list-group">
 				@foreach($reduced as $item)
 				<li class="list-group-item">
-					<span class="badge badge-warning">
+					<span class="badge badge-primary">
 						-{{ $item->reward }}
 					</span>
 					
