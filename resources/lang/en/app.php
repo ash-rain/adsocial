@@ -43,6 +43,7 @@ return [
 	'noreward' => '(no reward)',
 	'or' => 'or',
 	'password' => 'Password',
+	'password_change' => 'Change your password',
 	'plans' => [
 		'one' => 'Starter',
 		'two' => 'Real Deal',

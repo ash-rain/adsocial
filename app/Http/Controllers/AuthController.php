@@ -1,10 +1,11 @@
 <?php namespace App\Http\Controllers;
 
 use Socialize;
-use App\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\QueryException;
 
+use ErrorException;
 use App\OAuthData;
 use App\User;
 
@@ -28,8 +29,16 @@ class AuthController extends Controller {
 		return view('login');
 	}
 
-	public function postIndex(Request $request) {
-		// TODO
+	public function postIndex(Request $request)
+	{
+		$credentials = $request->only(['email', 'password']);
+		if(count($credentials) == count(array_filter($credentials))) {
+			try {
+				$attempt = $this->auth->attempt($credentials);
+			}
+			catch(ErrorException $e) { }
+		}
+		return redirect()->intended('/');
 	}
 
 	public function getLogout()

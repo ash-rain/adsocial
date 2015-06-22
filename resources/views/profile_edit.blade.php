@@ -115,6 +115,12 @@ $(function() {
 				</div>
 			</div>
 			<div class="form-group">
+				{!! Form::label('password', trans('app.password'), ['class' => 'col-sm-3 control-label']) !!}
+				<div class="col-sm-9">
+					<input type="password" name="password" class="form-control input-lg" placeholder="@lang('app.password_change')">
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-offset-3 col-sm-9">
 					<button type="submit" class="btn btn-lg btn-green btn-icon icon-left btn-block">
 						@lang('app.save')</a>
