@@ -6,9 +6,10 @@
 				<h4 class="modal-title" id="buyModalLabel">@lang('app.buy_points')</h4>
 			</div>
 			<div class="modal-body">
-				<form action="{{ action('CheckoutController@postIndex') }}" method="POST">
-					<div class="row">
-						@foreach(config('br.plans') as $plan => $details)
+				<div class="row">
+					@foreach(config('br.plans') as $plan => $details)
+					<form action="{{ action('CheckoutController@postIndex') }}" method="POST">
+						<input type="hidden" name="plan" value="{{ $plan }}">
 						<div class="col-sm-4">
 							<div class="market-item tile-block tile-aqua" data-plan="{{ $plan }}">
 								<div class="tile-header">@lang("app.plans.$plan")</div>
@@ -29,16 +30,16 @@
 									</div>
 								</div>
 								<div class="tile-footer">
-									<a href="#" class="btn btn-success btn-block">
+									<a href="#" class="btn submit btn-success btn-block">
 										<i class="fa fa-check"></i>
 										@lang('app.checkout')
 									</a>
 								</div>
 							</div>
 						</div>
-						@endforeach
-					</div>
-				</form>
+					</form>
+					@endforeach
+				</div>
 				<div>
 					<button type="button" class="btn btn-default pull-right" data-dismiss="modal">
 						{{ trans('app.cancel') }}

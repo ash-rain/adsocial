@@ -3,7 +3,7 @@
 @section('js')
 $(function() {
 	$('#buyModal .submit').click(function() {
-		$('#buyModal form')[0].submit()
+		$(this).parents('form')[0].submit()
 	})
 })
 @stop

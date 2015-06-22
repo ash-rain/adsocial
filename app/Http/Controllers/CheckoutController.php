@@ -1,12 +1,16 @@
 <?php namespace App\Http\Controllers;
 
+use Exception;
+use PayPal;
+use Illuminate\Http\Request;
+
 class CheckoutController extends Controller
 {
 	private $_apiContext;
 
 	public function __construct()
 	{
-		/*$this->_apiContext = PayPal::ApiContext(config('services.paypal.client_id'), config('services.paypal.secret'));
+		$this->_apiContext = PayPal::ApiContext(config('services.paypal.client_id'), config('services.paypal.secret'));
 		
 		$this->_apiContext->setConfig(array(
 			'mode' => 'sandbox',
@@ -16,9 +20,46 @@ class CheckoutController extends Controller
 			'log.FileName' => storage_path('logs/paypal.log'),
 			'log.LogLevel' => 'FINE'
 		));
-*/
+
 		$this->middleware('auth', ['only' => 'getIndex']);
 	}
+	
+	public function postIndex(Request $request)
+	{
+		$config = config('br.plans.' . $request->input('plan'));
+		
+		if(!is_array($config))
+			return redirect()->back('/');
+		
+		$total = $config['cost'];
+
+		$payer = PayPal::Payer();
+		$payer->setPaymentMethod("paypal");
+		$amount = PayPal:: Amount();
+		$amount->setCurrency(config('br.checkout.currency_code'));
+		$amount->setTotal($total);
+		$transaction = PayPal:: Transaction();
+		$transaction->setAmount($amount);
+		$transaction->setDescription(trans('app.checkout_description', $config));
+		$redirectUrls = PayPal:: RedirectUrls();
+		$redirectUrls->setReturnUrl(url('/checkout/done'));
+		$redirectUrls->setCancelUrl(url('/checkout/cancel'));
+		$payment = PayPal:: Payment();
+		$payment->setIntent("sale");
+		$payment->setPayer($payer);
+		$payment->setRedirectUrls($redirectUrls);
+		$payment->setTransactions(array($transaction));
+		$response = $payment->create($this->_apiContext);
+		$redirectUrl = $response->links[1]->href;
+		$order = new Order([
+				'total' => Cart::getTotal(),
+				'user_id' => Auth::user()->id,
+			]);
+		$order->save();
+		
+		return Redirect::to($redirectUrl);
+	}
+
 	public function getDone(Request $request)
 	{
 		$id = $request->get('paymentId');
@@ -41,36 +82,5 @@ class CheckoutController extends Controller
 	
 	public function getCancel() {
 		return view('checkout.cancel');
-	}
-	
-	public function postIndex()
-	{
-		$total = 0; //$request->
-
-		$payer = PayPal::Payer();
-		$payer->setPaymentMethod("paypal");
-		$amount = PayPal:: Amount();
-		$amount->setCurrency(config('app.checkout_currency'));
-		$amount->setTotal($total);
-		$transaction = PayPal:: Transaction();
-		$transaction->setAmount($amount);
-		$transaction->setDescription(trans('app.checkout_description', ['count' => 1]));
-		$redirectUrls = PayPal:: RedirectUrls();
-		$redirectUrls->setReturnUrl(url('/checkout/done'));
-		$redirectUrls->setCancelUrl(url('/checkout/cancel'));
-		$payment = PayPal:: Payment();
-		$payment->setIntent("sale");
-		$payment->setPayer($payer);
-		$payment->setRedirectUrls($redirectUrls);
-		$payment->setTransactions(array($transaction));
-		$response = $payment->create($this->_apiContext);
-		$redirectUrl = $response->links[1]->href;
-		$order = new Order([
-				'total' => Cart::getTotal(),
-				'user_id' => Auth::user()->id,
-			]);
-		$order->save();
-		
-		return Redirect::to($redirectUrl);
 	}
 }
