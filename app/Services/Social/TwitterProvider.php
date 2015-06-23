@@ -12,8 +12,8 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 		'posted_at' => 'created_at'
 	);
 	protected $actionMap = array(
-		'retweet' => 'https://twitter.com/buzzrunnr/status/%d',
-		'favorite' => 'https://twitter.com/buzzrunnr/status/%d',
+		'retweet' => 'https://twitter.com/intent/retweet?tweet_id=%d',
+		'favorite' => 'https://twitter.com/intent/favorite?tweet_id=%d',
 	);
 
 	public function getFeed($limit = parent::LIMIT)
@@ -30,5 +30,4 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 	{
 		return Twitter::get('statuses/show', compact('id'));
 	}
-
 }
