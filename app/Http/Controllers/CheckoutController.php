@@ -1,8 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use Auth;
 use Exception;
 use PayPal;
 use Illuminate\Http\Request;
+use App\Order;
+use App\Log;
 
 class CheckoutController extends Controller
 {
@@ -26,7 +29,8 @@ class CheckoutController extends Controller
 	
 	public function postIndex(Request $request)
 	{
-		$config = config('br.plans.' . $request->input('plan'));
+		$plan = $request->input('plan');
+		$config = config('br.plans.' . $plan);
 		
 		if(!is_array($config))
 			return redirect()->back('/');
@@ -52,12 +56,18 @@ class CheckoutController extends Controller
 		$response = $payment->create($this->_apiContext);
 		$redirectUrl = $response->links[1]->href;
 		$order = new Order([
-				'total' => Cart::getTotal(),
-				'user_id' => Auth::user()->id,
+				'total' => $total,
+				'plan' => $plan,
+				'user_id' => Auth::id()
 			]);
+		(new Log([
+				'user_id' => Auth::id(),
+				'reason' => 'purchase',
+				'reward' => $config['points']
+				]))->save();
 		$order->save();
 		
-		return Redirect::to($redirectUrl);
+		return redirect($redirectUrl);
 	}
 
 	public function getDone(Request $request)
@@ -70,13 +80,19 @@ class CheckoutController extends Controller
 		$paymentExecution = PayPal::PaymentExecution();
 		$paymentExecution->setPayerId($payer_id);
 		$executePayment = $payment->execute($paymentExecution, $this->_apiContext);
-		$order = Order::whereUserId(Auth::user()->id)->orderBy('created_at', 'desc')->first();
-		
+
+		$order = Order::whereUserId(Auth::id())->orderBy('created_at', 'desc')->first();
 		if(!is_null($order)) {
 			$order->payment = $id;
 			$order->save();
 		}
-		Cart::clear();
+
+		$log = Log::whereUserId(Auth::id())->whereReason('purchase')->orderBy('created_at', 'desc')->first();
+		if(!is_null($log)) {
+			$log->flag = true;
+			$log->save();
+		}
+		
 		return view('checkout.done');
 	}
 	

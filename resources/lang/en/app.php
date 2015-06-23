@@ -11,6 +11,7 @@ return [
 	],
 	'actions_done' => [
 		'register' => 'Joined BuzzRunnr',
+		'purchase' => 'Bought points',
 		'comment' => 'Commented',
 		'favorite' => 'Favorited',
 		'like' => 'Liked',
@@ -27,6 +28,8 @@ return [
 	'characters' => 'characters',
 	'checkout' => 'Checkout',
 	'checkout_description' => ':points BuzzRunnr points and :promoDays promotion days',
+	'checkout_done' => 'Thank you for your purchase.',
+	'checkout_cancel' => 'You cancelled the purchase.',
 	'connect' => 'Connect',
 	'connect_info' => 'Add another account to your profile',
 	'email' => 'E-mail',

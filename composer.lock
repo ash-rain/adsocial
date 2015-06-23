@@ -1219,12 +1219,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/net-shell/laravel-paypal.git",
-                "reference": "7a250644d73905c42ea4e9591acfff3d66fdf2a3"
+                "reference": "173aa930ab5fe266973063aba8b605df7b9a1215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/net-shell/laravel-paypal/zipball/7a250644d73905c42ea4e9591acfff3d66fdf2a3",
-                "reference": "7a250644d73905c42ea4e9591acfff3d66fdf2a3",
+                "url": "https://api.github.com/repos/net-shell/laravel-paypal/zipball/173aa930ab5fe266973063aba8b605df7b9a1215",
+                "reference": "173aa930ab5fe266973063aba8b605df7b9a1215",
                 "shasum": ""
             },
             "require": {
@@ -1254,7 +1254,7 @@
                 }
             ],
             "description": "Laravel-Paypal is simple package help you process direct credit card payments, stored credit card payments and PayPal account payments with your Laravel 5 projects using paypal REST API SDK.",
-            "time": "2015-03-24 20:33:14"
+            "time": "2015-06-23 13:21:28"
         },
         {
             "name": "nikic/php-parser",
