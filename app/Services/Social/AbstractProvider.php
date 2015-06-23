@@ -67,8 +67,14 @@ abstract class AbstractProvider implements SocialProvider {
 
 	public function feed($limit = static::LIMIT)
 	{
-		$feed = $this->getFeed($limit);
-		$feed = array_map(function($f){ return $this->post($f->{$this->idField}); }, $feed);
+		$feed = 0;
+		try {
+			$feed = $this->getFeed($limit);
+			$feed = array_map(function($f){ return $this->post($f->{$this->idField}); }, $feed);
+		}
+		catch(\Exception $e) {
+			$feed = Post::limit($limit)->get();
+		}
 		return $feed;
 	}
 
