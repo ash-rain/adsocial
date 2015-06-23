@@ -16,9 +16,8 @@
 					</a>
 					@endif
 					<a href="{{ action('UserController@show', $actions->first()->user->id) }}">
-						<span class="pull-right">{{ $actions->first()->updated_at->diffForHumans() }}</span>
 						{{ $actions->first()->user->name }}
-						<span>{{ $actions->first()->provider }}</span>
+						<span>{{ $actions->first()->updated_at->diffForHumans() }}</span>
 					</a>
 				</div>
 				@if($actions->first()->post->image)
@@ -30,7 +29,7 @@
 					<p>{{ $actions->first()->post->text }}</p>
 				</div>
 				@endif
-				@unless(0 && $actions->first()->user->id == $user->id)
+				@unless($actions->first()->user->id == $user->id)
 				<div class="tile-footer">
 					@foreach(config('br.actions.' . $actions->first()->provider) as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>

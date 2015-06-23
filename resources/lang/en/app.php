@@ -12,7 +12,7 @@ return [
 	'actions_done' => [
 		'register' => 'Joined BuzzRunnr',
 		'purchase' => 'Bought points',
-		'comment' => 'Commented',
+		'comment' => 'Commented on',
 		'favorite' => 'Favorited',
 		'like' => 'Liked',
 		'plus' => '+1',
