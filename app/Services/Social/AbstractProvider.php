@@ -73,7 +73,8 @@ abstract class AbstractProvider implements SocialProvider {
 			$feed = array_map(function($f){ return $this->post($f->{$this->idField}); }, $feed);
 		}
 		catch(\Exception $e) {
-			$feed = Post::whereUserId(Auth::id())->limit($limit)->get();
+			$feed = Post::whereUserId(Auth::id())->whereProvider($this->provides)
+				->limit($limit)->get();
 		}
 		return $feed;
 	}
