@@ -34,7 +34,7 @@
 				<div class="col-sm-9">
 					@if($item->link)
 					<a href="{{ $item->link }}">
-						<h3>{{ $item->text }}</h3>
+						<h3>{{ $item->text or $item->link }}</h3>
 					</a>
 					@else
 					<h3>{{ $item->text }}</h3>
