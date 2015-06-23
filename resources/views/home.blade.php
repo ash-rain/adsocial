@@ -20,15 +20,14 @@
 						<span>{{ $actions->first()->updated_at->diffForHumans() }}</span>
 					</a>
 				</div>
+				
 				@if($actions->first()->post->image)
 				<div class="tile-content image" style="background-image: url({{ $actions->first()->post->image }})">
-					<p>{{ $actions->first()->post->text }}</p>
-				</div>
 				@else
 				<div class="tile-content">
-					<p>{{ $actions->first()->post->text }}</p>
-				</div>
 				@endif
+					<p>{{ strlen($actions->first()->post->text) ? $actions->first()->post->text : $actions->first()->post->link }}</p>
+				</div>
 				@unless($actions->first()->user->id == $user->id)
 				<div class="tile-footer">
 					@foreach(config('br.actions.' . $actions->first()->provider) as $action => $settings)
