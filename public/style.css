@@ -33917,6 +33917,8 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
     }
 }
 
+.longtext { word-wrap: break-word; }
+
 .cbp_tmtimeline > li .cbp_tmicon { left: 15% }
 .cbp_tmtimeline:before { left: 15%; }
 .cbp_tmtimeline > li .cbp_tmtime { width: 20%; }
