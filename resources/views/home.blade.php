@@ -26,7 +26,7 @@
 				@else
 				<div class="tile-content">
 				@endif
-					<p>{{ strlen($actions->first()->post->text) ? $actions->first()->post->text : $actions->first()->post->link }}</p>
+					<p class="longtext">{{ strlen($actions->first()->post->text) ? $actions->first()->post->text : $actions->first()->post->link }}</p>
 				</div>
 				@unless($actions->first()->user->id == $user->id)
 				<div class="tile-footer">

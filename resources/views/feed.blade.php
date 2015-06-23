@@ -31,7 +31,7 @@
 		</time>
 		<div class="cbp_tmlabel">
 			<div class="row">
-				<div class="col-sm-9" style="word-wrap: break-word;">
+				<div class="col-sm-9 longtext">
 					@if($item->link)
 					<a href="{{ $item->link }}">
 						<h3>{{ strlen($item->text) ? $item->text : $item->link }}</h3>
