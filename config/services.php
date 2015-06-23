@@ -3,8 +3,8 @@
 return [
 
 	'paypal' => [
-		'client_id' => 'AUps4uSIQi66LNEV6A7zn62MvxT3lu2iqhyw8CC-Jn0s7HPCrbMzFjaM2_X6hWkXPLSCG2mRsIxDbWBd',
-		'secret' => 'EJTmTwAJC8AEXh0kPOWywtuhkJGJF6kmv3UAOqPBMJ2khfUTEJNCh42DrRjqF1i_syDRxITsXviCKsDf'
+		'client_id' => env('PAYPAL_ID'),
+		'secret' => env('PAYPAL_SECRET')
 	],
 
 	'facebook' => [
