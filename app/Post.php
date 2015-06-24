@@ -16,4 +16,8 @@ class Post extends Model {
 	public function log() {
 		return $this->hasManyThrough('App\Log', 'App\MarketItem');
 	}
+
+    public function categories() {
+    	return $this->belongsToMany('App\Category');
+    }
 }

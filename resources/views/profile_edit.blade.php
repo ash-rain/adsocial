@@ -97,6 +97,11 @@ $(function() {
 			<i class="fa fa-pencil-square-o"></i>
 			@lang('app.profile')
 		</h2>
+
+		@if(!$user->email)
+		<div class="alert alert-danger">@lang('app.email_required')</div>
+		@endif
+
 		{!! Form::model($user, [
 			'url' => action('UserController@update', $user->id),
 			'method' => 'PATCH',

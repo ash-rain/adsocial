@@ -20,7 +20,7 @@
 						<div class="col-sm-5">
 							<div class="date-and-time">
 								<input type="text" name="schedule_date" class="form-control datepicker" data-start-date="{{ date('Y-m-d') }}" placeholder="@lang('app.post_schedule')">
-								<input type="text" name="schedule_time" class="form-control timepicker" data-template="dropdown" data-show-meridian="false" data-minute-step="5"/>
+								<input type="text" name="schedule_time" class="form-control timepicker" data-template="dropdown" data-show-meridian="false" data-minute-step="5" placeholder="00:00" />
 							</div>
 						</div>
 					</div>
@@ -28,16 +28,9 @@
 						<label class="col-sm-3 control-label">@lang('app.categories')</label>
 						<div class="col-sm-9">
 							<select name="test" class="select2" multiple>
-								<option value="3" >Ohaio</option>
-								<option value="2" >Boston</option>
-								<option value="5" >Washington</option>
-								<option value="1" >Alabama</option>
-								<option value="4" >New York</option>
-								<option value="12" >Bostons</option>
-								<option value="11" >Alabama</option>
-								<option value="13" >Ohaio</option>
-								<option value="14" >New York</option>
-								<option value="15" >Washington II</option>
+								@foreach($categories as $category)
+								<option value="{{ $category->id }}" >{{ $category->name }}</option>
+								@endforeach
 							</select>
 						</div>
 					</div>
