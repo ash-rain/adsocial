@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use App\Http\Requests;
 use App\User;
 use App\Log;
+use Exception;
 
 class UserController extends Controller {
 
@@ -35,15 +36,20 @@ class UserController extends Controller {
 
 	public function store(Request $request)
 	{
-		$user = (new User)->fill($request->only('name'));
-		$user->save();
-		
-		if($user->id) {
-			$this->auth->login($user);
-			return redirect()->action('UserController@edit');
+		try
+		{
+			$input = $request->only(['email', 'password']);
+			$input['password'] = bcrypt($input['password']);
+			$user = (new User)->fill($input);
+			$user->save();
+			
+			if($user->id) {
+				$this->auth->login($user);
+				return redirect()->action('UserController@edit');
+			}
 		}
-
-		return redirect()->back();
+		catch(Exception $e) { }
+		return redirect()->back('/');
 	}
 
 	public function update(Request $request)

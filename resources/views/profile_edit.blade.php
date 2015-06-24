@@ -12,10 +12,12 @@ $(function() {
 
 @include('modals.buy')
 
+@if($user->name)
 <h1>
 	@lang('app.hi')
 	{{ $user->name }}
 </h1>
+@endif
 
 <div class="row">
 	<div class="col-sm-3">
@@ -97,6 +99,10 @@ $(function() {
 			<i class="fa fa-pencil-square-o"></i>
 			@lang('app.profile')
 		</h2>
+
+		@if(!$user->name)
+		<div class="alert alert-danger">@lang('app.name_required')</div>
+		@endif
 
 		@if(!$user->email)
 		<div class="alert alert-danger">@lang('app.email_required')</div>

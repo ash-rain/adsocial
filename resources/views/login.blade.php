@@ -25,7 +25,10 @@
 
 			<form action="{{ action('UserController@store') }}" method="POST">
 				<div class="form-group">
-					<input type="text" class="form-control input-lg" name="name" placeholder="@lang('app.name')" autocomplete="off" required>
+					<input type="email" class="form-control input-lg" name="email" placeholder="@lang('app.email')" autocomplete="off" required>
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control input-lg" name="password" placeholder="@lang('app.password')" autocomplete="off" required>
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-lg btn-success btn-icon btn-block btn-login">
