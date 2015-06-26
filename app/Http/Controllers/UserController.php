@@ -48,8 +48,11 @@ class UserController extends Controller {
 				return redirect()->action('UserController@edit');
 			}
 		}
-		catch(Exception $e) { }
-		return redirect()->back('/');
+		catch(Exception $e) {
+			dd($e);
+			app('App\Http\Controllers\AuthController')->postIndex($request);
+		}
+		return redirect()->intended('/');
 	}
 
 	public function update(Request $request)
