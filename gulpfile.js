@@ -10,17 +10,22 @@ elixir(function(mix) {
 		'neon/daterangepicker-bs3.css',
 		'neon/select2-bootstrap.css',
 		'neon/select2.css',
+		'neon/fullcalendar.min.css',
 		'app.css'
 	], 'public/style.css');
-	
+
 	mix.scripts([
 		'gsap/main-gsap.js',
+		'jquery-ui/js/jquery-ui-1.10.3.minimal.min.js',
 		'joinable.js',
 		'resizeable.js',
 		'neon-api.js',
 		'bootstrap-datepicker.js',
 		'bootstrap-timepicker.min.js',
 		'select2/select2.min.js',
+		'daterangepicker/moment.min.js',
+		'fullcalendar-2/fullcalendar.min.js',
+		'neon-calendar-2.js',
 		'neon-custom.js'
 	], 'public/vendor.js');
 });

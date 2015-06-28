@@ -6,12 +6,13 @@ class AppServiceProvider extends ServiceProvider {
 
 	public function boot() {
 		view()->composer([
-			'home',
+			'checkout.done',
+			'checkout.cancel',
 			'feed',
+			'home',
 			'profile',
 			'profile_edit',
-			'checkout.done',
-			'checkout.cancel'
+			'schedule',
 		], 'App\Http\ViewComposer');
 	}
 

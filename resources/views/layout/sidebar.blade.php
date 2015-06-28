@@ -43,11 +43,18 @@
 					@lang('app.post_new')
 				</a>
 			</li>
+			<li class="{{ Request::is('schedule', 'schedule/*') ? 'active' : '' }}">
+				<a href="{{ action('ScheduleController@getIndex') }}">
+					<i class="fa fa-clock-o"></i>
+					@lang('app.schedule')
+				</a>
+			</li>
 			<li class="{{ Request::is('me') ? 'active' : '' }}">
 				<a href="{{ action('UserController@edit') }}">
 					<i class="fa fa-pencil"></i>
 					@lang('app.profile')
 				</a>
+			</li>
 			</li>
 			<li>
 				<a href="{{ action('AuthController@getLogout') }}">

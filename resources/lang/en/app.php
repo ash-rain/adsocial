@@ -70,5 +70,6 @@ return [
 	'post_text' => 'Post text',
 	'post_link' => 'Post link',
 	'save' => 'Save',
+	'schedule' => 'Schedule',
 	'title' => 'BuzzRunnr'
 ];
