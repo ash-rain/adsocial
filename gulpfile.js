@@ -23,7 +23,6 @@ elixir(function(mix) {
 		'bootstrap-datepicker.js',
 		'bootstrap-timepicker.min.js',
 		'select2/select2.min.js',
-		'daterangepicker/moment.min.js',
 		'fullcalendar-2/fullcalendar.min.js',
 		'neon-custom.js'
 	], 'public/vendor.js');
