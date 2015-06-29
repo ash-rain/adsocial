@@ -4,7 +4,8 @@
 
 @section('js')
 $(function() {
-	$('#calendar').fullCalendar({
+	var calendar = $('#calendar');
+	calendar.fullCalendar({
     eventSources: [
       {
         url: '/api/v1/post',
@@ -30,24 +31,38 @@ $(function() {
 			center: 'title',
 			right: 'month,agendaWeek,agendaDay'
 		},
-		editable: true,
+		eventStartEditable: true,
     eventLimit: true,
-		forceEventDuration: true,
-		defaultTimedEventDuration: "03:00:00",
+		firstDay: 1,
 		timeFormat: 'H(:mm)',
 		eventRender: function (event, element, view) {
-			$(element).attr('title', event.title);
+			if(event.title.length > 16)
+				$(element).attr('title', event.title);
 		},
     eventClick: function (event) {
-      console.log(event)
+      window.open(event.link)
     },
     eventDrop: function (event, delta, revertFunc) {
         if (moment().diff(event.start.toString()) > 0) {
-          return revertFunc();
+          return revertFunc(); // we may long for the past but those days are gone
         }
-        if (!confirm("Are you sure about this change?")) {
+
+        if (!confirm("Delete original post?")) {
           revertFunc();
-        }
+        } else {
+					$.post('/api/v1/post/'+event.id, {'_method':'DELETE'});
+				}
+
+				var data = {
+					text: event.title,
+					link: event.link,
+					image: event.image,
+					provider: event.provider
+				};
+				
+				$.post('/api/v1/post', data, function() {
+					console.log( calendar.fullCalendar('refetchEvents') );
+				});
     }
 	});
 });

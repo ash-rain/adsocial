@@ -21,11 +21,21 @@ class PostController extends Controller {
 		return Post::whereUserId($this->auth->id())
 			->whereProvider($input['provider'])
 			//->whereBetween('posted_at', array($input['start'], $input['end']))
-			->latest()->get(['text as title', 'posted_at as start']);
+			->latest()->get(['id', 'text as title', 'posted_at as start', 'image', 'link', 'provider']);
 	}
 
 	public function show($id)
 	{
 		return Post::with('market')->whereId((int)$id)->first();
+	}
+
+	public function store()
+	{
+
+	}
+
+	public function destroy($id)
+	{
+
 	}
 }
