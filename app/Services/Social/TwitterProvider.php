@@ -3,6 +3,7 @@
 use Auth;
 use Twitter;
 use App\Contracts\SocialProvider;
+use App\Contracts\SocialPost;
 
 class TwitterProvider extends AbstractProvider implements SocialProvider {
 
@@ -15,6 +16,11 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 		'retweet' => 'https://twitter.com/intent/retweet?tweet_id=%d',
 		'favorite' => 'https://twitter.com/intent/favorite?tweet_id=%d',
 	);
+	
+	public function publish(SocialPost $post)
+	{
+
+	}
 
 	public function getFeed($limit = parent::LIMIT)
 	{
