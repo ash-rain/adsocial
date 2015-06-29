@@ -3,6 +3,7 @@
 use Auth;
 use Cache;
 use App\Contracts\SocialProvider;
+use App\Contracts\SocialPost;
 use Google_Client;
 use Google_Service_Plus;
 use Google_Auth_AssertionCredentials;
@@ -21,7 +22,7 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 		parent::__construct();
 		$client = new Google_Client();
 		$this->service = new Google_Service_Plus($client);
-		
+
 		if(Cache::has('service_token')) {
 			$client->setAccessToken(Cache::get('service_token'));
 		}
@@ -35,6 +36,11 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 			$client->getAuth()->refreshTokenWithAssertion($cred);
 		}
 		Cache::forever('service_token', $client->getAccessToken());
+	}
+
+	public function publish(SocialPost $post)
+	{
+
 	}
 
 	public function getFeed()
