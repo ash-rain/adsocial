@@ -16,7 +16,9 @@ Route::get('user/{user}', 'UserController@show');
 
 Route::group(['prefix' => 'api/v1', 'namespace' => 'API'], function() {
 	Route::controllers([
-		'trade' => 'TradeController',
+		'trade' => 'TradeController'
+	]);
+	Route::resources([
 		'post' => 'PostController'
 	]);
 });

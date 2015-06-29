@@ -4,10 +4,11 @@ use Auth;
 use App\Contracts\SocialProvider;
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
+use App\Contracts\SocialPost;
 use App\Post;
 
 class FacebookProvider extends AbstractProvider implements SocialProvider {
-	
+
 	protected $provides = 'facebook';
 	protected $fieldMap = [
 		'text' => ['story', 'description', 'type'],
@@ -25,6 +26,11 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 			);
 	}
 
+	public function publish(SocialPost $post)
+	{
+
+	}
+
 	private function useSession() {
 		$this->session = new FacebookSession($this->providerData()->token);
 	}
@@ -39,7 +45,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		return $graphObject->asArray()['data'];
 	}
 
-	
+
 	public function getPost($id)
 	{
 		$this->useSession();

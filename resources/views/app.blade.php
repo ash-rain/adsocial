@@ -23,7 +23,7 @@
 				@include('layout.sidebar')
 			</div>
 		</div>
-		<div class="main-content">
+		<div class="@yield('pageClass') main-content">
 			@yield('content')
 		</div>
 	</div>

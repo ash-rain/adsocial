@@ -23,9 +23,8 @@
 		@if(!isset($settings['authOnly']) && !in_array($provider, $user->providers))
 		<li class="{{ Request::is("feed/$provider", "feed/$provider/*") ? 'active' : '' }}">
 			<a href="{{ action('AuthController@getSocial', $provider) }}">
-				<i class="fa fa-plus"></i>
-				<i class="{{ $settings['icon'] }}"></i>
-				Connect @lang("app.providers.$provider")
+				<i class="fa fa-plus-circle"></i>
+				@lang("app.providers.$provider")
 			</a>
 		</li>
 		@endif

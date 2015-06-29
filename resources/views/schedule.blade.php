@@ -1,52 +1,67 @@
 @extends('app')
 
+@section('pageClass', 'scheduler')
+
+@section('js')
+$(function() {
+	$('#calendar').fullCalendar({
+    eventSources: [
+      {
+        url: '/api/v1/post',
+        data: { provider: 'google' },
+        className: 'google'
+      },
+      {
+        url: '/api/v1/post',
+				data: { provider: 'facebook' },
+        className: 'facebook'
+      },
+      {
+        url: '/api/v1/post',
+				data: { provider: 'twitter' },
+        className: 'twitter'
+      }
+    ],
+		events: {
+				cache: true
+		},
+		header: {
+			left: 'prev,next today',
+			center: 'title',
+			right: 'month,agendaWeek,agendaDay'
+		},
+		editable: true,
+    eventLimit: true,
+		forceEventDuration: true,
+		defaultTimedEventDuration: "03:00:00",
+		timeFormat: 'H(:mm)',
+		eventRender: function (event, element, view) {
+			$(element).attr('title', event.title);
+		},
+    eventClick: function (event) {
+      console.log(event)
+    },
+    eventDrop: function (event, delta, revertFunc) {
+        if (moment().diff(event.start.toString()) > 0) {
+          return revertFunc();
+        }
+        if (!confirm("Are you sure about this change?")) {
+          revertFunc();
+        }
+    }
+	});
+});
+@stop
+
 @section('content')
-
-<h1>@lang('app.schedule')</h1>
-
-<div class="calendar-env">
-
-	<!-- Calendar Body -->
-	<div class="calendar-body">
-		<div id="calendar"></div>
-	</div>
-
-	<!-- Sidebar -->
-	<div class="calendar-sidebar">
-		<!-- new task form -->
-		<div class="calendar-sidebar-row">
-			<form role="form" id="add_event_form">
-				<div class="input-group minimal">
-					<input type="text" class="form-control" placeholder="Add event..." />
-					<div class="input-group-addon">
-						<i class="fa fa-pencil"></i>
-					</div>
-				</div>
-			</form>
-		</div>
-
-		<!-- Events List -->
-		<ul class="events-list" id="draggable_events">
-			<li>
-				<p>Drag Events to Calendar Dates</p>
-			</li>
-			<li>
-				<a href="#">Sport Match</a>
-			</li>
-			<li>
-				<a href="#" class="color-blue" data-event-class="color-blue">Meeting</a>
-			</li>
-			<li>
-				<a href="#" class="color-orange" data-event-class="color-orange">Relax</a>
-			</li>
-			<li>
-				<a href="#" class="color-primary" data-event-class="color-primary">Study</a>
-			</li>
-			<li>
-				<a href="#" class="color-green" data-event-class="color-green">Family Time</a>
-			</li>
-		</ul>
-	</div>
+<div class="header">
+	<h1>
+		@lang('app.schedule')
+		<a class="btn btn-success" data-toggle="modal" data-target="#postModal">
+				<i class="fa fa-plus"></i>
+				@lang('app.post_new')
+		</a>
+	</h1>
 </div>
-
+<div id="calendar"></div>
 @stop

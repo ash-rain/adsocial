@@ -12,5 +12,5 @@ interface SocialProvider {
 	public function action($action, $id);
 
 	// Create new post
-	public function publish($post);
+	public function publish(SocialPost $post);
 }

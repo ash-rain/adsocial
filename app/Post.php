@@ -1,9 +1,10 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Contracts\SocialPost;
 use Carbon\Carbon;
 
-class Post extends Model {
+class Post extends Model implements SocialPost {
 
 	protected $guarded = ['id'];
 

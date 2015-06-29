@@ -1,4 +1,36 @@
-.calendar-env { background: #fff; }
+.fc-button {
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 0 1em !important;
+}
+
+.fc-event {
+	font-size: 1em;
+	padding: .7em !important;
+	-webkit-box-shadow: 2px 2px 7px 0px rgba(50, 50, 50, 0.4);
+	-moz-box-shadow:    2px 2px 7px 0px rgba(50, 50, 50, 0.4);
+	box-shadow:         2px 2px 7px 0px rgba(50, 50, 50, 0.4);
+}
+
+.fc-day-grid-event.google {
+	background: #dd4b39 !important;
+}
+.fc-day-grid-event.facebook {
+	background: #3b5998 !important;
+}
+.fc-day-grid-event.twitter {
+	background: #55acee !important;
+}
+
+.page-body .main-content.scheduler {
+	background-color: #fff;
+}
+
+.scheduler .header {
+	margin: -2rem -2rem 1rem -2rem;
+	padding: 3rem;
+	background-color: #ddd;
+}
 
 .longtext { word-wrap: break-word; }
 
@@ -8,6 +40,10 @@
 .cbp_tmtimeline > li .cbp_tmlabel { margin-left: 20%; }
 
 @media only screen and (max-width: 767px) {
+	.scheduler .header {
+		margin-top: -4rem;
+	}
+
 	.page-body .page-container .main-content {
 		padding-top: 100px;
 	}

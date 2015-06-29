@@ -25,7 +25,6 @@ elixir(function(mix) {
 		'select2/select2.min.js',
 		'daterangepicker/moment.min.js',
 		'fullcalendar-2/fullcalendar.min.js',
-		'neon-calendar-2.js',
 		'neon-custom.js'
 	], 'public/vendor.js');
 });

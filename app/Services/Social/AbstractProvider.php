@@ -2,6 +2,7 @@
 
 use Auth;
 use Exception;
+use Cache;
 use Closure;
 use App\Contracts\SocialProvider;
 use App\Post;
@@ -13,9 +14,11 @@ abstract class AbstractProvider implements SocialProvider {
 	protected $fieldMap = [];
 	protected $user;
 	protected $provides;
+	protected $useCache = false;
 
 	public function __construct() {
 		$this->user = Auth::user();
+		$this->useCache = !config('app.debug');
 	}
 
 	public function post($id)
@@ -55,11 +58,11 @@ abstract class AbstractProvider implements SocialProvider {
 		if($postData['posted_at'] && (string)(int)$postData['posted_at'] != $postData['posted_at']) {
 			$postData['posted_at'] = strtotime($postData['posted_at']);
 		}
-		
+
 		$postData['provider'] = $this->provides;
 		$postData['provider_id'] = $id;
 		$postData['user_id'] = $this->user->id;
-		
+
 		$post = new Post($postData);
 		$post->save();
 		return $post;
@@ -70,9 +73,20 @@ abstract class AbstractProvider implements SocialProvider {
 		$feed = 0;
 		try {
 			$feed = $this->getFeed($limit);
-			$feed = array_map(function($f){ return $this->post($f->{$this->idField}); }, $feed);
+			$feed = array_map(function($f) {
+				$providerId = $f->{$this->idField};
+				if($this->useCache)
+				{
+					return Cache::remember("{$this->provides}_post_$providerId", 10, function() {
+						return $this->post($providerId);
+					});
+				}
+
+				return $this->post($providerId);
+			}, $feed);
 		}
 		catch(\Exception $e) {
+			// TODO: logging
 			$feed = Post::whereUserId(Auth::id())->whereProvider($this->provides)
 				->limit($limit)->get();
 		}
@@ -96,7 +110,7 @@ abstract class AbstractProvider implements SocialProvider {
 		}
 		return false;
 	}
-	
+
 	public function check($market, $user)
 	{
 		$method = 'check' . ucfirst($market->action);
