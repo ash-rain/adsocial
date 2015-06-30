@@ -2,18 +2,36 @@
 
 use Auth;
 use App\Contracts\SocialProvider;
-use App\WebLink;
+use App\Contracts\SocialPost;
+use App\Post;
 
 class WebLinkProvider extends AbstractProvider implements SocialProvider {
 
-	public function getFeed()
+	protected $provides = 'weblink';
+
+	public function __construct()
 	{
-		return WebLink::all();
+		parent::__construct();
 	}
 
-	
+	public function getFeed()
+	{
+		return Post::whereProvider('weblink')->get();
+	}
+
+	public function publish(SocialPost $post)
+	{
+
+	}
+
 	public function getPost($id)
 	{
-		return WebLink::find($id);
+		return Post::find($id);
+	}
+
+	public function actionVisit($id)
+	{
+		$post = Post::find($id);
+		return $post->link;
 	}
 }

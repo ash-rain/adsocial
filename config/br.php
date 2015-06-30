@@ -44,6 +44,14 @@
 		'linkedin' => [
 			'icon' => 'fa fa-linkedin',
 			'authOnly' => true
+		],
+		'weblink' => [
+			'icon' => 'fa fa-link',
+			'sourceOnly' => true,
+			'visit' => [
+				'default' => 4,
+				'icon' => 'hand-o-up'
+			]
 		]
 	],
 

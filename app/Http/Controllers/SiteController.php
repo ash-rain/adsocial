@@ -41,7 +41,7 @@ class SiteController extends Controller {
 	public function getAction($post = null, $action = null)
 	{
 		$post = Post::find($post);
-		
+
 		if($action) {
 			// Log action and push to queue
 			$log = Log::firstOrNew([
@@ -54,7 +54,7 @@ class SiteController extends Controller {
 			}
 		}
 
-		if(!$post) {	
+		if(!$post) {
 			return view('action_complete');
 		}
 		$url = !$action ? false
@@ -74,8 +74,10 @@ class SiteController extends Controller {
 
 		$providerUser = Auth::user()->oauth_data()
 			->whereProvider($provider)
-			->first()->user_data;
-		
+			->first();
+
+		$providerUser = $providerUser ? $providerUser->user_data : Auth::user();
+
 		return view('feed', compact('feed', 'provider', 'providerUser'));
 	}
 

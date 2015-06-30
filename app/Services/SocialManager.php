@@ -21,6 +21,16 @@ class SocialManager extends Manager {
 	*
 	* @return App\Services\Social\AbstractProvider
 	*/
+	protected function createWeblinkDriver()
+	{
+		return $this->buildProvider('App\Services\Social\WebLinkProvider', ['client_id' => null, 'client_secret' => null]);
+	}
+
+	/**
+	* Create an instance of the specified driver.
+	*
+	* @return App\Services\Social\AbstractProvider
+	*/
 	protected function createFacebookDriver()
 	{
 		$config = $this->app['config']['services.facebook'];
@@ -37,7 +47,7 @@ class SocialManager extends Manager {
 		$config = $this->app['config']['services.twitter'];
 		return $this->buildProvider('App\Services\Social\TwitterProvider', $config);
 	}
-	
+
 	/**
 	* Create an instance of the specified driver.
 	*

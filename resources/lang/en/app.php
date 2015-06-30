@@ -8,6 +8,7 @@ return [
 		'plus' => '+1',
 		'retweet' => 'Retweet',
 		'share' => 'Share',
+		'visit' => 'Visit'
 	],
 	'actions_done' => [
 		'register' => 'Joined BuzzRunnr',
@@ -18,6 +19,7 @@ return [
 		'plus' => '+1',
 		'retweet' => 'Retweeted',
 		'share' => 'Shared',
+		'visit' => 'Visited'
 	],
 	'boost' => 'Boost Post',
 	'boosted' => 'Boosting',
@@ -56,8 +58,9 @@ return [
 	],
 	'promo_days' => '{0} Promotion not included|{1} day of post promotion|[2,Inf] days of post promotion',
 	'promo_text' => 'While promoted your posts will appear in the begining of the market. Purchasing a bigger plan will give your posts additional advantage.',
-	'provider' => 'Post to',
+	'provider' => 'Provider',
 	'providers' => [
+		'weblink' => 'Web Link',
 		'twitter' => 'Twitter',
 		'linkedin' => 'LinkedIn',
 		'facebook' => 'Facebook',
@@ -65,6 +68,8 @@ return [
 	],
 	'profile' => 'Profile',
 	'points' => 'points',
+	'post_edit' => 'Edit Post',
+	'post_image' => 'Image URL',
 	'post_new' => 'New Post',
 	'post_schedule' => 'Schedule post',
 	'post_text' => 'Post text',

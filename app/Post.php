@@ -8,7 +8,7 @@ class Post extends Model implements SocialPost {
 
 	protected $guarded = ['id'];
 
-	protected $dates = ['posted_at'];
+	protected $dates = ['posted_at', 'promoted_until'];
 
 	public function market() {
 		return $this->hasMany('App\MarketItem');

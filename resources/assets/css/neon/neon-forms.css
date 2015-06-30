@@ -1081,11 +1081,6 @@ div.datepicker thead tr:first-child th.cw {
 .bootstrap-timepicker-widget table td a i {
   margin-top: 2px;
 }
-.bootstrap-timepicker-widget table td a i:before {
-  font-family: 'Entypo';
-  font-size: 12px;
-  font-style: normal;
-}
 .bootstrap-timepicker-widget table td a i.icon-chevron-up:before {
   content: '\e876';
 }
@@ -4715,7 +4710,7 @@ input[type="button"].btn-block {
 		.rounded;
 		.transall;
 	}
-	
+
 	&:after {
 		content: '';
 		position: absolute;
@@ -4724,20 +4719,20 @@ input[type="button"].btn-block {
 		background: @default;
 		left: 1px;
 		top: 8px;
-		
+
 		left: -20px;
 		top: 1px;
-		
+
 		.size(@s - 2, @s - 3);
 		opacity: 0;
 		.rounded;
 		.transition(~"250ms all cubic-bezier(0.455, 0.030, 0.515, 0.955)");
 	}
-	
+
 	> .chk-replaced {
-		
+
 	}
-	
+
 	input[type="checkbox"],
 	input[type="radio"] {
 		visibility: visible;
@@ -4747,28 +4742,28 @@ input[type="button"].btn-block {
 		top: 0;
 		margin-left: 0;
 		.size(@s);
-		
+
 		&:checked + label:after {
 			opacity: 1;
 		}
-		
+
 		&:disabled {
-			
+
 			+ label {
-				
+
 				&:before {
 					opacity: 0.3;
 				}
-				
+
 				&:after {
 					opacity: 0;
 				}
 			}
-			
+
 			&:checked {
-				
+
 				+ label {
-					
+
 					&:after {
 						opacity: 1;
 					}
@@ -4776,37 +4771,37 @@ input[type="button"].btn-block {
 			}
 		}
 	}
-	
+
 	label {
 		position: relative;
-		
-		
+
+
 	}
-	
+
 	&:hover {
-		
+
 		label {
-			
+
 			&:before {
 				.box-shadow(~"0 0 0 2px rgba(0,0,0,.03)");
 			}
 		}
 	}
-	
+
 	&:hover input[type="checkbox"]:disabled + label:before {
 		.box-shadow(none);
 	}
-	
-	
+
+
 	// Radio
 	&.radio-replace {
-		
+
 		label {
-			
+
 			&:before {
 				.border-radius(50%);
 			}
-			
+
 			&:after {
 				.border-radius(50%);
 				height: @s - 2;
@@ -4814,11 +4809,11 @@ input[type="button"].btn-block {
 			}
 		}
 	}
-	
-	
+
+
 	// Skins
 	.replaced-checkbox-variant(darken(@default, 10%); #fff);
-	
+
 	&.color-primary { .replaced-checkbox-variant(@main_color; @secondary_text); }
 	&.color-red { .replaced-checkbox-variant(@secondary; @secondary_text); }
 	&.color-blue { .replaced-checkbox-variant(@info; @info_text); }
@@ -4829,26 +4824,26 @@ input[type="button"].btn-block {
 .replaced-checkbox-variant(@color-1; @color-2)
 {
 	label {
-	
+
 		&:before {
 			border-color: @color-1;
 		}
-		
+
 		&:after {
 			border-color: @color-2;
 			background-color: @color-1;
 		}
 	}
-	
+
 	&:hover {
-		
+
 		label {
-			
+
 			&:before {
 				@r: red(@color-1);
 				@g: green(@color-1);
 				@b: blue(@color-1);
-				
+
 				.box-shadow(~"0 0 0 2px rgba(@{r},@{g},@{b},.1)");
 			}
 		}
@@ -4901,7 +4896,6 @@ input[type="button"].btn-block {
 }
 .page-body .select2-container .select2-choice .select2-arrow b:before {
   position: relative;
-  font-family: 'Entypo';
   content: '\e873';
   display: block;
   color: #303641;
@@ -5072,7 +5066,6 @@ input[type="button"].btn-block {
 }
 .page-body .select2-drop .select2-search:after {
   position: absolute;
-  font-family: 'Entypo';
   right: 15px;
   top: 12px;
   content: '\e803';
@@ -5163,7 +5156,6 @@ input[type="button"].btn-block {
 }
 .page-body .selectboxit-container .selectboxit .selectboxit-arrow-container:after {
   position: relative;
-  font-family: 'Entypo';
   content: '\e873';
   display: block;
   color: #303641;
@@ -5444,12 +5436,10 @@ input.typeahead {
 }
 .ms-container .ms-selectable:after {
   content: '\e120';
-  font-family: "Glyphicons Halflings";
   display: block;
   position: absolute;
   right: -19px;
   color: #303641;
-  font-size: 15px;
   top: 50%;
   margin-top: -8px;
 }
@@ -5921,8 +5911,6 @@ hr + .mail-env {
   position: relative;
 }
 .mail-env .mail-body .mail-attachments ul li > a.thumb:after {
-  font-family: 'Entypo';
-  content: '\e826';
   display: block;
   position: absolute;
   left: 50%;

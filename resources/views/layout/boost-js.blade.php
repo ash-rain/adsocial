@@ -15,7 +15,7 @@ $(function() {
 		var id = $(this).data('post-id')
 		modals.find('[name="post_id"]').val(id)
 		$.ajax({
-			url: '/api/v1/post/details/' + id,
+			url: '/api/v1/post/' + id,
 			complete: function(d) {
 				var data = d.responseJSON
 				modals.find('.post-preview').attr('href', data.link).text(data.text)

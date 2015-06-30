@@ -25,7 +25,7 @@ class AuthController extends Controller {
 			return Socialize::buildProvider('App\Services\LinkedInProvider', $config);
 		});
 	}
-	
+
 	public function getIndex() {
 		return view('login');
 	}
@@ -99,7 +99,7 @@ class AuthController extends Controller {
 					$record->user_id = $this->auth->id();
 				}
 			}
-			
+
 			if(!$this->auth->check()) {
 				$this->auth->login($userModel);
 			}

@@ -42,7 +42,7 @@ class User extends Model implements AuthenticatableContract {
 	public function log() {
 		return $this->hasMany('App\Log');
 	}
-	
+
 	public function getReducedAttribute() {
 		return DB::table('log')
 			->join('market', 'log.market_item_id', '=', 'market.id')
@@ -62,7 +62,7 @@ class User extends Model implements AuthenticatableContract {
 
 	public function getProvidersAttribute()
 	{
-		$list = array();
+		$list = array('weblink');
 		foreach ($this->oauth_data as $od) {
 			$list[] = $od->provider;
 		}

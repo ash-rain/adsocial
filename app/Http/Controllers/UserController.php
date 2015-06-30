@@ -15,7 +15,7 @@ class UserController extends Controller {
 		$this->middleware('auth', ['except' => ['store']]);
 		$this->auth = $auth;
 	}
-	
+
 	public function show(User $user) {
 		return view('profile', compact('user'));
 	}
@@ -42,14 +42,13 @@ class UserController extends Controller {
 			$input['password'] = bcrypt($input['password']);
 			$user = (new User)->fill($input);
 			$user->save();
-			
+
 			if($user->id) {
 				$this->auth->login($user);
 				return redirect()->action('UserController@edit');
 			}
 		}
 		catch(Exception $e) {
-			dd($e);
 			app('App\Http\Controllers\AuthController')->postIndex($request);
 		}
 		return redirect()->intended('/');
@@ -62,11 +61,14 @@ class UserController extends Controller {
 		if($input['password']) {
 			$input['password'] = bcrypt($input['password']);
 		}
-	
+		else {
+			unset($input['password']);
+		}
+
 		$this->auth->user()
 			->fill($input)
 			->save();
-		
+
 		return redirect()->action('UserController@edit');
 	}
 }

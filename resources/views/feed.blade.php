@@ -46,10 +46,17 @@
 				</div>
 				@endif
 			</div>
+
 			<a class="btn btn-icon icon-left {{ $item->market->count() ? 'btn-primary' : 'btn-green' }}"
 				data-toggle="modal" data-target="#{{ $provider }}BoostModal" data-post-id="{{ $item->id }}">
-				<i class="fa {{ $item->market->count() ? 'fa-pencil' : 'fa-plus' }}"></i>
+				<i class="fa {{ $item->market->count() ? 'fa-cog' : 'fa-plus' }}"></i>
 				{{ trans($item->market->count() ? 'app.boosted' : 'app.boost') }}
+			</a>
+
+			<a class="btn btn-icon icon-left btn-default"
+				data-toggle="modal" data-target="#postModal" data-id="{{ $item->id }}">
+				<i class="fa fa-pencil"></i>
+				@lang('app.post_edit')
 			</a>
 		</div>
 	</li>
