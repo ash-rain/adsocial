@@ -33,6 +33,9 @@
 .fc-day-grid-event.twitter {
 	background: #55acee !important;
 }
+.fc-day-grid-event.weblink {
+	background: #429167 !important;
+}
 
 .page-body .main-content.scheduler {
 	background-color: #fff;

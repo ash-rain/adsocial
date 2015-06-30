@@ -21,6 +21,11 @@ $(function() {
         url: '/api/v1/post',
 				data: { provider: 'twitter' },
         className: 'twitter'
+      },
+      {
+        url: '/api/v1/post',
+				data: { provider: 'weblink' },
+        className: 'weblink'
       }
     ],
 		events: {
@@ -43,26 +48,23 @@ $(function() {
       window.open(event.link)
     },
     eventDrop: function (event, delta, revertFunc) {
-        if (moment().diff(event.start.toString()) > 0) {
-          return revertFunc(); // we may long for the past but those days are gone
-        }
+			var s = jQuery.extend(true, {}, event.start);
+			if (moment().diff(s) > 0) {
+        return revertFunc(); // no dropping in the past
+      }
+			if (moment().diff(s.subtract(delta)) > 0) {
+        return revertFunc(); // also no dropping from the past thank you very much
+			}
 
-        if (!confirm("Delete original post?")) {
-          revertFunc();
-        } else {
-					$.post('/api/v1/post/'+event.id, {'_method':'DELETE'});
-				}
+			event.start.add(delta)
 
-				var data = {
-					text: event.title,
-					link: event.link,
-					image: event.image,
-					provider: event.provider
-				};
-				
-				$.post('/api/v1/post', data, function() {
-					console.log( calendar.fullCalendar('refetchEvents') );
-				});
+			var data = { 'id': event.id, 'published_at': event.start.format('x') / 1000 };
+
+			console.log(data)
+
+			//$.post('/api/v1/post', data, function() {
+			//	calendar.fullCalendar('refetchEvents');
+			//});
     }
 	});
 });

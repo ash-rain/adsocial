@@ -32,17 +32,25 @@
 		<div class="cbp_tmlabel">
 			<div class="row">
 				<div class="col-sm-9 longtext">
-					@if($item->link)
-					<a href="{{ $item->link }}">
-						<h3>{{ strlen($item->text) ? $item->text : $item->link }}</h3>
-					</a>
-					@else
-					<h3>{{ $item->text }}</h3>
+					<blockquote>
+						@if($item->link)
+						<a href="{{ $item->link }}">
+							<h4>{{ strlen($item->text) ? $item->text : $item->link }}</h4>
+						</a>
+						@else
+							<h4>{{ $item->text }}</h4>
+						@endif
+					</blockquote>
+
+					@if($item->meta)
+							@include("meta.$provider", compact('item'))
 					@endif
 				</div>
 				@if($item->image)
-				<div class="col-sm-3" style="text-align: right;">
-					<img src="{{ $item->image }}">
+				<div class="col-sm-3">
+					<div class="thumbnail-highlight pull-right">
+						<img class="img-responsive img-rounded" src="{{ $item->image }}">
+					</div>
 				</div>
 				@endif
 			</div>
@@ -53,11 +61,13 @@
 				{{ trans($item->market->count() ? 'app.boosted' : 'app.boost') }}
 			</a>
 
+			@if($provider == 'weblink')
 			<a class="btn btn-icon icon-left btn-default"
 				data-toggle="modal" data-target="#postModal" data-id="{{ $item->id }}">
 				<i class="fa fa-pencil"></i>
 				@lang('app.post_edit')
 			</a>
+			@endif
 		</div>
 	</li>
 	@endforeach

@@ -62,6 +62,7 @@ abstract class AbstractProvider implements SocialProvider {
 		$postData['provider'] = $this->provides;
 		$postData['provider_id'] = $id;
 		$postData['user_id'] = $this->user->id;
+		$postData['meta'] = json_encode($source);
 
 		$post = new Post($postData);
 		$post->save();

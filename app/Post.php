@@ -18,7 +18,11 @@ class Post extends Model implements SocialPost {
 		return $this->hasManyThrough('App\Log', 'App\MarketItem');
 	}
 
-    public function categories() {
-    	return $this->belongsToMany('App\Category');
-    }
+  public function categories() {
+  	return $this->belongsToMany('App\Category');
+  }
+
+  public function getMetaAttribute() {
+		return json_decode($this->attributes['meta']);
+	}
 }
