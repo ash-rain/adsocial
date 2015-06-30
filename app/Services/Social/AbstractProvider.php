@@ -18,7 +18,6 @@ abstract class AbstractProvider implements SocialProvider {
 
 	public function __construct() {
 		$this->user = Auth::user();
-		$this->useCache = !config('app.debug');
 	}
 
 	public function post($id)
