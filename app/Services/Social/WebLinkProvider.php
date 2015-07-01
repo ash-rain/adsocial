@@ -34,4 +34,8 @@ class WebLinkProvider extends AbstractProvider implements SocialProvider {
 		$post = Post::find($id);
 		return $post->link;
 	}
+
+	public function checkVisit($id, $user) {
+		return true;
+	}
 }

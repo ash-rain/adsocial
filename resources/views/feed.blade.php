@@ -42,9 +42,11 @@
 						@endif
 					</blockquote>
 
+					<div class="meta" style="margin-bottom: 4px;">
 					@if($item->meta)
-							@include("meta.$provider", compact('item'))
+						@include("meta.$provider", compact('item'))
 					@endif
+					</div>
 				</div>
 				@if($item->image)
 				<div class="col-sm-3">

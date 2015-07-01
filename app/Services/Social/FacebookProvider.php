@@ -89,4 +89,12 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 		}
 		return false;
 	}
+
+	public function checkComment($id, $user) {
+		return true;
+	}
+
+	public function checkShare($id, $user) {
+		return true;
+	}
 }

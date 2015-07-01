@@ -114,10 +114,22 @@ abstract class AbstractProvider implements SocialProvider {
 	public function check($market, $user)
 	{
 		$method = 'check' . ucfirst($market->action);
-		if(method_exists($this, $method)) {
+		if (method_exists($this, $method)) {
 			$this->user = $market->user;
-			$oauth_data = $user->oauth_data()->whereProvider($this->provides)->first();
-			return $this->$method($market->post->provider_id, $oauth_data->provider_id);
+			if (!config("br.actions.{$this->provides}.sourceOnly")) {
+				$oauth_data = $user->oauth_data()->whereProvider($this->provides)->first();
+				$provider_id = $oauth_data->provider_id;
+			} else {
+				$provider_id = $user->id;
+			}
+			return $this->$method($market->post->provider_id, $provider_id);
+		} else {
+			dd(
+				$user->log()
+					->wherePostId($market->post_id)
+					->whereReason($market->action)
+					->latest()->first()
+			);
 		}
 		return false;
 	}

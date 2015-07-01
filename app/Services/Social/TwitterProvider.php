@@ -16,7 +16,7 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 		'retweet' => 'https://twitter.com/intent/retweet?tweet_id=%d',
 		'favorite' => 'https://twitter.com/intent/favorite?tweet_id=%d',
 	);
-	
+
 	public function publish(SocialPost $post)
 	{
 
@@ -32,8 +32,15 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 			]);
 	}
 
-	public function getPost($id)
-	{
+	public function getPost($id) {
 		return Twitter::get('statuses/show', compact('id'));
+	}
+
+	public function checkRetweet($id, $user) {
+		return true;
+	}
+
+	public function checkFavorite($id, $user) {
+		return true;
 	}
 }

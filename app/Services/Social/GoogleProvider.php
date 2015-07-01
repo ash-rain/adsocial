@@ -54,4 +54,12 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 		$activity = $this->service->activities->get($id);
 		return array_only((array)$activity, ['title', 'published', 'url']);
 	}
+
+	public function checkPlus($id, $user) {
+		return true;
+	}
+
+	public function checkShare($id, $user) {
+		return true;
+	}
 }
