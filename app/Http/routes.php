@@ -23,5 +23,7 @@ Route::group(['prefix' => 'api/v1', 'namespace' => 'API'], function() {
 	]);
 });
 
+Route::get('/{hash}', 'ShortenController@handleShortcode');
+
 Route::get('/', ['as' => 'home', 'uses' => 'SiteController@getIndex']);
 Route::controller('/', 'SiteController');

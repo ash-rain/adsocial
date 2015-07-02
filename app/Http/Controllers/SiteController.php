@@ -20,11 +20,6 @@ class SiteController extends Controller {
 		$this->social = new SocialManager(app());
 	}
 
-	public function postNewPost(Request $request)
-	{
-		$input = $request->only(['provider', 'text', 'link', 'posted_at', 'categories']);
-	}
-
 	public function getIndex()
 	{
 		$market = array();
@@ -41,6 +36,10 @@ class SiteController extends Controller {
 	public function getAction($post = null, $action = null)
 	{
 		$post = Post::find($post);
+
+		if(!$post) {
+			app()->abort(422);
+		}
 
 		if($action) {
 			// Log action and push to queue

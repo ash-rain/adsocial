@@ -8,8 +8,8 @@ use App\Log;
 class EventServiceProvider extends ServiceProvider {
 
 	protected $listen = [
-		'event.name' => [
-			'EventListener',
+		'App\Events\PlanWasPurchased' => [
+			'App\Listeners\PromoteUserPosts',
 		],
 	];
 
