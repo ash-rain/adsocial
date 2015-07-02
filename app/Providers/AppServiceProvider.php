@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider {
 			'profile',
 			'profile_edit',
 			'schedule',
+			'shortener'
 		], 'App\Http\ViewComposer');
 	}
 

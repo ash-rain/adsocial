@@ -6,7 +6,8 @@ Route::model('post', 'App\Post');
 Route::controllers([
 	'auth' => 'AuthController',
 	'checkout' => 'CheckoutController',
-	'schedule' => 'ScheduleController'
+	'schedule' => 'ScheduleController',
+	'shorten' => 'ShortenController'
 ]);
 
 Route::get('me', 'UserController@edit');

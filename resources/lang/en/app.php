@@ -76,5 +76,12 @@ return [
 	'post_link' => 'Post link',
 	'save' => 'Save',
 	'schedule' => 'Schedule',
-	'title' => 'BuzzRunnr'
+	'shorten' => 'Shorten',
+	'shortener' => 'URL Shortener',
+	'shorten_empty' => 'You don\'t have any shortened URLs.',
+	'shorten_link' => 'Short Link',
+	'shorten_new' => 'Shorten URL',
+	'shorten_url' => 'URL',
+	'shorten_visits' => 'Visits',
+	'title' => 'BuzzRunnr',
 ];

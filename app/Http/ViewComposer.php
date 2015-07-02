@@ -13,9 +13,9 @@ class ViewComposer {
 
 	public function compose(View $view)
 	{
-		//$categories = Cache::remember('categories', 1440, function() {
-			$categories = Category::orderBy('name')->get();
-		//});
+		$categories = Cache::remember('categories', 1440, function() {
+			return Category::orderBy('name')->get();
+		});
 
 		$view->with([
 			'user' => $this->auth->user(),

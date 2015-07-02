@@ -28,7 +28,6 @@ class AddPostMetaAndPromo extends Migration
       Schema::table('posts', function ($table) {
         $table->dropColumn('meta');
         $table->dropColumn('promoted_until');
-        $table->dropIndex('promoted_until');
       });
     }
 }
