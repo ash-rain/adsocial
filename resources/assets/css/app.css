@@ -1,3 +1,56 @@
+/* Medium & small */
+@media only screen and (max-width: 767px) {
+	.focus .header {
+		margin-top: -4rem;
+	}
+
+	.page-body .page-container .main-content {
+		padding-top: 100px;
+	}
+
+	.page-container .sidebar-menu .sidebar-menu-inner.ps-container {
+		width: 100%;
+		background: #2b303a;
+		bottom: auto;
+		height: auto;
+	}
+
+	.user-info {
+		position: absolute;
+		top: 0;
+		left: 120px;
+	}
+}
+
+/* Large */
+@media only screen and (min-width: 768px) {
+	.user-info {
+		margin-bottom: 3rem;
+	}
+}
+
+.user-info {
+	padding: 1rem 4rem;
+	clear: both;
+}
+
+.user-info .points {
+	display: block;
+}
+
+.user-info .info {
+	margin-left: .5em;
+}
+
+.user-info .name a {
+	font-size: 1.5em;
+	color: #fff;
+}
+
+.user-info > * {
+	float: left;
+}
+
 .select2-search-choice .select2-search-choice-close {
 	display: none;
 }
@@ -37,11 +90,11 @@
 	background: #429167 !important;
 }
 
-.page-body .main-content.scheduler {
+.page-body .main-content.focus {
 	background-color: #fff;
 }
 
-.scheduler .header {
+.focus .header {
 	margin: -2rem -2rem 1rem -2rem;
 	padding: 3rem;
 	background-color: #ddd;
@@ -53,23 +106,6 @@
 .cbp_tmtimeline:before { left: 15%; }
 .cbp_tmtimeline > li .cbp_tmtime { width: 20%; }
 .cbp_tmtimeline > li .cbp_tmlabel { margin-left: 20%; }
-
-@media only screen and (max-width: 767px) {
-	.scheduler .header {
-		margin-top: -4rem;
-	}
-
-	.page-body .page-container .main-content {
-		padding-top: 100px;
-	}
-
-	.page-container .sidebar-menu .sidebar-menu-inner.ps-container {
-		width: 100%;
-		background: #2b303a;
-		bottom: auto;
-		height: auto;
-	}
-}
 
 #buyModal .tile-block .tile-footer a {
 	padding: 1em 0;

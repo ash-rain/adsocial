@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('pageClass', 'scheduler')
+@section('pageClass', 'focus')
 
 @section('js')
 $(function() {

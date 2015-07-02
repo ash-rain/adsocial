@@ -48,6 +48,12 @@
 					@lang('app.schedule')
 				</a>
 			</li>
+			<li class="{{ Request::is('shorten') ? 'active' : '' }}">
+				<a href="{{ action('ShortenController@getIndex') }}">
+					<i class="fa fa-compress"></i>
+					@lang('app.shortener')
+				</a>
+			</li>
 			<li class="{{ Request::is('me') ? 'active' : '' }}">
 				<a href="{{ action('UserController@edit') }}">
 					<i class="fa fa-pencil"></i>

@@ -20,6 +20,19 @@
 						</a>
 					</div>
 				</header>
+
+				<div class="user-info">
+					<a href="{{ url('me') }}">
+						<img src="{{ $user->avatar }}">
+					</a>
+					<div class="info">
+						<span class="name">
+							<a href="{{ url('me') }}">{{ $user->name }}</a>
+						</span>
+						<span class="points">{{ $user->points }}</span>
+					</div>
+				</div>
+
 				@include('layout.sidebar')
 			</div>
 		</div>

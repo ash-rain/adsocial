@@ -86,4 +86,15 @@ class User extends Model implements AuthenticatableContract {
 			return $marketActions + $otherActions - $reduced;
 		});
 	}
+
+	public function getAvatarAttribute()
+	{
+		foreach ($this->oauth_data as $oauth) {
+
+			if($oauth->user_data->avatar) {
+				return $oauth->user_data->avatar;
+			}
+		}
+		return null;
+	}
 }
