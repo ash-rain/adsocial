@@ -33939,6 +33939,54 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 	.user-info {
 		margin-bottom: 3rem;
 	}
+	.sidebar-collapsed .user-info > * {
+		float: none;
+	}
+}
+
+.cbp_tmtimeline ul.meta {
+	text-align: right;
+}
+
+.page-container .sidebar-menu.fixed,
+.page-container .sidebar-menu.fixed .sidebar-menu-inner {
+	width: 240px;
+}
+
+.sidebar-collapsed .sidebar-menu #main-menu > li > ul {
+	bottom: 0 !important;
+}
+
+.sidebar-collapsed #main-menu > li > a {
+	text-align: center;
+}
+
+.sidebar-collapsed #main-menu > li > a .fa {
+	font-size: 1.8em;
+	padding: .4em 0;
+}
+
+.sidebar-collapsed #main-menu > li > a label {
+	display: none;
+}
+
+#main-menu a {
+	font-size: 14px;
+}
+
+
+.sidebar-collapsed .user-info {
+	padding: 1rem 0;
+	text-align: center;
+}
+
+.sidebar-collapsed .user-info .name {
+	display: none;
+}
+
+.user-info img {
+	width: 48px;
+	height: 48px;
 }
 
 .user-info {
@@ -33948,6 +33996,10 @@ html[dir="rtl"] .select2-container-multi .select2-search-choice-close {
 
 .user-info .points {
 	display: block;
+}
+
+.user-info .points a {
+	color: #fff;
 }
 
 .user-info .info {

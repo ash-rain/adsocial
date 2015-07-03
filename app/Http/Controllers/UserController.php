@@ -16,8 +16,8 @@ class UserController extends Controller {
 		$this->auth = $auth;
 	}
 
-	public function show(User $user) {
-		return view('profile', compact('user'));
+	public function show(User $profile) {
+		return view('profile', compact('profile'));
 	}
 
 	public function edit()

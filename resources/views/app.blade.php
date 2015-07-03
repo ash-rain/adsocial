@@ -9,11 +9,13 @@
 					<div class="logo">
 						<a href="{{ url('/') }}">@lang('app.title')</a>
 					</div>
+
 					<div class="sidebar-collapse">
 						<a href="#" class="sidebar-collapse-icon">
 							<i class="fa fa-fw fa-bars"></i>
 						</a>
 					</div>
+
 					<div class="sidebar-mobile-menu visible-xs">
 						<a href="#" class="with-animation">
 							<i class="fa fa-fw fa-bars"></i>
@@ -29,7 +31,9 @@
 						<span class="name">
 							<a href="{{ url('me') }}">{{ $user->name }}</a>
 						</span>
-						<span class="points">{{ $user->points }}</span>
+						<span class="points">
+							{{ $user->points }}
+						</span>
 					</div>
 				</div>
 

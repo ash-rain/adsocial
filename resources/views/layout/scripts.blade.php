@@ -51,6 +51,9 @@ $(function() {
   			})
   		}
     });
+
+    var provider = $(e.relatedTarget).data('provider')
+    if(provider) form.find("select[name='provider']").val(provider)
   }).on('hidden.bs.modal', function (e) {
     form[0].reset();
   });

@@ -3,11 +3,11 @@
 @section('content')
 
 <h1>
-	{{ $user->name }}
-	<small>{{ $user->points }}</small>
+	{{ $profile->name }}
+	<small>{{ $profile->points }}</small>
 </h1>
 <div class="row">
-	@foreach($user->posts()->latest()->get() as $post)
+	@foreach($profile->posts()->latest()->get() as $post)
 	<div class="col-sm-4">
 		<div class="market-item tile-block tile-gray">
 			<div class="tile-header">

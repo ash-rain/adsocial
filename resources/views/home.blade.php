@@ -1,6 +1,24 @@
 @extends('app')
 
+@section('pageClass', 'focus')
+
 @section('content')
+
+<div class="header">
+	<h2>
+		{{ $user->points }}
+		@lang('app.points')
+		<a class="btn btn-primary buy" data-toggle="modal" data-target="#buyModal">
+			<i class="fa fa-dollar"></i>
+			@lang('app.buy_points')
+		</a>
+
+		<a class="btn btn-success buy" data-toggle="modal" data-target="#postModal">
+			<i class="fa fa-plus"></i>
+			@lang('app.post_new')
+		</a>
+	</h2>
+</div>
 
 @if(count($market))
 <div>
@@ -20,7 +38,7 @@
 						<span>{{ $actions->first()->updated_at->diffForHumans() }}</span>
 					</a>
 				</div>
-				
+
 				@if($actions->first()->post->image)
 				<div class="tile-content image" style="background-image: url({{ $actions->first()->post->image }})">
 				@else

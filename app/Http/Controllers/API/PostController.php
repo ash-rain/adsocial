@@ -37,7 +37,7 @@ class PostController extends Controller {
 		$categories = $this->request->input('categories');
 		$inputSchedule = $this->request->only(['schedule_date', 'schedule_time']);
 
-		if(!$input['link']) {
+		if($input['provider'] == 'weblink' && !$input['link']) {
 			throw new Exception('The "link" argument is missing', 1);
 		}
 
@@ -48,7 +48,9 @@ class PostController extends Controller {
 		if($inputSchedule['schedule_date']) {
 			$time = explode(':', $inputSchedule['schedule_time']);
 			$date = new Carbon($inputSchedule['schedule_date']);
-			$date->setTime($time[0], $time[1]);
+			if(count($time) > 1) {
+				$date->setTime($time[0], $time[1]);
+			}
 			if($date->timestamp > time()) {
 				$post->posted_at = $date;
 			}

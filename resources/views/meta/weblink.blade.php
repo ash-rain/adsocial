@@ -1,8 +1,8 @@
 @if(isset($item->meta->visits))
 
-<span class="label label-info">
+<li>
   <i class="fa fa-fw fa-{{ config('br.actions.weblink.visit.icon') }}"></i>
   {{ $item->meta->visits }}
-</span>
+</li>
 
 @endif

@@ -11,8 +11,40 @@
 			<ul class="list-inline">
 				<li>
 					<h3>{{ $providerUser->name }}</h3>
-					<span>{{ $providerUser->email or trans('app.noemail') }}</span>
+					<span>{{ $providerUser->nickname or $providerUser->email }}</span>
 				</li>
+				@if('twitter' == $provider)
+				<li>
+					<div class="profile-stat">
+						<h3>{{ $providerUser->user->followers_count }}</h3>
+						<span>Followers</span>
+					</div>
+				</li>
+				<li>
+					<div class="profile-stat">
+				    <h3>{{ $providerUser->user->friends_count }}</h3>
+						<span>Friends</span>
+					</div>
+				</li>
+				<li>
+					<div class="profile-stat">
+				    <h3>{{ $providerUser->user->favourites_count }}</h3>
+						<span>Favorites</span>
+					</div>
+				</li>
+				<li>
+					<div class="profile-stat">
+				    <h3>{{ $providerUser->user->statuses_count }}</h3>
+						<span>Statuses</span>
+					</div>
+				</li>
+				@endif
+				<div class="pull-right">
+					<a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#postModal" data-provider="{{ $provider }}">
+						<i class="fa fa-plus"></i>
+						@lang('app.post_new')
+					</a>
+				</div>
 			</ul>
 		</div>
 	</li>
@@ -27,6 +59,12 @@
 	@foreach($feed as $item)
 	<li>
 		<time class="cbp_tmtime" title="{{ $item->posted_at->format('d/m H:i') }}">
+			@if(isset($item->meta) && $item->meta)
+			<ul class="meta list-inline">
+				@include("meta.$provider", compact('item'))
+			</ul>
+			@endif
+
 			<span>{{ $item->posted_at->diffForHumans() }}</span>
 		</time>
 		<div class="cbp_tmlabel">
@@ -41,12 +79,6 @@
 							<h4>{{ $item->text }}</h4>
 						@endif
 					</blockquote>
-
-					<div class="meta" style="margin-bottom: 4px;">
-					@if($item->meta)
-						@include("meta.$provider", compact('item'))
-					@endif
-					</div>
 				</div>
 				@if($item->image)
 				<div class="col-sm-3">
