@@ -22,6 +22,7 @@ Route::group(['prefix' => 'api/v1', 'namespace' => 'API'], function() {
 	Route::resources([
 		'post' => 'PostController'
 	]);
+	Route::post('post/{post}/reschedule', 'PostController@reschedule');
 });
 
 Route::get('/{hash}', 'ShortenController@handleShortcode');

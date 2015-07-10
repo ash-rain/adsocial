@@ -26,7 +26,11 @@ class PostController extends Controller {
 			->latest()->get(['id', 'text as title', 'posted_at as start', 'image', 'link', 'provider']);
 	}
 
-	public function show($post) {
+	public function show(Post $post) {
+		return $post->load(['market', 'categories']);
+	}
+	
+	public function reschedule(Post $post) {
 		return $post->load(['market', 'categories']);
 	}
 
@@ -74,8 +78,7 @@ class PostController extends Controller {
 		$post->save();
 	}
 
-	public function destroy($id)
-	{
-
+	public function destroy(Post $post) {
+		return $post->delete();
 	}
 }
