@@ -75,9 +75,14 @@ class SiteController extends Controller {
 			->whereProvider($provider)
 			->first();
 
+		$scheduled = Auth::user()->posts()
+			->where('posted_at', '>', date('Y-m-d H:i:s'))
+			->whereProvider($provider)
+			->count();
+
 		$providerUser = $providerUser ? $providerUser->user_data : Auth::user();
 
-		return view('feed', compact('feed', 'provider', 'providerUser'));
+		return view('feed', compact('feed', 'provider', 'providerUser', 'scheduled'));
 	}
 
 }

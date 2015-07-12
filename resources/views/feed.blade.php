@@ -13,7 +13,9 @@
 					<h3>{{ $providerUser->name }}</h3>
 					<span>{{ $providerUser->nickname or $providerUser->email }}</span>
 				</li>
+
 				@if('twitter' == $provider)
+
 				<li>
 					<div class="profile-stat">
 						<h3>{{ $providerUser->user->followers_count }}</h3>
@@ -38,7 +40,9 @@
 						<span>Statuses</span>
 					</div>
 				</li>
+
 				@endif
+
 				<div class="pull-right">
 					<a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#postModal" data-provider="{{ $provider }}">
 						<i class="fa fa-plus"></i>
@@ -53,6 +57,9 @@
 			<h2>
 				<i class="{{ config("br.actions.$provider.icon") }}"></i>
 				{{ ucfirst($provider) }}
+				<a href="{{ action('ScheduleController@getIndex') }}">
+					({{ $scheduled }} scheduled posts)
+				</a>
 			</h2>
 		</div>
 	</li>
@@ -95,7 +102,7 @@
 				{{ trans($item->market->count() ? 'app.boosted' : 'app.boost') }}
 			</a>
 
-			@if($provider == 'weblink')
+			@if($provider == 'weblink' && $item->posted_at->isFuture())
 			<a class="btn btn-icon icon-left btn-default"
 				data-toggle="modal" data-target="#postModal" data-id="{{ $item->id }}">
 				<i class="fa fa-pencil"></i>

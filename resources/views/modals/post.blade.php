@@ -13,14 +13,16 @@
 						<div class="col-sm-4">
 							<select class="form-control" name="provider">
 								@foreach($user->providers as $provider)
+								@unless(config("br.actions.$provider.readOnly"))
 								<option value="{{ $provider }}">@lang("app.providers.$provider")</option>
+								@endunless
 								@endforeach
 							</select>
 						</div>
 
 						<div class="col-sm-5">
 							<div class="date-and-time">
-								<input type="text" name="schedule_date" class="form-control datepicker" data-start-date="{{ date('d/m/Y') }}" placeholder="@lang('app.post_schedule')">
+								<input type="text" name="schedule_date" class="form-control datepicker" data-start-date="{{ date('m/d/Y') }}" placeholder="@lang('app.post_schedule')">
 								<input type="text" name="schedule_time" class="form-control timepicker" data-template="dropdown" data-show-meridian="false" data-minute-step="5" placeholder="00:00" />
 							</div>
 						</div>

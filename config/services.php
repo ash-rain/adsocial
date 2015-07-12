@@ -6,7 +6,6 @@ return [
 		'client_id' => env('PAYPAL_ID'),
 		'secret' => env('PAYPAL_SECRET')
 	],
-
 	'facebook' => [
 		'client_id' => env('AUTH_FB_ID'),
 		'client_secret' => env('AUTH_FB_SECRET'),

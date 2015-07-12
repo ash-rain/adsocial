@@ -5,6 +5,14 @@ $(function() {
 	$('#buyModal .submit').click(function() {
 		$(this).parents('form')[0].submit()
 	})
+	$('.tile-stats a.detach').click(function(e) {
+		e.preventDefault()
+		if(confirm("@lang('app.confirm_detach')")) {
+			$.get($(this).attr('href'), function(r) {
+				if(r.success) window.location.reload()
+			});
+		}
+	})
 })
 @stop
 
@@ -41,11 +49,11 @@ $(function() {
 					<span class="badge badge-success">
 						+{{ $item->reward ? $item->reward : $item->market_reward }}
 					</span>
-					
+
 					@unless($item->reward)
 					<i class="fa fa-{{ config('br.actions.'. $item->provider .'.'. $item->reason .'.icon') }}"></i>
 					@endunless
-					
+
 					<strong>{{ trans("app.actions_done.$item->reason") }}</strong>
 
 					@unless($item->reward)
@@ -53,7 +61,7 @@ $(function() {
 						{{ $item->text }}
 					</a>
 					@endunless
-					
+
 					<div title="{{ $item->updated_at }}">
 						<i class="fa fa-clock-o"></i>
 						<small>{{ (new Carbon\Carbon($item->updated_at))->diffForHumans() }}</small>
@@ -73,15 +81,15 @@ $(function() {
 					<span class="badge badge-primary">
 						-{{ $item->reward }}
 					</span>
-					
+
 					<i class="fa-fw {{ config("br.actions.{$item->provider}.icon") }}"></i>
 					<i class="fa-fw fa fa-{{ config("br.actions.{$item->provider}.{$item->reason}.icon") }}"></i>
 
 					<a href="{{ action('UserController@show', $item->user_id) }}">{{ $item->name }}</a>
 					@lang("app.actions_done.$item->reason")
-					
+
 					<a href="#">{{ $item->text }}</a>
-					
+
 					<div>
 						<i class="fa fa-clock-o"></i>
 						<small>{{ (new Carbon\Carbon($item->updated_at))->diffForHumans() }}</small>
@@ -150,17 +158,28 @@ $(function() {
 		<div class="row">
 			@foreach($user->oauth_data as $provider)
 			<div class="col-sm-6">
-				<a href="javascript:void(0)" onclick="if({{ strlen($provider->user_data->email) }}) jQuery('input[name=email]').val('{{ $provider->user_data->email }}')">
-					<div class="tile-stats tile-aqua">
-						<div class="icon"><i class="{{ config("br.actions.{$provider->provider}.icon") }}"></i></div>
-						<div class="num">
-							<img width="40" height="40" src="{{ $provider->user_data->avatar }}">
-							{{ trans("app.providers.$provider->provider") }}
+				<div class="tile-stats tile-aqua">
+					<div class="icon"><i class="{{ config("br.actions.{$provider->provider}.icon") }}"></i></div>
+					<div class="num">
+						<div class="row">
+							<div class="col-sm-8">
+								{{ trans("app.providers.$provider->provider") }}
+							</div>
+							<div class="col-sm-4">
+								<a class="detach btn btn-white btn-block" href="{{ action('AuthController@getDetach', $provider->provider) }}">
+									<i class="fa fa-unlink"></i>
+								</a>
+							</div>
 						</div>
+					</div>
+					<div>
+						<img class="img-circle" width="40" height="40" src="{{ $provider->user_data->avatar }}" style="float: left; margin-right: 1em;">
+
 						<h3>{{ $provider->user_data->name }}</h3>
+
 						<p>{{ $provider->user_data->email or trans('app.noemail') }}</p>
 					</div>
-				</a>
+				</div>
 			</div>
 			@endforeach
 

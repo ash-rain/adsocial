@@ -15,7 +15,7 @@ class AuthController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->auth = $auth;
-		$this->middleware('guest', ['except' => ['getLogout', 'getSocial', 'getCallback']]);
+		$this->middleware('guest', ['except' => ['getLogout', 'getSocial', 'getCallback', 'getDetach']]);
 	}
 
 	private function socialite()
@@ -46,6 +46,15 @@ class AuthController extends Controller {
 	{
 		$this->auth->logout();
 		return redirect('/');
+	}
+
+	public function getDetach($provider = 'facebook')
+	{
+		return [
+			'success' => $this->auth->user()->oauth_data()
+				->whereProvider($provider)
+				->delete()
+		];
 	}
 
 	public function getSocial($provider = 'facebook')

@@ -38,9 +38,8 @@ class GoogleProvider extends AbstractProvider implements SocialProvider {
 		Cache::forever('service_token', $client->getAccessToken());
 	}
 
-	public function publish(SocialPost $post)
-	{
-
+	public function publish(SocialPost $post) {
+		return false;
 	}
 
 	public function getFeed()

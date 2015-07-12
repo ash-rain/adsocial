@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ App::getLocale() }}">
 <head>@include('layout.head')</head>
 <body class="page-body">
 	<div class="page-container">
@@ -25,7 +25,7 @@
 
 				<div class="user-info">
 					<a href="{{ url('me') }}">
-						<img src="{{ $user->avatar }}">
+						<img class="img-circle" src="{{ $user->avatar }}">
 					</a>
 					<div class="info">
 						<span class="name">

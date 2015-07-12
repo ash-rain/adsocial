@@ -26,6 +26,7 @@ return [
 	'boost_text' => 'Set a reward for each action. Leave a field blank if you don\'t want to reward that action.',
 	'buy_points' => 'Buy Points',
 	'cancel' => 'Cancel',
+	'confirm_detach' => 'Are you sure you want to detach this account from your BuzzRunnr profile?',
 	'categories' => 'Categories',
 	'characters' => 'characters',
 	'checkout' => 'Checkout',

@@ -19,7 +19,8 @@ class TwitterProvider extends AbstractProvider implements SocialProvider {
 
 	public function publish(SocialPost $post)
 	{
-
+		$status = $post->link ? "$post->text $post->link" : $post->text;
+		return Twitter::post('statuses/update', compact('status'));
 	}
 
 	public function getFeed($limit = parent::LIMIT)

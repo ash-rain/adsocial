@@ -44,13 +44,9 @@ $(function() {
 	<tbody>
 	@foreach($shortlinks as $shortlink)
 		<tr>
+			<td>{{ url($shortlink->hash) }}</td>
 			<td>
-				<a href="{{ url($shortlink->hash) }}" target="_blank">
-					{{ url($shortlink->hash) }}
-				</a>
-			</td>
-			<td>
-				<div class="label label-info">
+				<div class="label label-info" style="font-weight: bold; font-size: 1.1em;">
 					{{ $shortlink->visits }}
 				</div>
 			</td>

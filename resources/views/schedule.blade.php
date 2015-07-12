@@ -39,13 +39,14 @@ $(function() {
 
 		event.start.add(delta)
 
-		var data = { 'id': event.id, 'published_at': event.start.format('x') / 1000 };
-
-		console.log(data)
-
-		//$.post('/api/v1/post', data, function() {
-		//	calendar.fullCalendar('refetchEvents');
-		//});
+		$.post(
+			('/api/v1/post/' + event.id + '/reschedule'),
+			{ 'posted_at': (event.start.format('x') / 1000) },
+			function(r) {
+				console.log( r )
+				calendar.fullCalendar('refetchEvents');
+			}
+		);
 	}
 	});
 });

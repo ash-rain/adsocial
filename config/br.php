@@ -32,6 +32,7 @@
 		],
 		'google' => [
 			'icon' => 'fa fa-google-plus',
+			'readOnly' => true,
 			'plus' => [
 				'default' => 5,
 				'icon' => 'plus',

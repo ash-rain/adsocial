@@ -90,7 +90,7 @@ abstract class AbstractProvider implements SocialProvider {
 			$feed = Post::whereUserId(Auth::id())->whereProvider($this->provides)
 				->limit($limit)->get();
 		}
-		return $feed;
+		return collect($feed);
 	}
 
 	public function providerData()

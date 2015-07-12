@@ -80,6 +80,7 @@
 @endunless
 @endforeach
 
+@include('modals.buy')
 @include('layout.boost-js')
 
 @stop

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Exception;
 use Carbon\Carbon;
 use App\Post;
+use App\Jobs\PublishPost;
 
 class PostController extends Controller {
 
@@ -29,9 +30,15 @@ class PostController extends Controller {
 	public function show(Post $post) {
 		return $post->load(['market', 'categories']);
 	}
-	
+
 	public function reschedule(Post $post) {
-		return $post->load(['market', 'categories']);
+		$post->posted_at = $this->request->input('posted_at');
+		$success = $post->save();
+
+		$job = (new PublishPost($post))->onQueue('publish');
+  	$queued = $this->dispatch($job);
+
+		return compact('success', 'queued');
 	}
 
 	public function store()

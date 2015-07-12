@@ -28,10 +28,11 @@ $(function() {
     modal.find("select[name='provider']").attr('disabled', !!id)
     modal.find("input[name='id']").val(id)
     if(id) $.ajax({
-  		url: '/api/v1/post/' + id,
-  		complete: function(d) {
-  			var data = d.responseJSON
-  			form.find('[name]').each(function() {
+      url: '/api/v1/post/' + id,
+      complete: function(d) {
+        var data = d.responseJSON
+        // modal.find("[name='schedule_date'], [name='schedule_time']").attr('disabled', (0 < moment().diff(data.posted_at)))
+        form.find('[name]').each(function() {
           var k = $(this).attr('name');
           switch(k) {
             case 'schedule_date':

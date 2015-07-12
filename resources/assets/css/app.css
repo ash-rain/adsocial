@@ -32,6 +32,19 @@
 	}
 }
 
+.tile-stats .num {
+	font-size: 2.4rem;
+}
+
+.fc-view-container {
+	margin: 0 -22px;
+	font-size: 1.1em;
+}
+
+.fc-view-container thead {
+	background: #eee;
+}
+
 .cbp_tmtimeline ul.meta {
 	text-align: right;
 }
@@ -78,7 +91,7 @@
 }
 
 .user-info {
-	padding: 1rem 4rem;
+	padding: 1rem 2rem;
 	clear: both;
 }
 
