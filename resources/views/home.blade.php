@@ -1,5 +1,20 @@
 @extends('app')
 
+@section('js')
+$(function() {
+	$('.market-item .action a').click(function(e) {
+		e.preventDefault();
+		$.get($(this).attr('href'), function(r) {
+			if(r.error) {
+				alert(r.error)
+			} else {
+				if(r.redirect) window.open(r.redirect) 
+			}
+		});
+	})
+})
+@stop
+
 @section('pageClass', 'focus')
 
 @section('content')
@@ -83,12 +98,4 @@
 @include('modals.buy')
 @include('layout.boost-js')
 
-@stop
-
-@section('js')
-$(function() {
-	$('.market-item:gt(3)').each(function() {
-		console.log($(this).offset(), $(this).prevAll())
-	})
-})
 @stop

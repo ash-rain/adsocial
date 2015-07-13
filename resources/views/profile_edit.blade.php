@@ -24,6 +24,7 @@ $(function() {
 </h1>
 @endif
 
+@if($user->email)
 <div class="row">
 	<div class="col-sm-3">
 		<div class="tile-stats tile-gray">
@@ -97,9 +98,10 @@ $(function() {
 		</div>
 	</div>
 </div>
+@endif
 
 <div class="row">
-	<div class="col-sm-5">
+	<div class="col-sm-5 profile {{ $user->email ? '' : 'error' }}">
 		<h2>
 			<i class="fa fa-pencil-square-o"></i>
 			@lang('app.profile')

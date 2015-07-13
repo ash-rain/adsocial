@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'action_duplicate' => 'You have already performed this action.',
 	'actions' => [
 		'comment' => 'Comment',
 		'favorite' => 'Favorite',

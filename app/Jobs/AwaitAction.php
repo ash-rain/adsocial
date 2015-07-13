@@ -1,28 +1,30 @@
 <?php namespace App\Jobs;
 
-use App\Services\SocialManager;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Log;
+use App\Services\SocialManager;
 
 class AwaitAction extends Job implements SelfHandling, ShouldQueue
 {
 	use InteractsWithQueue, SerializesModels;
 
-	public function __construct()
+	private $log;
+
+	public function __construct(Log $log)
 	{
-		$this->social = new SocialManager(app());
+		$this->log = $log;
 	}
 
-	public function fire($job, $data)
+	public function handle()
 	{
-		$log = Log::find($data['log']);
-		$market = $log->market;
-		$confirm = $this->social->with($market->provider)->check($market, $log->user);
-		$log->flag = $confirm;
-		$log->save();
+		$social = new SocialManager(app());
+		$market = $this->log->market;
+		$confirm = $social->with($market->provider)->check($market, $this->log->user);
+		$this->log->flag = $confirm;
+		$this->log->save();
 		if($confirm) {
 			$job->delete();
 		} else {

@@ -32,6 +32,10 @@
 	}
 }
 
+.profile.error {
+	background-color: #ffc9c9;
+}
+
 #calendar a.delete {
 	color: #fff;
 	font-size: 1.2em;

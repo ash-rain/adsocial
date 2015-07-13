@@ -1,15 +1,16 @@
 <?php namespace App\Http\Controllers;
 
 use Auth;
-use Queue;
 use PayPal;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Services\SocialManager;
+use App\Jobs\AwaitAction;
 use App\MarketItem;
 use App\Post;
 use App\Log;
+use Exception;
 
 class SiteController extends Controller {
 
@@ -47,24 +48,31 @@ class SiteController extends Controller {
 				'reason' => $action,
 				'market_item_id' => $post->market()->whereAction($action)->first()->id
 			]);
+
 			if(!$log->id) {
 				Auth::user()->log()->save($log);
-				$q = Queue::later(Carbon::now()->addSeconds(15), 'App\Jobs\AwaitAction', ['log' => $log->id]);
+				$job = (new AwaitAction($log))->onQueue('check');
+		  	$this->dispatch($job);
+			}
+			else {
+				return ['error' => trans('app.action_duplicate')];
 			}
 		}
 
 		if(!$post) {
-			return view('action_complete');
+			return ['success' => true];
 		}
+
 		$url = !$action ? false
 			: $this->social->with($post->provider)->action($action, $post->provider_id);
+
 		if($url === true) {
-			return view('action_complete');
+			return ['success' => true];
 		}
 		if(!$url || !parse_url($url)) {
 			$url = $post->link;
 		}
-		return redirect($url);
+		return ['success' => true, 'redirect' => $url];
 	}
 
 	public function getFeed($provider)
