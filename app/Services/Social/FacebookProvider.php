@@ -30,7 +30,7 @@ class FacebookProvider extends AbstractProvider implements SocialProvider {
 	{
 		$this->useSession();
 		$data = ['message' => $post->text,	'link' => $post->link];
-		$request = new FacebookRequest($this->session, 'POST', "/$id/feed", $data);
+		$request = new FacebookRequest($this->session, 'POST', "/{$post->provider_id}/feed", $data);
 		$response = $request->execute();
 		$graphObject = $response->getGraphObject();
 		return $graphObject->getProperty('success');
