@@ -7,13 +7,20 @@
 @yield('js')
 
 $(function() {
+
+  $(document).on('submit','.dontSubmit',function (e) {
+      e.preventDefault();
+      return false;
+  })
+
   var form = $('#postModal form');
   var modal = $('#postModal');
 
   modal.find('.btn.submit').click(function() {
-    $.post(form.attr('action'), form.serialize(), function() {
-      window.location.reload()
-    });
+    if(form[0].checkValidity()){
+      $.post(form.attr('action'), form.serialize(), function() { window.location.reload(); });
+    }
+    else form.find(':submit').click()
   });
 
   modal.find('textarea').on('keyup', function() {

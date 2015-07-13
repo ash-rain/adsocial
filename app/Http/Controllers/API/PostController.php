@@ -83,7 +83,12 @@ class PostController extends Controller {
 		}
 
 		$post->provider_id = $post->id;
-		$post->save();
+		$success = $post->save();
+
+		$job = (new PublishPost($post))->onQueue('publish');
+  	$queued = $this->dispatch($job);
+
+		return compact('success', 'queued');
 	}
 
 	public function destroy(Post $post) {

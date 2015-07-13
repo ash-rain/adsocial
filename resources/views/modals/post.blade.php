@@ -6,7 +6,7 @@
 				<h4 class="modal-title" id="postModalLabel">@lang('app.post_new')</h4>
 			</div>
 			<div class="modal-body">
-				<form class="form-horizontal" action="{{ action('API\PostController@store') }}" method="POST">
+				<form class="form-horizontal validate dontSubmit" action="{{ action('API\PostController@store') }}" method="POST">
 					<input type="hidden" name="id" value="">
 					<div class="form-group">
 						<label class="col-sm-3 control-label">@lang('app.provider')</label>
@@ -42,7 +42,7 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label">@lang('app.post_text')</label>
 						<div class="col-sm-9">
-							<textarea name="text" class="form-control" rows="6"></textarea>
+							<textarea name="text" class="form-control" rows="6" data-validate="required"></textarea>
 							<p>
 								<span id="charcount">0</span>
 								@lang('app.characters')
@@ -53,15 +53,19 @@
 					<div class="form-group">
 						<label class="col-sm-3 control-label">@lang('app.post_link')</label>
 						<div class="col-sm-9">
-							<input type="text" name="link" class="form-control">
+							<input type="url" name="link" class="form-control" data-validate="required,url" required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label class="col-sm-3 control-label">@lang('app.post_image')</label>
 						<div class="col-sm-9">
-							<input type="text" name="image" class="form-control">
+							<input type="url" name="image" class="form-control" data-validate="url">
 						</div>
+					</div>
+
+					<div style="display: none">
+						<input type="submit" />
 					</div>
 				</form>
 			</div>
@@ -69,7 +73,7 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">
 					{{ trans('app.cancel') }}
 				</button>
-				<button type="button" class="btn submit btn-primary" data-dismiss="modal">
+				<button type="button" class="btn submit btn-primary">
 					{{ trans('app.save') }}
 				</button>
 			</div>

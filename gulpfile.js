@@ -20,6 +20,7 @@ elixir(function(mix) {
 		'joinable.js',
 		'resizeable.js',
 		'neon-api.js',
+		'jquery.validate.min.js',
 		'bootstrap-datepicker.js',
 		'bootstrap-timepicker.min.js',
 		'select2/select2.min.js',

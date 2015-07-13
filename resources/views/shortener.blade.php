@@ -6,11 +6,15 @@
 @section('js')
 $(function() {
 	var modal = $('#shortlinkModal')
+	var form = modal.find('form')
 	modal.find('.submit').click(function() {
-		var url = modal.find("input[name='url']").val()
-		$.post('/shorten', { 'url': url }, function() {
-			window.location.reload()
-		})
+		if(form[0].checkValidity()){
+			var url = modal.find("input[name='url']").val()
+			$.post('/shorten', { 'url': url }, function() {
+				window.location.reload()
+			})
+    }
+    else form.find(':submit').click()
 	})
 })
 @stop
