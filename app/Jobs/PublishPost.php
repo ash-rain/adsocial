@@ -34,9 +34,7 @@ class PublishPost extends Job implements SelfHandling, ShouldQueue
          $this->release(600);
       }
 
-      $social = new SocialManager(app());
-
-      $this->social->with($this->post->provider)
+      (new SocialManager(app()))->with($this->post->provider)
         ->publish($this->post);
     }
 }
