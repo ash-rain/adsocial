@@ -21,12 +21,14 @@
 			@endif
 			<div class="tile-footer clearfix">
 				<div class="btn-group pull-right">
+					@if(false)
 					@foreach(config("br.actions.$post->provider") as $action => $settings)
 					<?php if(!is_array($settings)) continue; ?>
-					<a target="_blank" href="{{ action('SiteController@getAction', [$post->id, $action]) }}" class="btn btn-default" title="@lang("app.providers.$action")">
+					<a target="_blank" href="{{ action('SiteController@getAction', ['post' => $post->id, 'action' => $action]) }}" class="btn btn-default" title="@lang("app.providers.$action")">
 						<i class="fa fa-{{ $settings['icon'] }}"></i>
 					</a>
 					@endforeach
+					@endif
 				</div>
 				<div class="time">
 					<i class="fa fa-clock-o"></i>

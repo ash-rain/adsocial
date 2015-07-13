@@ -10,6 +10,7 @@ class ScheduleController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->middleware('auth', ['except' => ['store']]);
+		$this->middleware('checkUser');
 		$this->auth = $auth;
 	}
 

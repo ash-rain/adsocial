@@ -10,7 +10,7 @@ return [
 		'client_id' => env('AUTH_FB_ID'),
 		'client_secret' => env('AUTH_FB_SECRET'),
 		'redirect' => env('BASE_URL') . 'auth/callback/facebook',
-		'scopes' => ['user_posts', 'publish_actions', 'publish_pages']
+		'scopes' => ['user_posts', 'publish_actions', 'publish_pages', 'manage_pages']
 	],
 
 	'twitter' => [

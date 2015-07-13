@@ -24,9 +24,20 @@ $(function() {
 	timeFormat: 'H(:mm)',
 	eventRender: function (event, element, view) {
 		if(event.title.length > 16) $(element).attr('title', event.title);
+		var dl = $('<a href="#" class="delete"><i class="fa fa-remove pull-right"></i></a>');
+		$(element).prepend(dl);
+		dl.click(function(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			if(confirm('Are you sure you want to delete this post?')) {
+				$.post('/api/v1/post/' + event.id, {_method:'DELETE'}, function(r) {
+					if(r.success) calendar.fullCalendar('refetchEvents');
+				});
+			}
+		})
 	},
 	eventClick: function (event) {
-		if(event.link) window.open(event.link)
+		if(event.link && event.link.indexOf('http') == 0) window.open(event.link)
 	},
 	eventDrop: function (event, delta, revertFunc) {
 		var s = jQuery.extend(true, {}, event.start);

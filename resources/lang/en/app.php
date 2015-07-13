@@ -35,6 +35,7 @@ return [
 	'checkout_cancel' => 'You cancelled the purchase.',
 	'connect' => 'Connect',
 	'connect_info' => 'Add another account to your profile',
+	'detach_info' => 'Detach this account from your profile',
 	'email' => 'E-mail',
 	'email_required' => 'E-mail is required!',
 	'get_started' => 'Get Started!',

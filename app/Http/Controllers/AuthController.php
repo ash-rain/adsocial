@@ -62,6 +62,7 @@ class AuthController extends Controller {
 		$this->socialite();
 		$service = Socialize::with($provider);
 		$scopes = config("services.$provider.scopes");
+		//dd($scopes);
 		if($scopes && count($scopes)) {
 			$service = $service->scopes($scopes);
 		}

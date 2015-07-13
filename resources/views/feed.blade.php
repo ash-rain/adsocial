@@ -5,7 +5,7 @@
 <ul class="cbp_tmtimeline">
 	<li>
 		<div class="cbp_tmicon">
-			<img src="{{ $providerUser->avatar }}" class="img-responsive img-circle" />
+			<img src="{{ $providerUser->avatar }}" class="img-responsive img-circle" style="width: 40px; height: 40px;" />
 		</div>
 		<div class="cbp_tmlabel header">
 			<ul class="list-inline">
@@ -43,12 +43,14 @@
 
 				@endif
 
+				@unless(config("br.actions.$provider.readOnly"))
 				<div class="pull-right">
 					<a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#postModal" data-provider="{{ $provider }}">
 						<i class="fa fa-plus"></i>
 						@lang('app.post_new')
 					</a>
 				</div>
+				@endunless
 			</ul>
 		</div>
 	</li>
@@ -57,9 +59,12 @@
 			<h2>
 				<i class="{{ config("br.actions.$provider.icon") }}"></i>
 				{{ ucfirst($provider) }}
+				
+				@unless(config("br.actions.$provider.readOnly"))
 				<a href="{{ action('ScheduleController@getIndex') }}">
 					({{ $scheduled }} scheduled posts)
 				</a>
+				@endunless
 			</h2>
 		</div>
 	</li>

@@ -24,6 +24,7 @@ class PostController extends Controller {
 		return Post::whereUserId($this->auth->id())
 			->whereProvider($input['provider'])
 			->whereBetween('posted_at', array($input['start'], $input['end']))
+			->where('posted_at', '>', date('Y-m-d H:i:s'))
 			->latest()->get(['id', 'text as title', 'posted_at as start', 'image', 'link', 'provider']);
 	}
 
@@ -86,6 +87,6 @@ class PostController extends Controller {
 	}
 
 	public function destroy(Post $post) {
-		return $post->delete();
+		return [ 'success' => $post->delete() ];
 	}
 }

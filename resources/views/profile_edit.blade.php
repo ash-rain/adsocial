@@ -166,7 +166,7 @@ $(function() {
 								{{ trans("app.providers.$provider->provider") }}
 							</div>
 							<div class="col-sm-4">
-								<a class="detach btn btn-white btn-block" href="{{ action('AuthController@getDetach', $provider->provider) }}">
+								<a class="detach btn btn-white btn-block" href="{{ action('AuthController@getDetach', $provider->provider) }}" title="@lang('app.detach_info')">
 									<i class="fa fa-unlink"></i>
 								</a>
 							</div>

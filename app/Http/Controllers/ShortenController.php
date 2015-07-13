@@ -12,6 +12,7 @@ class ShortenController extends Controller {
 	public function __construct(Guard $auth)
 	{
 		$this->middleware('auth', ['except' => ['handleShortcode']]);
+		$this->middleware('checkUser');
 		$this->auth = $auth;
 	}
 

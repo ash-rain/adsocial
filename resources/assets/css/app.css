@@ -32,6 +32,21 @@
 	}
 }
 
+#calendar a.delete {
+	color: #fff;
+	font-size: 1.2em;
+	display: none;
+	text-shadow:
+	-1px -1px 0 #f50,
+	1px -1px 0 #f50,
+	-1px 1px 0 #f50,
+	1px 1px 0 #f50;
+}
+
+#calendar .fc-event-container:hover a.delete {
+	display: block;
+}
+
 .tile-stats .num {
 	font-size: 2.4rem;
 }

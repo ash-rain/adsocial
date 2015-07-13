@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration {
 		{
 			$table->bigIncrements('id')->unsigned();
 			$table->string('provider', 8)->index();
-			$table->string('provider_id')->index();
+			$table->string('provider_id')->index()->unique();
 			$table->string('text');
 			$table->string('image')->nullable();
 			$table->string('link')->nullable();
