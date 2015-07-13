@@ -2,9 +2,6 @@
 
 @section('js')
 $(function() {
-	$('#buyModal .submit').click(function() {
-		$(this).parents('form')[0].submit()
-	})
 	$('.tile-stats a.detach').click(function(e) {
 		e.preventDefault()
 		if(confirm("@lang('app.confirm_detach')")) {

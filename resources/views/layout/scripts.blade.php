@@ -8,6 +8,10 @@
 
 $(function() {
 
+	$('#buyModal .submit').click(function() {
+		$(this).parents('form')[0].submit()
+	})
+
   $(document).on('submit','.dontSubmit',function (e) {
       e.preventDefault();
       return false;
