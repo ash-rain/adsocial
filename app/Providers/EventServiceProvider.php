@@ -16,13 +16,13 @@ class EventServiceProvider extends ServiceProvider {
 	public function boot(DispatcherContract $events)
 	{
 		parent::boot($events);
-		Queue::failing(function($connection, $job, $data)
+		/*Queue::failing(function($connection, $job, $data)
 		{
 			$log = Log::find($data['log']);
 			if($log) {
 				$log->delete();
 			}
-		});
+		});*/
 	}
 
 }
