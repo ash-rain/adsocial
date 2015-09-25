@@ -1,4 +1,6 @@
-## BuzzRunnr
+# SocialSync
+
+Manage user posts across multiple social platforms. Runs on Laravel 5.1.
 
 ## Configuration
 * /.env
@@ -9,10 +11,8 @@
 ## Deployment
 
 #### 1. Clone the repository
-```
-git clone git@github.com:skyint/AdSocial.git
-```
-or `git pull` in an existing clone's root directory.
+
+Or `git pull` in an existing clone's root directory.
 
 #### 2. File permissions
 Run `sudo chgrp www-data -R DIRECTORY && sudo chmod 775 -R DIRECTORY` replacing `DIRECTORY` with each of the following (i.e. issue a separate command for each dir):
